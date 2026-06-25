@@ -1,5 +1,5 @@
 name: heavy-coder
-version: 0.1.0
+version: 0.1.1
 description: "Terminal-first Hermes profile distribution for adaptive Heavy-style coding-agent teams."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
