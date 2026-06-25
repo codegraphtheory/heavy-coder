@@ -24,7 +24,10 @@ delegation:
   max_spawn_depth: 1
 heavy_coder:
   status: scaffolded
-  candidate_widths: [1, 3, 5]
+  candidate_widths: [3, 5]
+  default_width: 3
+  team_enforced: true
+  single_mode_requires_explicit: true
   default_repair_attempts: 2
   trigger_label: hermes:auto
   provider: xai-oauth
