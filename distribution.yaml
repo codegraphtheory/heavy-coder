@@ -5,12 +5,6 @@ hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"
 env_requires:
-  - name: XAI_API_KEY
-    description: "Optional xAI/Grok API key when using xAI models directly. Model credentials may also be configured through Hermes provider settings."
-    required: false
-  - name: OPENROUTER_API_KEY
-    description: "Optional OpenRouter API key if Grok or fallback models are routed through OpenRouter."
-    required: false
   - name: GITHUB_TOKEN
     description: "Optional token for GitHub API access. Prefer gh auth for local terminal workflows."
     required: false

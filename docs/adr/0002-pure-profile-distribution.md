@@ -16,4 +16,4 @@ Official Hermes documentation says `hermes profile install <source>` installs a 
 
 ## Uncertainty
 
-Exact provider model identifiers for Grok Composer and Grok reasoning models are version-dependent and must be verified before pinning production defaults.
+The profile defaults to Hermes provider `xai-oauth`. The main chat model is `grok-4.3` because Heavy Coder's interactive entrypoint acts as the coordinator. The role map sets candidate workers to `grok-composer-2.5-fast` and coordinator, critic, synthesizer, and verifier roles to `grok-4.3`, based on current Hermes source showing `grok-composer-2.5-fast` as an xAI OAuth curated extra and `grok-4.3` as the current replacement for retired Grok 4 fast/code refs. Future role-specific routing must still verify live model access at runtime.

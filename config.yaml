@@ -1,6 +1,6 @@
 model:
-  provider: openrouter
-  default: x-ai/grok-code-fast-1
+  provider: xai-oauth
+  default: grok-4.3
 agent:
   max_turns: 120
   tool_use_enforcement: true
@@ -27,6 +27,7 @@ heavy_coder:
   candidate_widths: [1, 3, 5]
   default_repair_attempts: 2
   trigger_label: hermes:auto
+  provider: xai-oauth
   state_labels:
     queued: hermes:queued
     running: hermes:running
@@ -35,8 +36,8 @@ heavy_coder:
     blocked: hermes:blocked
     merged: hermes:merged
   model_roles:
-    candidate: "configurable-grok-composer"
-    coordinator: "configurable-grok-reasoning-or-composer"
-    critic: "configurable-grok-reasoning-or-composer"
-    synthesizer: "configurable-grok-reasoning-or-composer"
-    verifier: "fresh-configured-context"
+    candidate: grok-composer-2.5-fast
+    coordinator: grok-4.3
+    critic: grok-4.3
+    synthesizer: grok-4.3
+    verifier: grok-4.3

@@ -74,9 +74,9 @@ Hermes distribution details were checked against the local Hermes source and off
 - `git`.
 - GitHub CLI, `gh`, for future GitHub workflow implementation.
 - Optional Docker or remote execution tooling for higher-risk unattended operation.
-- Model credentials configured outside this repository.
+- xAI Grok OAuth configured in Hermes. Run `hermes auth add xai-oauth` or select `xAI Grok OAuth (SuperGrok / Premium+)` in `hermes model`.
 
-No credentials or local user state are packaged.
+No credentials or local user state are packaged. The default profile config uses provider `xai-oauth` and model `grok-4.3` for the main coordinator chat. The role map keeps candidate implementation workers on `grok-composer-2.5-fast` and uses `grok-4.3` for coordinator, critic, synthesizer, and fresh verifier roles. Exact model access still depends on the user's active xAI subscription and current Hermes provider support.
 
 ## Safety boundaries
 
