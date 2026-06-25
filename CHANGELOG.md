@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.15
+
+- **Cyberpunk TUI skin:** neon cyan/magenta chrome, framed wordmark, scanline caduceus hero, richer swarm spinner verbs/wings, and council-themed branding in `skins/heavy-coder.yaml`.
+- **Docs:** [cli-observability.md](docs/cli-observability.md) describes the updated skin look.
+
 ## 0.2.14
 
 - **Heavy Coder TUI skin:** ship `skins/heavy-coder.yaml` (Grok cyan/violet, Hermes gold, caduceus banner, swarm spinner verbs) via `distribution_owned`.

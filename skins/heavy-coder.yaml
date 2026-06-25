@@ -1,78 +1,92 @@
-# Heavy Coder profile skin - Grok (xAI Composer) × Hermes messenger aesthetic.
+# Heavy Coder profile skin - cyberpunk ops terminal x Hermes swarm council.
+# Grok electric cyan/magenta, Hermes gold telemetry, deep void chrome.
 # Installed to ~/.hermes/profiles/<profile>/skins/ via profile distribution.
 name: heavy-coder
-description: "Heavy Coder - electric Grok cyan, Hermes gold, swarm-ready"
+description: "Heavy Coder - neon cyber terminal, swarm council, Grok x Hermes"
 
 colors:
-  banner_border: "#5B21B6"
-  banner_title: "#22D3EE"
-  banner_accent: "#FFD700"
-  banner_dim: "#7C3AED"
-  banner_text: "#E0F2FE"
-  ui_accent: "#38BDF8"
-  ui_label: "#FBBF24"
+  banner_border: "#D946EF"
+  banner_title: "#00F5FF"
+  banner_accent: "#FFE566"
+  banner_dim: "#A855F7"
+  banner_text: "#E0F7FA"
+  ui_accent: "#00E5FF"
+  ui_label: "#F0ABFC"
   ui_primary: "#67E8F9"
-  ui_border: "#6D28D9"
-  ui_text: "#F0F9FF"
-  ui_ok: "#34D399"
-  ui_error: "#FB7185"
-  ui_warn: "#FBBF24"
-  prompt: "#E0F2FE"
-  input_rule: "#7C3AED"
-  response_border: "#22D3EE"
-  status_bar_bg: "#0F0A1A"
-  status_bar_text: "#CBD5E1"
-  status_bar_strong: "#22D3EE"
-  status_bar_dim: "#64748B"
-  status_bar_good: "#6EE7B7"
-  status_bar_warn: "#FDE047"
-  status_bar_bad: "#FB923C"
-  status_bar_critical: "#F87171"
+  ui_border: "#C026D3"
+  ui_text: "#F0FDFF"
+  ui_ok: "#39FF14"
+  ui_error: "#FF3B7A"
+  ui_warn: "#FDE047"
+  prompt: "#CFFAFE"
+  input_rule: "#E879F9"
+  response_border: "#00F5FF"
+  status_bar_bg: "#050508"
+  status_bar_text: "#94A3B8"
+  status_bar_strong: "#00F5FF"
+  status_bar_dim: "#475569"
+  status_bar_good: "#4ADE80"
+  status_bar_warn: "#FACC15"
+  status_bar_bad: "#FB7185"
+  status_bar_critical: "#F43F5E"
   session_label: "#FBBF24"
-  session_border: "#94A3B8"
-  selection_bg: "#1E1B4B"
-  completion_menu_bg: "#0F0A1A"
-  completion_menu_current_bg: "#312E81"
-  completion_menu_meta_bg: "#0F0A1A"
-  completion_menu_meta_current_bg: "#312E81"
-  shell_dollar: "#38BDF8"
+  session_border: "#64748B"
+  selection_bg: "#1E1033"
+  completion_menu_bg: "#07050F"
+  completion_menu_current_bg: "#3B0764"
+  completion_menu_meta_bg: "#07050F"
+  completion_menu_meta_current_bg: "#4C1D95"
+  shell_dollar: "#22D3EE"
+  voice_status_bg: "#0A0612"
 
 spinner:
   waiting_faces:
     - "(⛓)"
     - "(◈)"
     - "(⌁)"
+    - "(◢)"
     - "(⚔)"
     - "(✦)"
+    - "(▣)"
   thinking_faces:
     - "(◈)"
     - "(⛓)"
     - "(⌁)"
+    - "(◢◣)"
     - "(<>)"
+    - "(╬)"
   thinking_verbs:
-    - "spawning candidates"
-    - "running the council"
-    - "synthesizing evidence"
-    - "delegating leaves"
-    - "composing in parallel"
-    - "forging a merge path"
-    - "cross-checking Grok"
-    - "routing through Hermes"
+    - "jacking into the council"
+    - "spawning parallel leaves"
+    - "routing through Hermes mesh"
+    - "synthesizing candidate evidence"
+    - "forging merge topology"
+    - "running blind critique"
+    - "composing on Grok silicon"
+    - "parsing swarm telemetry"
+    - "locking fail-closed gates"
+    - "diffing the winning path"
+    - "warming the neon bus"
+    - "handshaking leaf nodes"
   wings:
-    - ["⟪◈", "◈⟫"]
-    - ["⟪⛓", "⛓⟫"]
+    - ["⟨◈", "◈⟩"]
+    - ["⟨⛓", "⛓⟩"]
+    - ["⟨⌁", "⌁⟩"]
     - ["⟪⚕", "⚕⟫"]
-    - ["⟪✦", "✦⟫"]
+    - ["╠◢", "◣╣"]
+    - ["▐✦", "✦▌"]
+    - ["⟦◈", "◈⟧"]
+    - ["╞⛓", "⛓╡"]
 
 branding:
   agent_name: "Heavy Coder"
-  welcome: "Composer swarms on Hermes - type a task, /agents during batches, /help for commands. Powered by Hermes · Grok (xAI)."
-  goodbye: "Council adjourned. ⚕ ◈"
-  response_label: " ◈ Heavy "
-  prompt_symbol: "⛓"
-  help_header: "(⛓) Heavy Coder · Hermes commands"
+  welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. Dispatch a task; during batches hit /agents for live leaves. /help · Powered by Hermes x Grok"
+  goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
+  response_label: " ◈ HEAVY "
+  prompt_symbol: "▸"
+  help_header: "(⛓) Heavy Coder · neural command deck"
 
-tool_prefix: "╎"
+tool_prefix: "▌"
 
 tool_emojis:
   terminal: "⚔"
@@ -80,35 +94,51 @@ tool_emojis:
   patch: "◈"
   read_file: "⌁"
   write_file: "✦"
+  search_files: "◢"
+  execute_code: "▣"
+  todo: "╬"
+  process: "◎"
+  browser_navigate: "◉"
+  skill_view: "⚕"
 
 banner_logo: |
-  [bold #22D3EE]██╗  ██╗███████╗ █████╗ ██╗   ██╗[/]
-  [bold #06B6D4]██║  ██║██╔════╝██╔══██╗╚██╗ ██╔╝[/]
-  [#0EA5E9]███████║█████╗  ███████║ ╚████╔╝ [/]
-  [#38BDF8]██╔══██║██╔══╝  ██╔══██║  ╚██╔╝  [/]
-  [bold #67E8F9]██║  ██║███████╗██║  ██║   ██║   [/]
-  [dim #155E75]╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   [/]
-  [bold #FFD700] ██████╗ ██████╗ ██████╗ ███████╗██████╗ [/]
-  [#FBBF24]██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗[/]
-  [#F59E0B]██║     ██║   ██║██║  ██║█████╗  ██████╔╝[/]
-  [#D97706]██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗[/]
-  [bold #FFD700]╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║[/]
-  [dim #92400E] ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝[/]
-  [dim #7C3AED]  Hermes orchestration[/] [bold #22D3EE]×[/] [dim #A78BFA]Grok Composer[/] [dim #64748B]· multi-candidate coding[/]
+  [dim #4C1D95]╔══════════════════════════════════════════════════════════════════╗[/]
+  [bold #FF2BD6]║[/] [bold #00F5FF]██╗  ██╗███████╗ █████╗ ██╗   ██╗[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#06B6D4]██║  ██║██╔════╝██╔══██╗╚██╗ ██╔╝[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#22D3EE]███████║█████╗  ███████║ ╚████╔╝ [/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#38BDF8]██╔══██║██╔══╝  ██╔══██║  ╚██╔╝  [/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [bold #67E8F9]██║  ██║███████╗██║  ██║   ██║   [/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [dim #155E75]╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   [/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [bold #FFE566] ██████╗ ██████╗ ██████╗ ███████╗██████╗ [/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#FDE047]██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#FBBF24]██║     ██║   ██║██║  ██║█████╗  ██████╔╝[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [#F59E0B]██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [bold #FFD700]╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [dim #92400E] ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝[/] [bold #FF2BD6]║[/]
+  [bold #FF2BD6]║[/] [dim #64748B]  HERMES MESH[/] [bold #00F5FF] × [/] [dim #F0ABFC]GROK COMPOSER[/] [dim #475569] · multi-candidate forge[/] [bold #FF2BD6]║[/]
+  [dim #4C1D95]╚══════════════════════════════════════════════════════════════════╝[/]
+  [dim #7C3AED]▓▓▒▒░░[/][#00F5FF] SWARM_NET v0[/][dim #7C3AED] ░░▒▒▓▓[/]  [dim #475569]fail-closed · evidence-first · terminal-first[/]
 
 banner_hero: |
-  [#7C3AED]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⣀⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#6D28D9]⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣇⠸⣿⣿⠇⣸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀[/]
-  [#22D3EE]⠀⢀⣠⣴⣶⠿⠋⣩⡿⣿⡿⠻⣿⡇⢠⡄⢸⣿⠟⢿⣿⢿⣍⠙⠿⣶⣦⣄⡀⠀[/]
-  [#06B6D4]⠀⠀⠉⠉⠁⠶⠟⠋⠀⠉⠀⢀⣈⣁⡈⢁⣈⣁⡀⠀⠉⠀⠙⠻⠶⠈⠉⠉⠀⠀[/]
-  [#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢁⡈⠛⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#FBBF24]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⣿⣦⣤⣈⠁⢠⣴⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#38BDF8]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⢿⣿⣦⡉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#0EA5E9]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣦⣈⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#5B21B6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⠦⠈⠙⠿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#7C3AED]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣤⡈⠁⢤⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#22D3EE]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠷⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#06B6D4]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠑⢶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⢰⡆⠈⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#A78BFA]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⠈⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-  [dim #4C1D95]⠀⠀⠀⠀⠀⠀⠀⠀⚕ swarm caduceus⠀⠀⠀⠀⠀⠀⠀[/]
+  [dim #1E1033]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/]
+  [#FF2BD6]⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#D946EF]⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀[/]
+  [#00F5FF]⠀⠀⣰⣿⡿⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠻⣿⣆⠀⠀[/]
+  [#06B6D4]⠀⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣷⠀[/]
+  [#22D3EE]⣾⡟⠀⠀⠀⠀⢀⣀⡀⠀⣀⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣷[/]
+  [#38BDF8]⣿⠀⠀⠀⢀⣠⣴⣾⣿⣿⣇⠸⣿⣿⠇⣸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#FFE566]⣿⠀⢀⣠⣶⠿⠋⣩⡿⣿⡿⠻⣿⡇⢠⡄⢸⣿⠟⢿⣿⢿⣍⠙⠿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#FBBF24]⣿⠀⠉⠉⠁⠶⠟⠋⠀⠉⠀⢀⣈⣁⡈⢁⣈⣁⡀⠀⠉⠀⠙⠻⠶⠈⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#FFD700]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢁⡈⠛⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#F59E0B]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⣿⣦⣤⣈⠁⢠⣴⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#00E5FF]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⢿⣿⣦⡉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#5B21B6]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣦⣈⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#7C3AED]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⠦⠈⠙⠿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#A855F7]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣤⡈⠁⢤⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#22D3EE]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠷⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#06B6D4]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠑⢶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#FF2BD6]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⢰⡆⠈⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#D946EF]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⠈⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
+  [#00F5FF]⠸⣿⣦⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣦⣿⠇[/]
+  [dim #1E1033]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/]
+  [bold #00F5FF]  ◈[/] [dim #94A3B8]caduceus relay[/] [bold #FFE566]⚕[/] [dim #94A3B8]parallel council[/] [bold #F0ABFC]⛓[/] [dim #64748B]· neon terminal ops[/]

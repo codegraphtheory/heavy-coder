@@ -18,7 +18,7 @@ No manual `hermes config set` required on a fresh install. Updaters who kept an 
 
 Profile `config.yaml` sets `display.interface: tui` and `display.skin: heavy-coder`.
 
-The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile on install). It customizes the TUI wordmark, caduceus panel art, colors (cyan/violet Grok + Hermes gold), swarm spinner verbs, and branding (`Heavy Coder`, welcome mentions *Powered by Hermes · Grok*). Switch anytime with `/skin heavy-coder` or another Hermes skin via `/skin list`.
+The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile on install). It customizes the TUI chrome-framed wordmark, neon caduceus hero (scanline frame + relay tagline), cyberpunk palette (electric cyan/magenta + Hermes gold), swarm spinner verbs, and branding (`Heavy Coder`, *CYBER COUNCIL ONLINE* welcome). Switch anytime with `/skin heavy-coder` or another Hermes skin via `/skin list`.
 
 ```bash
 hermes -p heavy-coder chat
