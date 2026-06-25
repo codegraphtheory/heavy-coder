@@ -8,7 +8,7 @@ This repository is a Hermes profile distribution scaffold. Preserve installabili
 2. Keep `distribution.yaml` at the repository root.
 3. Keep the profile installable with `hermes profile install <source>`.
 4. Dangerous operations must be dry-run only or return a clear not-implemented error.
-5. Do not add a Hermes plugin. This project must remain a pure profile distribution.
+5. Do not add Hermes plugins except the shipped `plugins/heavy-council/` helper installed by `scripts/bootstrap_heavy_team.py` via `install_heavy_council_plugin`. No other plugins in this repository; it must otherwise remain a pure profile distribution.
 6. Do not pin guessed Grok model identifiers. Put uncertain model names in docs or configurable fields.
 7. Run local validation and tests after substantive edits.
 8. No documentation may claim autonomous issue-to-merge is currently available.

@@ -55,11 +55,33 @@ The public Grok Heavy idea that matches us best: **many parallel hypotheses, the
 
 ## When to use width 16
 
-- Research-grade or high-ambiguity coding tasks where diversity beats latency.
+- **Default** for non-trivial work when `heavy_council_always: true` (profile default since 0.2.6).
+- Research-grade or high-ambiguity coding where diversity beats latency.
 - Demos and evaluations (`skills/heavy-coding-eval/`).
-- **Not** daily small fixes (use width 3).
+- **Smaller teams** only when the user says **single mode** or explicitly asks for width 3/5.
 
 Expect **~16x** subagent token cost versus one candidate, plus coordinator critique/synthesis.
+
+## "Literally everything" team policy
+
+Plan 1A hooks treat most **non-trivial** user turns as team work:
+
+1. **`pre_llm`** injects a width-**16** `TEAM_PLAN_JSON` (heavy council).
+2. Your **first** tool call must be **`delegate_task`** with **16** parallel `tasks` (unless **single mode**).
+3. **`patch` / `write_file` / mutating `terminal` / `skill_manage` / `execute_code`** are blocked until candidates finish and you synthesize.
+4. Optional **`heavy-council`** Hermes plugin (install via `bootstrap_heavy_team.py`) adds the same checks at the plugin layer.
+
+**Not** forced: empty greetings, pure trivia ("what is Python?"), or messages with explicit **single mode** opt-out. Reads (`read_file`, `search_files`, read-only `terminal`) still work before delegation.
+
+See `docs/plan-1a-shell-hooks.md` and `docs/enforcement-model.md` for limits (coordinator can still solo-read; terminal bypass is narrowed, not impossible).
+
+## Opt-out: single mode
+
+When `single_mode_requires_explicit: true`, include a clear phrase in the **same** user message, for example:
+
+- `single mode` / `composer only` / `no team` / `one agent`
+
+The coordinator may then use width 3 or solo edits without the 16-task gate.
 
 ## Worktrees
 

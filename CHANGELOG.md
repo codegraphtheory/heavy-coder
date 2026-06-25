@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.6
+
+- Register `terminal` on `pre_tool_call` hook matcher; block solo terminal before delegation.
+- `scripts/sync_profile_hooks.py --verify-only` checks hook matchers (terminal) before path sync.
+- Ship `plugins/heavy-council/`; `bootstrap_heavy_team.py` runs `install_heavy_council_plugin`; document AGENTS.md exception to the no-plugin rule.
+- Add `plugins` to `distribution_owned` with profile-local `plugins/README.md` (no bundled Hermes plugins).
+- Document mandatory **16**-task heavy council in `docs/plan-1a-shell-hooks.md`; README paragraph and `examples/delegate_tasks_16.sample.json`.
+
 ## 0.2.5
 
 - Fix install docs: Hermes does not support `@tag` on `hermes profile install` URLs; add `docs/release-checklist.md`.

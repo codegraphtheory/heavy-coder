@@ -1,0 +1,5 @@
+name: heavy-council
+version: 0.1.0
+description: Shipped helper for Heavy Coder 16-wide council team workflows.
+author: CodeGraphTheory
+kind: standalone

@@ -29,6 +29,7 @@ TRIVIAL_RE = re.compile(
 PHASE_IDLE = "IDLE"
 PHASE_AWAITING_DELEGATE = "AWAITING_DELEGATE"
 PHASE_AWAITING_SYNTHESIS = "AWAITING_SYNTHESIS"
+HEAVY_COUNCIL_WIDTH = 16
 
 
 @dataclass
@@ -111,9 +112,30 @@ def is_coding_task(text: str) -> bool:
     return bool(CODING_TASK_RE.search(text))
 
 
+def should_trigger_team_plan(text: str) -> bool:
+    """Nearly all non-trivial user messages enter heavy council (opt-out via single mode)."""
+    if not text.strip():
+        return False
+    if is_single_mode(text):
+        return False
+    return not TRIVIAL_RE.search(text.strip())
+
+
 def emit_json(payload: dict[str, Any]) -> None:
     sys.stdout.write(json.dumps(payload))
     sys.stdout.flush()
+
+
+def load_profile_config_for_hook() -> Any:
+    """Load ProfileConfig from the installed profile tree (adds src/ to sys.path)."""
+    root = profile_root()
+    src = root / "src"
+    src_str = str(src)
+    if src_str not in sys.path:
+        sys.path.insert(0, src_str)
+    from heavy_coder.profile_config import load_profile_config
+
+    return load_profile_config(root)
 
 
 def run_team_plan(task: str, repo: Path) -> dict[str, Any]:
@@ -125,8 +147,20 @@ def run_team_plan(task: str, repo: Path) -> dict[str, Any]:
     if env.get("PYTHONPATH"):
         py_path = py_path + os.pathsep + env["PYTHONPATH"]
     env["PYTHONPATH"] = py_path
+
+    heavy_council_always = False
+    try:
+        cfg = load_profile_config_for_hook()
+        heavy_council_always = bool(cfg.heavy_council_always)
+    except Exception:
+        heavy_council_always = False
+
+    cmd = [sys.executable, str(script), task, "--repo", str(repo)]
+    if heavy_council_always:
+        cmd.append("--heavy-council")
+
     proc = subprocess.run(
-        [sys.executable, str(script), task, "--repo", str(repo)],
+        cmd,
         capture_output=True,
         text=True,
         timeout=120,
@@ -150,3 +184,113 @@ def delegate_task_count(tool_input: dict[str, Any]) -> int:
     if tool_input.get("goal"):
         return 1
     return 0
+
+
+_WRITE_REDIRECT_RE = re.compile(
+    r"(?:^|[|;&]\s*)(?:[^\s|;&]+(?:\s+[^\s|;&]+)*\s+)?>>?\s*(?!/dev/(?:null|stdout|stderr)\b)[^\s|;&]+",
+    re.IGNORECASE,
+)
+_TERMINAL_WRITE_HINTS: tuple[re.Pattern[str], ...] = (
+    _WRITE_REDIRECT_RE,
+    re.compile(r"\btee\b", re.IGNORECASE),
+    re.compile(r"\bsed\s+(?:-[^\s]+\s+)*-[^\s]*i", re.IGNORECASE),
+    re.compile(r"\b(patch|git\s+apply)\b", re.IGNORECASE),
+    re.compile(r"\bgit\s+(commit|add|am|cherry-pick|rebase|merge|push)\b", re.IGNORECASE),
+    re.compile(r"\b(rm|mv|cp|install|touch|truncate)\s+", re.IGNORECASE),
+    re.compile(r"\b(npm|pnpm|yarn|pip|uv)\s+install\b", re.IGNORECASE),
+    re.compile(r"\bhermes\s+profile\s+install\b", re.IGNORECASE),
+)
+
+_EXECUTE_CODE_WRITE_HINTS: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\.write_text\s*\(", re.IGNORECASE),
+    re.compile(r"\.write_bytes\s*\(", re.IGNORECASE),
+    re.compile(r"\bopen\s*\([^)]*['\"]w", re.IGNORECASE),
+    re.compile(r"\b(write_file|patch)\s*\(", re.IGNORECASE),
+    re.compile(
+        r"\b(shutil\.(copy|move|rmtree)|os\.(remove|unlink|rename))\s*\(",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bsubprocess\.(run|call|Popen)\s*\([^)]*sed\s+[^)]*-i",
+        re.IGNORECASE | re.DOTALL,
+    ),
+)
+
+
+def terminal_looks_like_write(command: str) -> bool:
+    text = command.strip()
+    if not text:
+        return False
+    return any(pattern.search(text) for pattern in _TERMINAL_WRITE_HINTS)
+
+
+def skill_manage_looks_like_write(tool_input: dict[str, Any]) -> bool:
+    action = tool_input.get("action")
+    if not isinstance(action, str):
+        return False
+    return action.strip().lower() in {"patch", "write_file"}
+
+
+def execute_code_looks_like_write(code: str) -> bool:
+    text = code.strip()
+    if not text:
+        return False
+    return any(pattern.search(text) for pattern in _EXECUTE_CODE_WRITE_HINTS)
+
+
+def terminal_command_looks_like_file_write(command: str) -> bool:
+    """Backward-compatible alias for terminal write detection in shell hooks."""
+    return terminal_looks_like_write(command)
+
+
+def required_min_delegate_count(
+    *,
+    min_delegate_tasks: int,
+    heavy_council_always: bool,
+    council_width: int = HEAVY_COUNCIL_WIDTH,
+    plan_width: int | None = None,
+) -> int:
+    if heavy_council_always:
+        return council_width
+    if plan_width is not None and plan_width >= council_width:
+        return council_width
+    return min_delegate_tasks
+
+
+def should_block_terminal_before_delegate(
+    *,
+    phase: str,
+    single_mode: bool,
+    command: str,
+    block_all_terminal: bool = True,
+) -> bool:
+    if single_mode or phase != PHASE_AWAITING_DELEGATE:
+        return False
+    if block_all_terminal:
+        return True
+    return terminal_looks_like_write(command)
+
+
+def should_block_repo_edit_before_delegate(
+    *,
+    tool_name: str | None,
+    phase: str,
+    single_mode: bool,
+    terminal_command: str | None = None,
+    block_all_terminal: bool = True,
+    tool_input: dict[str, Any] | None = None,
+) -> bool:
+    if single_mode or phase != PHASE_AWAITING_DELEGATE:
+        return False
+    if tool_name in {"patch", "write_file"}:
+        return True
+    if tool_name == "skill_manage":
+        return skill_manage_looks_like_write(tool_input or {})
+    if tool_name == "terminal":
+        return should_block_terminal_before_delegate(
+            phase=phase,
+            single_mode=single_mode,
+            command=terminal_command or "",
+            block_all_terminal=block_all_terminal,
+        )
+    return False

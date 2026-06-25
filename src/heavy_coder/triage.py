@@ -35,6 +35,11 @@ HEAVY_COUNCIL_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
 
 HEAVY_COUNCIL_WIDTH = 16
 
+SINGLE_MODE_RE = re.compile(
+    r"\b(single mode|composer only|no team|solo agent|one agent only)\b",
+    re.IGNORECASE,
+)
+
 ROLE_ROTATION = (
     "minimal-fix",
     "robust-fix",
@@ -51,12 +56,17 @@ class TriageResult:
     candidate_roles: tuple[str, ...]
 
 
+def is_single_mode(text: str) -> bool:
+    return bool(SINGLE_MODE_RE.search(text))
+
+
 def classify_task(
     task: str,
     *,
     default_width: int = 3,
     allowed_widths: tuple[int, ...] = (3, 5, 16),
     heavy_council_width: int = HEAVY_COUNCIL_WIDTH,
+    heavy_council_always: bool = False,
 ) -> TriageResult:
     text = task.strip()
     reasons: list[str] = []
@@ -65,6 +75,9 @@ def classify_task(
     if any(p.search(text) for p in HEAVY_COUNCIL_PATTERNS):
         width = council_w
         reasons.append("heavy council / Grok Heavy emulation signals in task text")
+    elif heavy_council_always and not is_single_mode(text):
+        width = council_w
+        reasons.append("heavy_council_always: default council width (skipped adaptive 3/5)")
     else:
         width = default_width if default_width in allowed_widths else min(allowed_widths)
 

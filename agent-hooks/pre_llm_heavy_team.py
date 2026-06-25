@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
-"""pre_llm_call: inject Heavy team plan and set session phase for coding tasks."""
+"""pre_llm_call: inject Heavy council plan (width 16) for non-trivial tasks."""
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 from hook_lib import (
+    HEAVY_COUNCIL_WIDTH,
     PHASE_AWAITING_DELEGATE,
     PHASE_AWAITING_SYNTHESIS,
     emit_json,
-    is_coding_task,
-    is_single_mode,
     load_session_state,
     read_payload,
     run_team_plan,
     save_session_state,
+    should_trigger_team_plan,
 )
 
 
 def main() -> int:
     payload = read_payload()
     msg = payload.user_message
-    if not msg or is_single_mode(msg) or not is_coding_task(msg):
+    if not should_trigger_team_plan(msg):
         emit_json({})
         return 0
 
@@ -50,9 +50,9 @@ def main() -> int:
         emit_json(
             {
                 "context": (
-                    "Heavy Coder team mode: run scripts/team_coordinator.py before editing. "
+                    "Heavy Coder heavy council mode: run scripts/team_coordinator.py --heavy-council before editing. "
                     f"Auto-plan failed: {plan['error']}. "
-                    "You must still call delegate_task with at least 3 parallel leaf tasks."
+                    f"You must still call delegate_task with exactly {HEAVY_COUNCIL_WIDTH} parallel leaf tasks."
                 )
             }
         )
@@ -60,13 +60,15 @@ def main() -> int:
 
     tasks = plan.get("delegate_tasks")
     task_count = len(tasks) if isinstance(tasks, list) else 0
+    width = plan.get("width", HEAVY_COUNCIL_WIDTH)
     emit_json(
         {
             "context": (
-                "Heavy Coder mandatory team workflow (Grok-Heavy style):\n"
-                "1) Your next tool call MUST be delegate_task with the delegate_tasks array below (parallel width "
-                f"{plan.get('width', 3)}, got {task_count} specs).\n"
-                "2) Do NOT patch/write_file until candidates finish and you synthesize.\n"
+                "Heavy Coder mandatory heavy council workflow (Grok Heavy, width 16):\n"
+                f"1) Your next tool call MUST be delegate_task with exactly {HEAVY_COUNCIL_WIDTH} tasks "
+                f"from delegate_tasks below (plan width {width}, got {task_count} specs). "
+                "Pass the full array in one batch; do not shrink the council.\n"
+                "2) Do NOT patch/write_file until all 16 candidates finish and you synthesize.\n"
                 "3) Validate evidence, critique, verify with project tests.\n\n"
                 f"TEAM_PLAN_JSON:\n{json.dumps(plan, indent=2)[:12000]}"
             )

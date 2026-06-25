@@ -25,7 +25,23 @@ def test_single_mode_phrase() -> None:
     assert hook_lib.is_single_mode("composer only: fix typo")
 
 
+def test_should_trigger_team_plan_non_trivial_without_coding_keywords() -> None:
+    hook_lib = _load_hook_lib()
+    assert hook_lib.should_trigger_team_plan("Ship the dashboard redesign by Friday")
+    assert not hook_lib.should_trigger_team_plan("what is Python")
+    assert not hook_lib.should_trigger_team_plan("composer only: fix typo")
+    assert not hook_lib.should_trigger_team_plan("")
+
+
 def test_delegate_task_count_batch() -> None:
     hook_lib = _load_hook_lib()
     assert hook_lib.delegate_task_count({"tasks": [{}, {}, {}]}) == 3
     assert hook_lib.delegate_task_count({"goal": "solo"}) == 1
+
+
+def test_terminal_looks_like_write_detects_redirects_and_sed() -> None:
+    hook_lib = _load_hook_lib()
+    assert hook_lib.terminal_looks_like_write("echo hi > out.txt")
+    assert hook_lib.terminal_looks_like_write("sed -i '' 's/a/b/' file.py")
+    assert hook_lib.terminal_looks_like_write("cat log | tee backup.log")
+    assert not hook_lib.terminal_looks_like_write("pytest -q")

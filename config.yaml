@@ -33,7 +33,7 @@ hooks:
     - matcher: "delegate_task"
       command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_tool_heavy_team.py"
       timeout: 30
-    - matcher: "patch|write_file"
+    - matcher: "patch|write_file|terminal|skill_manage|execute_code"
       command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_tool_heavy_team.py"
       timeout: 30
   post_tool_call:
@@ -45,9 +45,11 @@ hooks:
       timeout: 30
 heavy_coder:
   status: scaffolded
+  min_delegate_tasks: 16
+  heavy_council_always: true
   candidate_widths: [3, 5, 16]
   heavy_council_width: 16
-  default_width: 3
+  default_width: 16
   team_enforced: true
   single_mode_requires_explicit: true
   default_repair_attempts: 2
