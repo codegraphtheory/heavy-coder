@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.17
+
+- **TUI wordmark:** replace box-drawing **HEAVY CODER** art with single-word **HEAVYCODER** Banner3 figlet so **V/Y** no longer read as stray **U** glyphs; doc note in [cli-observability.md](docs/cli-observability.md).
+- **Control surface:** sharper prompt/completion/selection colors, `⛓▸` prompt, `⟨◈ HEAVY⟩` response label, deck-style `/help` header in `skins/heavy-coder.yaml`.
+
 ## 0.2.16
 
 - **TUI skin fix:** rewrite `skins/heavy-coder.yaml` banner art to use one Rich color tag per line so the Ink TUI no longer stacks multi-tag rows vertically (broken wordmark/hero).

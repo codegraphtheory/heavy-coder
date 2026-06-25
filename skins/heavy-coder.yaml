@@ -18,25 +18,25 @@ colors:
   ui_ok: "#39FF14"
   ui_error: "#FF3B7A"
   ui_warn: "#FDE047"
-  prompt: "#CFFAFE"
-  input_rule: "#E879F9"
+  prompt: "#E0F7FA"
+  input_rule: "#FF2BD6"
   response_border: "#00F5FF"
-  status_bar_bg: "#050508"
-  status_bar_text: "#94A3B8"
-  status_bar_strong: "#00F5FF"
-  status_bar_dim: "#475569"
+  status_bar_bg: "#030308"
+  status_bar_text: "#A8B4C8"
+  status_bar_strong: "#5EEAD4"
+  status_bar_dim: "#52525B"
   status_bar_good: "#4ADE80"
   status_bar_warn: "#FACC15"
   status_bar_bad: "#FB7185"
   status_bar_critical: "#F43F5E"
   session_label: "#FBBF24"
   session_border: "#64748B"
-  selection_bg: "#1E1033"
-  completion_menu_bg: "#07050F"
-  completion_menu_current_bg: "#3B0764"
-  completion_menu_meta_bg: "#07050F"
-  completion_menu_meta_current_bg: "#4C1D95"
-  shell_dollar: "#22D3EE"
+  selection_bg: "#2E1065"
+  completion_menu_bg: "#05040A"
+  completion_menu_current_bg: "#134E4A"
+  completion_menu_meta_bg: "#05040A"
+  completion_menu_meta_current_bg: "#115E59"
+  shell_dollar: "#2DD4BF"
   voice_status_bg: "#0A0612"
 
 spinner:
@@ -82,9 +82,9 @@ branding:
   agent_name: "Heavy Coder"
   welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. Dispatch a task; during batches hit /agents for live leaves. /help · Powered by Hermes x Grok"
   goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
-  response_label: " ◈ HEAVY "
-  prompt_symbol: "▸"
-  help_header: "(⛓) Heavy Coder · neural command deck"
+  response_label: " ⟨◈ HEAVY⟩ "
+  prompt_symbol: "⛓▸"
+  help_header: "╭─ ⛓ HEAVY CODER · command deck ─╮"
 
 tool_prefix: "▌"
 
@@ -102,14 +102,15 @@ tool_emojis:
   skill_view: "⚕"
 
 banner_logo: |
-  [bold #00F5FF]██╗  ██╗███████╗ █████╗ ██╗   ██╗██╗   ██╗   ██████╗ ██████╗ ██████╗ ███████╗██████╗[/]
-  [#06B6D4]██║  ██║██╔════╝██╔══██╗╚██╗ ██╔╝██║   ██║  ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗[/]
-  [#22D3EE]███████║█████╗  ███████║ ╚████╔╝ ██║   ██║  ██║     ██║   ██║██║  ██║█████╗  ██████╔╝[/]
-  [#38BDF8]██╔══██║██╔══╝  ██╔══██║  ╚██╔╝  ██║   ██║  ██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗[/]
-  [bold #67E8F9]██║  ██║███████╗██║  ██║   ██║   ╚██████╔╝  ╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║[/]
-  [dim #155E75]╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝    ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝[/]
-  [dim #4C1D95]────────────────────────────────────────────────────────────────────────────────────[/]
-  [bold #FF2BD6]◈ HERMES MESH × GROK COMPOSER · multi-candidate forge · /agents for live swarms[/]
+  [bold #00F5FF]##     ## ########    ###    ##     ## ##    ##  ######   #######  ########  ######## ########[/]
+  [#06B6D4]##     ## ##         ## ##   ##     ##  ##  ##  ##    ## ##     ## ##     ## ##       ##     ##[/]
+  [#22D3EE]##     ## ##        ##   ##  ##     ##   ####   ##       ##     ## ##     ## ##       ##     ##[/]
+  [#38BDF8]######### ######   ##     ## ##     ##    ##    ##       ##     ## ##     ## ######   ########[/]
+  [#67E8F9]##     ## ##       #########  ##   ##     ##    ##       ##     ## ##     ## ##       ##   ##[/]
+  [#A855F7]##     ## ##       ##     ##   ## ##      ##    ##    ## ##     ## ##     ## ##       ##    ##[/]
+  [bold #FF2BD6]##     ## ######## ##     ##    ###       ##     ######   #######  ########  ######## ##     ##[/]
+  [dim #4C1D95]────────────────────────────────────────────────────────────────────────────────────────────[/]
+  [bold #FFE566]◈ HERMES MESH × GROK COMPOSER · multi-candidate forge · /agents for live swarms[/]
   [dim #7C3AED]▓▓▒▒░░ SWARM_NET · fail-closed · evidence-first · terminal-first ░░▒▒▓▓[/]
 
 banner_hero: |

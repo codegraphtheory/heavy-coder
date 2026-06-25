@@ -22,6 +22,8 @@ The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile
 
 **TUI banner rule:** each physical line in `banner_logo` / `banner_hero` must use **at most one** Rich `[#hex]…[/]` tag. The Ink TUI renders every tag as its own row; multiple tags on one line stack vertically and break the layout. Run `python scripts/validate_skin_tui_markup.py` after editing the skin.
 
+**Wordmark tip:** avoid box-drawing block fonts where **V** and **Y** share the same `██╗   ██╗` top row; they read as stray **U** glyphs. The shipped logo uses a single-word **HEAVYCODER** Banner3-style `#` figlet (one tag per line).
+
 ```bash
 hermes -p heavy-coder chat
 ```
