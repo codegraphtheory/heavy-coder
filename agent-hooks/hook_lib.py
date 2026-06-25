@@ -48,7 +48,15 @@ class HookPayload:
 
 def read_payload() -> HookPayload:
     raw = sys.stdin.read()
-    data = json.loads(raw) if raw.strip() else {}
+    if not raw.strip():
+        data: dict[str, Any] = {}
+    else:
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            data = {}
+    if not isinstance(data, dict):
+        data = {}
     tool_input = data.get("tool_input")
     extra = data.get("extra")
     return HookPayload(

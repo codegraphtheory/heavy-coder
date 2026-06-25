@@ -17,13 +17,23 @@ def load_validator() -> Draft202012Validator:
 
 
 def validate_candidate_result(payload: dict[str, Any]) -> list[str]:
-    validator = load_validator()
+    try:
+        validator = load_validator()
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"schema: {exc}"]
     errors = sorted({f"{e.path}: {e.message}" for e in validator.iter_errors(payload)})
     return errors
 
 
 def validate_candidate_file(path: Path) -> list[str]:
-    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [f"read: {exc}"]
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        return [f"json: {exc}"]
     if not isinstance(data, dict):
         return ["root: must be a JSON object"]
     return validate_candidate_result(data)

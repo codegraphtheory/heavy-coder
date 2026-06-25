@@ -7,6 +7,7 @@ from pathlib import Path
 
 from hook_lib import (
     PHASE_AWAITING_DELEGATE,
+    PHASE_AWAITING_SYNTHESIS,
     emit_json,
     is_coding_task,
     is_single_mode,
@@ -21,6 +22,14 @@ def main() -> int:
     payload = read_payload()
     msg = payload.user_message
     if not msg or is_single_mode(msg) or not is_coding_task(msg):
+        emit_json({})
+        return 0
+
+    state = load_session_state(payload.session_id)
+    if state.get("phase") == PHASE_AWAITING_SYNTHESIS:
+        emit_json({})
+        return 0
+    if "ASYNC DELEGATION BATCH COMPLETE" in msg:
         emit_json({})
         return 0
 
