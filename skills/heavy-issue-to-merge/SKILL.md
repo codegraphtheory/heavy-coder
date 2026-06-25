@@ -30,7 +30,8 @@ Scaffolded. Do not claim autonomous issue-to-merge is implemented.
 
 All scripts are safe in this scaffold. Potentially dangerous actions are dry-run or not implemented.
 
-- `scripts/doctor.py`: environment checks.
+- `scripts/doctor.py`: comprehensive read-only environment checks (tools, git, Hermes context).
+- `scripts/repo_discovery.py`: deterministic repository root, branch, remote, and test command discovery.
 - `scripts/github_state.py`: deterministic state-label projection.
 - `scripts/claim_issue.py`: dry-run issue claim plan.
 - `scripts/worktrees.py`: dry-run worktree planning.

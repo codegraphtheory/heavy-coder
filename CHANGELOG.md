@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+- Improve the Heavy Coder environment doctor with read-only tool, git, and Hermes context checks.
+- Add deterministic repository discovery for root, default branch, remote URL, and basic test-command hints.
+- Update the candidate worker role configuration to use `composer-2.5`.
+
 ## 0.1.2
 
 - Add a release guard workflow and script that fail when release-relevant profile-distribution changes do not bump `distribution.yaml` version.
