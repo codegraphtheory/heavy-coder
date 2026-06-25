@@ -36,7 +36,7 @@ heavy_coder:
     blocked: hermes:blocked
     merged: hermes:merged
   model_roles:
-    candidate: grok-composer-2.5-fast
+    candidate: composer-2.5
     coordinator: grok-4.3
     critic: grok-4.3
     synthesizer: grok-4.3
