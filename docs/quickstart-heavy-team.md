@@ -4,10 +4,10 @@
 
 ```bash
 hermes auth add xai-oauth   # once
-hermes -p heavy-coder chat
+heavy-coder chat            # alias from install --alias; or: hermes -p heavy-coder chat
 ```
 
-You are the **coordinator** session: `composer-2.5` plans the swarm and later synthesizes results.
+The profile defaults to the **Ink TUI**. When a swarm runs, type **`/agents`** for live subagent status. Details: [cli-observability.md](cli-observability.md).
 
 ## 2. Send a real repo task
 

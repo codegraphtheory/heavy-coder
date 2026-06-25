@@ -8,6 +8,7 @@ memories/
 workspace/
 plans/
 local/
+.heavy-coder/
 cache/
 __pycache__/
 .pytest_cache/

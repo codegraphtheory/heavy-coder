@@ -42,7 +42,7 @@ Typical flow:
 4. `pre_tool_call` blocks `patch` / `write_file` / write-like `terminal` until delegation completes.
 5. When Hermes reports **ASYNC DELEGATION BATCH COMPLETE**, coordinator synthesizes one implementation, runs tests, reports evidence.
 
-Watch parallelism: Hermes TUI `/agents` (when available) shows multiple subagents active.
+Watch parallelism: Hermes TUI **`/agents`** (when available) shows multiple subagents active. See [cli-observability.md](cli-observability.md).
 
 ### Heavy Coder profile (policy + ergonomics)
 

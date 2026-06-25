@@ -83,7 +83,7 @@ Installation docs: https://hermes-agent.nousresearch.com/docs/getting-started/in
 From GitHub (recommended for use):
 
 ```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --force --yes
+hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --alias --force --yes
 ```
 
 Hermes does **not** accept `@v0.2.4` on the install URL. To pin a tag, clone and install from a clean checkout:
@@ -109,13 +109,17 @@ hermes profile install . --name heavy-coder-dev --force --yes
 
 Local `hermes profile install .` **rejects symlinks**. Use a clean tree; remove `.venv` or other symlinked paths before installing.
 
-After install, start chat:
+After install, start chat (TUI is the profile default; use `/agents` during swarms):
 
 ```bash
+heavy-coder chat    # when you used --alias above
+# or:
 hermes -p heavy-coder chat
 ```
 
-Optional: `hermes profile install ... --alias` creates a shell wrapper for that profile.
+Fresh install copies `config.yaml` with `display.interface: tui`, verbose tool progress, and `delegation.max_async_children: 16`. An `on_session_start` hook merges those defaults if you upgraded without `--force-config`. See [docs/cli-observability.md](docs/cli-observability.md).
+
+The profile also sets **`compression.threshold: 0.85`** (compress when context is about 85% full); Hermes's default is **50%**.
 
 ---
 

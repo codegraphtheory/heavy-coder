@@ -14,11 +14,7 @@ def main() -> int:
     parser.add_argument("path", type=Path)
     args = parser.parse_args()
 
-    try:
-        errors = validate_candidate_file(args.path)
-    except json.JSONDecodeError as exc:
-        print(json.dumps({"ok": False, "errors": [f"json: {exc}"]}, indent=2))
-        return 2
+    errors = validate_candidate_file(args.path)
 
     ok = not errors
     print(json.dumps({"ok": ok, "path": str(args.path), "errors": errors}, indent=2, sort_keys=True))

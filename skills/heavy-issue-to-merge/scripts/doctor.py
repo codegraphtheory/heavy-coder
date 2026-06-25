@@ -12,6 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+RECOMMENDED_COMPRESSION_THRESHOLD = 0.85
+
 
 def check_command(name: str, version_flag: str = "--version") -> dict[str, object]:
     path = shutil.which(name)
@@ -113,6 +115,39 @@ def check_team_config() -> dict[str, object]:
     return {"readable": False, "error": "config.yaml not found in cwd or heavy-coder profile"}
 
 
+def check_compression_config() -> dict[str, object]:
+    """Read compression.threshold from profile config (advisory)."""
+    try:
+        import yaml
+    except Exception:
+        return {"readable": False, "error": "PyYAML not installed"}
+
+    for cfg_path in (
+        Path("config.yaml"),
+        Path.home() / ".hermes" / "profiles" / "heavy-coder" / "config.yaml",
+    ):
+        if not cfg_path.exists():
+            continue
+        data = yaml.safe_load(cfg_path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            continue
+        compression = data.get("compression") or {}
+        if not isinstance(compression, dict):
+            compression = {}
+        threshold = compression.get("threshold")
+        below_recommended = False
+        if isinstance(threshold, (int, float)):
+            below_recommended = float(threshold) < RECOMMENDED_COMPRESSION_THRESHOLD
+        return {
+            "readable": True,
+            "path": str(cfg_path),
+            "threshold": threshold,
+            "recommended_minimum": RECOMMENDED_COMPRESSION_THRESHOLD,
+            "below_recommended": below_recommended,
+        }
+    return {"readable": False, "error": "config.yaml not found in cwd or heavy-coder profile"}
+
+
 def main() -> int:
     data = {
         "status": "scaffolded",
@@ -123,10 +158,21 @@ def main() -> int:
             "git": check_git_state(),
             "hermes": check_hermes_context(),
             "team_config": check_team_config(),
+            "compression": check_compression_config(),
         },
         "dangerous_operations": "none",
         "note": "Read-only checks. See docs/enforcement-model.md for what is enforced vs advisory.",
     }
+
+    compression = data["checks"].get("compression")
+    if isinstance(compression, dict) and compression.get("below_recommended"):
+        data["warnings"] = [
+            (
+                f"Profile compression threshold ({compression.get('threshold')}) is below "
+                f"recommended minimum {RECOMMENDED_COMPRESSION_THRESHOLD}."
+            ),
+        ]
+
     print(json.dumps(data, indent=2, sort_keys=True))
 
     tools = data["checks"]["tools"]

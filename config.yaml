@@ -19,16 +19,33 @@ security:
   redact_secrets: true
 approvals:
   mode: manual
+compression:
+  enabled: true
+  threshold: 0.85
 delegation:
   max_concurrent_children: 16
+  max_async_children: 16
   max_spawn_depth: 1
   subagent_auto_approve: true
+display:
+  interface: tui
+  tool_progress: verbose
+  timestamps: true
+  tui_agents_nudge: true
+  cli_refresh_interval: 1.0
+  bell_on_complete: true
+plugins:
+  enabled:
+    - heavy-council
 skills:
   creation_nudge_interval: 0
 # Shell hooks (Plan 1A): require profile installed as ~/.hermes/profiles/heavy-coder
 # or run: python scripts/sync_profile_hooks.py --profile <name>
 hooks_auto_accept: true
 hooks:
+  on_session_start:
+    - command: "~/.hermes/profiles/heavy-coder/agent-hooks/on_session_start_bootstrap.py"
+      timeout: 60
   pre_llm_call:
     - command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_llm_heavy_team.py"
       timeout: 120
