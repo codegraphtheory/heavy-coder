@@ -76,6 +76,17 @@ From GitHub (recommended for use):
 hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --force --yes
 ```
 
+Hermes does **not** accept `@v0.2.4` on the install URL. To pin a tag, clone and install from a clean checkout:
+
+```bash
+git clone https://github.com/codegraphtheory/heavy-coder.git
+cd heavy-coder
+git checkout v0.2.4
+hermes profile install . --name heavy-coder --force --yes   # remove .venv first if present
+```
+
+Check installed version: `hermes profile list` (shows distribution version from `distribution.yaml`).
+
 Use the profile name **`heavy-coder`** so shell hook paths in `config.yaml` resolve to `~/.hermes/profiles/heavy-coder/` (see `docs/plan-1a-shell-hooks.md`).
 
 **Local development** (this checkout):
