@@ -1,5 +1,5 @@
 name: heavy-coder
-version: 0.2.12
+version: 0.2.13
 description: "Hermes profile with shell-hook enforced multi-candidate coding teams (Plan 1A)."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"

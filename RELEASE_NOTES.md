@@ -1,30 +1,24 @@
-# heavy-coder 0.2.8
+## heavy-coder 0.2.13
 
-## Highlights
+### Highlights
+- **Fast swarm watcher:** `scripts/swarm_watch.py` renders a low-latency second-pane dashboard for live candidate progress.
+- **Richer dashboard:** progress bar, elapsed time, updated age, per-candidate roles, goal excerpts, and human-readable durations.
+- **Safer progress file:** atomic writes prevent the watcher from reading partial `.heavy-coder/swarm-progress.json` snapshots.
+- **Truthful dispatch state:** candidate slots show as running after `delegate_task` dispatch so users can see what is actually happening.
+- **Coordinator UX:** compact council injection now points users to the watcher and renders blank lines correctly.
 
-- Default **8-wide Composer swarm** on non-trivial coding tasks (`council_width: 8`).
-- **Compact** `DELEGATE_TASKS_JSON` in chat; full council plan on disk under `.heavy-coder/plans/`.
-- In-process plan build for lower hook latency.
-- README and **docs/composer-hermes-swarms.md** for Composer + Hermes + Heavy Coder.
-
-## Install (external user)
-
+### Install
 ```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --force --yes
+hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --alias --force --yes
+heavy-coder chat
 ```
 
-Hermes does not support `@tag` on install URLs. After install, confirm version **0.2.8** in profile metadata, or clone and `git checkout v0.2.8` before `hermes profile install .` from a clean tree.
-
-## Upgrade
+Run the live dashboard in a second terminal from the repo being coded:
 
 ```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --force --yes
+python scripts/swarm_watch.py --repo .
 ```
 
-Re-auth if needed: `hermes auth add xai-oauth`
+Pin this release: `git checkout v0.2.13` then install from a clean tree. Hermes install URLs do not support tag suffixes.
 
-## Config knobs
-
-- `heavy_coder.council_width: 16` for 16-leaf councils
-- `compact_chat_injection: false` restores large `TEAM_PLAN_JSON` injection
-- Say **single mode** to opt out of council enforcement for a turn
+Full changelog: [CHANGELOG.md](https://github.com/codegraphtheory/heavy-coder/blob/v0.2.13/CHANGELOG.md)

@@ -61,11 +61,13 @@ def main() -> int:
     out.write_text(json.dumps(record, indent=2, sort_keys=True), encoding="utf-8")
     duration = extra.get("duration_ms")
     duration_ms = int(duration) if isinstance(duration, (int, float)) else None
+    leaf_role = role.strip() if isinstance(role, str) and role.strip() else None
     mark_leaf_done(
         repo,
         child_id=str(child_id),
         status=str(status) if status is not None else "unknown",
         duration_ms=duration_ms,
+        role=leaf_role,
     )
     emit_json({})
     return 0

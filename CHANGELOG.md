@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.13
+
+- **Fast swarm watcher:** add `scripts/swarm_watch.py` with low-latency, change-aware redraws and in-place terminal repainting.
+- **Richer swarm dashboard:** show elapsed time, updated age, per-candidate roles, goal excerpts, progress bars, and human-readable durations.
+- **Safer progress writes:** write `.heavy-coder/swarm-progress.json` atomically so second-pane watchers do not read partial JSON.
+- **Truthful running state:** mark dispatched candidate slots as running so the dashboard reflects parallel `delegate_task` behavior.
+- **Coordinator UX:** tell users about `python scripts/swarm_watch.py --repo .` after dispatch and fix compact council newline formatting.
+
 ## 0.2.12
 
 - **Context compression on install:** shipped `config.yaml` sets `compression.enabled: true` and `compression.threshold: 0.85`; `on_session_start` merges missing compression keys and upgrades legacy thresholds at or below 0.5 to 0.85.

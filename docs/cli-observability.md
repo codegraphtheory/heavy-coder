@@ -58,10 +58,14 @@ Hooks maintain:
 Updated on **each leaf finish** (`subagent_stop` hook). Second terminal:
 
 ```bash
+python scripts/swarm_watch.py --repo . --interval 1
+# or raw JSON:
 watch -n2 cat .heavy-coder/swarm-progress.json
 ```
 
-Fields: `total`, `completed`, `leaves[]`, `delegation_id`, `status`.
+`swarm_watch` renders a progress bar and per-candidate roles (minimal-fix, test-first, …) as leaves finish.
+
+Fields: `total`, `completed`, `slots[]`, `leaves[]`, `delegation_id`, `status`.
 
 ## Coordinator behavior
 
@@ -69,6 +73,7 @@ Fields: `total`, `completed`, `leaves[]`, `delegation_id`, `status`.
 
 - TUI: `/agents`
 - CLI: status bar ⛓
+- Second pane: `python scripts/swarm_watch.py --repo . --interval 1`
 - Optional: `watch` on `swarm-progress.json`
 
 You should not get only a silent multi-minute gap.

@@ -31,7 +31,7 @@ Read [docs/composer-hermes-swarms.md](docs/composer-hermes-swarms.md) when the u
 
 1. Hooks inject `DELEGATE_TASKS_JSON` (or run `python scripts/team_coordinator.py "<task>" --repo .`).
 2. Spawn **N independent leaf candidates in one** `delegate_task(tasks=[...])` call (default N=8; N=16 if config/plan says so).
-3. **Right after dispatch**, tell the user plainly: swarm is running in the background; in **TUI** press `/agents` for the live dashboard; in **classic CLI** watch the status bar **⛓** count; optional second pane: `watch -n2 cat .heavy-coder/swarm-progress.json` in the repo.
+3. **Right after dispatch**, tell the user plainly: swarm is running in the background; in **TUI** press `/agents` for the live dashboard; in **classic CLI** watch the status bar **⛓** count; optional second pane: `python scripts/swarm_watch.py --repo .` in the repo.
 4. Critique candidates on evidence; workers do not share proposals beforehand.
 5. Synthesize one implementation from the best evidence.
 6. Verify with tests before claiming done.
