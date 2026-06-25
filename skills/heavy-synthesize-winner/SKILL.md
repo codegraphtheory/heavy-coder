@@ -7,7 +7,7 @@ license: MIT
 metadata:
   hermes:
     tags: [heavy-coder, synthesis, critique, swarm]
-    related_skills: [heavy-team-default, heavy-leaf-brief, heavy-ship-gate]
+    related_skills: [heavy-team-default, heavy-leaf-brief, heavy-ship-gate, heavy-leaf-candidate-output]
 ---
 
 # Heavy synthesize winner

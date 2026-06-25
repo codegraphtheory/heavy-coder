@@ -7,7 +7,7 @@ license: MIT
 metadata:
   hermes:
     tags: [heavy-coder, discovery, context, software-development]
-    related_skills: [heavy-leaf-brief, heavy-team-default, plan]
+    related_skills: [heavy-leaf-brief, heavy-team-default, plan, heavy-scope-router]
 ---
 
 # Heavy explore first

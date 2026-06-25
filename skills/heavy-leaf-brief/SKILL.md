@@ -7,7 +7,7 @@ license: MIT
 metadata:
   hermes:
     tags: [heavy-coder, delegation, swarm, context]
-    related_skills: [heavy-team-default, heavy-synthesize-winner, heavy-ship-gate]
+    related_skills: [heavy-team-default, heavy-synthesize-winner, heavy-ship-gate, heavy-leaf-candidate-output, heavy-pre-dispatch-enrich]
 ---
 
 # Heavy leaf brief (delegate_task context)

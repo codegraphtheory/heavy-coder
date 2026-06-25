@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- **Coordinator skills:** add eight strategic skills for routing, dispatch discipline, pre-dispatch enrich, candidate JSON, hook phases, repair waves, context budget, and single mode: `heavy-scope-router`, `heavy-swarm-dispatch`, `heavy-pre-dispatch-enrich`, `heavy-leaf-candidate-output`, `heavy-hook-phases`, `heavy-repair-wave`, `heavy-context-budget`, `heavy-single-mode`.
+- **`heavy-team-default` v0.6.0:** phase-based companion table wiring all swarm skills.
+- **Profile docs:** `.hermes.md` and `SOUL.md` - load `heavy-scope-router` each task; align council width **8** with `config.yaml`.
+- **Docs:** `enforcement-model.md` - delegate minimum and skills section for 0.3.0.
+
 ## 0.2.23
 
 - **IDE TUI bootstrap:** `display.auto_ide_skin` (default true) selects **`heavy-coder-ide`** in Cursor / VS Code / Windsurf and **`heavy-coder-light`** when `HERMES_TUI_THEME=light` (`profile_bootstrap.py`, shipped `config.yaml`).

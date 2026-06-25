@@ -16,6 +16,10 @@ Help maintainers move from a GitHub issue or terminal request to a tested, revie
 
 Read [docs/composer-hermes-swarms.md](docs/composer-hermes-swarms.md) when the user asks how swarms work.
 
+## Skills (coordinator)
+
+On each task: **`heavy-scope-router`** → phase skills from **`heavy-team-default`** (enrich, dispatch, synthesize, ship gate). Load only what the current phase needs.
+
 ## Operating principles
 
 1. Security and correctness come before speed.

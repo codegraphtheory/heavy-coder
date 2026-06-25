@@ -1,9 +1,10 @@
-## heavy-coder 0.2.23
+## heavy-coder 0.3.0
 
 ### Highlights
-- **IDE auto-skin:** `display.auto_ide_skin: true` (default) picks **`heavy-coder-ide`** in Cursor/VS Code/Windsurf on session bootstrap; **`heavy-coder-light`** when `HERMES_TUI_THEME=light`.
-- **heavy-coder-ide:** compact banner (logo only), brighter secondary/status text, clearer welcome for composer bleed mitigations.
-- **Docs:** `Iky`-style composer junk example in [ide-terminal-composer.md](docs/ide-terminal-composer.md).
+
+- **Strategic coordinator skills (8 new):** route tasks before spending swarm tokens (`heavy-scope-router`), dispatch full-width batches once (`heavy-swarm-dispatch`), enrich slim hook context (`heavy-pre-dispatch-enrich`), require candidate-result JSON (`heavy-leaf-candidate-output`), obey hook phases (`heavy-hook-phases`), narrow repair waves (`heavy-repair-wave`), token discipline (`heavy-context-budget`), explicit single mode (`heavy-single-mode`).
+- **`heavy-team-default` v0.6.0:** single phase table linking explore → enrich → dispatch → synthesize → ship gate.
+- **Profile alignment:** `.hermes.md` / `SOUL.md` updated for default council width **8** and per-turn routing.
 
 ### Install / update (local tree or GitHub)
 
@@ -12,22 +13,13 @@ hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder
 heavy-coder chat
 ```
 
-Restart chat (`/new`) from the **IDE integrated terminal** so bootstrap can set the IDE skin.
-
-**Best composer fix in Cursor** (short prompt prefix):
-
-```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name hc --alias --force --yes
-hc chat
-```
-
 Pin a tagged checkout:
 
 ```bash
-git checkout v0.2.23
+git checkout v0.3.0
 hermes profile install . --name heavy-coder --alias --force --yes
 ```
 
 Hermes install URLs do not support `@tag` suffixes; use a local checkout to pin.
 
-Full changelog: [CHANGELOG.md](https://github.com/codegraphtheory/heavy-coder/blob/v0.2.23/CHANGELOG.md)
+Full changelog: [CHANGELOG.md](https://github.com/codegraphtheory/heavy-coder/blob/v0.3.0/CHANGELOG.md)
