@@ -21,6 +21,8 @@ python -m mypy src tests
 
 Hermes rejects symlinks in local profile distributions. If you created a local `.venv` in this checkout, remove it or run the install from a clean clone before the smoke test.
 
+The profile default provider is `xai-oauth`. Authenticate with `hermes auth add xai-oauth` before live chat smoke tests.
+
 ```bash
 HERMES_HOME=$(mktemp -d) hermes profile install . --name heavy-coder-smoke --yes --force
 ```
