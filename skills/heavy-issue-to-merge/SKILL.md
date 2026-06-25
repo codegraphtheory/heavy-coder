@@ -28,17 +28,26 @@ Scaffolded. Do not claim autonomous issue-to-merge is implemented.
 
 ## Helper scripts
 
-All scripts are safe in this scaffold. Potentially dangerous actions are dry-run or not implemented.
+Dangerous GitHub writes require explicit `--execute` (default is dry-run).
 
-- `scripts/doctor.py`: comprehensive read-only environment checks (tools, git, Hermes context).
-- `scripts/repo_discovery.py`: deterministic repository root, branch, remote, and test command discovery.
-- `scripts/github_state.py`: deterministic state-label projection.
-- `scripts/claim_issue.py`: dry-run issue claim plan.
-- `scripts/worktrees.py`: dry-run worktree planning.
-- `scripts/collect_evidence.py`: local evidence summary.
-- `scripts/policy_gate.py`: deterministic merge-policy evaluation.
-- `scripts/publish_pr.py`: dry-run PR publication plan.
-- `scripts/merge_pr.py`: fail-closed not-implemented merge stub.
+| Script | Purpose |
+|--------|---------|
+| `doctor.py` | Environment and team-config checks (exit non-zero if python/git missing) |
+| `repo_discovery.py` | Repository root, branch, remote, test heuristics |
+| `worktrees.py` | `plan`, `list`, `create --execute`, `remove --execute` for candidate isolation |
+| `validate_candidate.py` | JSON schema validation for candidate results |
+| `claim_issue.py` | Issue claim labels/comments (`--execute` uses `gh`) |
+| `publish_pr.py` | Open PR (`--execute` uses `gh pr create`) |
+| `merge_pr.py` | Fail-closed stub (merge not implemented) |
+| `policy_gate.py` | Deterministic merge-policy evaluation |
+| `github_state.py` | Label projection helpers |
+| `collect_evidence.py` | Local git evidence snapshot |
+
+Coordinator entrypoints at repo `scripts/`:
+
+- `team_coordinator.py`: emit `delegate_task` specs
+- `critique_candidates.py`: blind ranking of candidate JSON
+- `heavy_coding_flow.py`: doctor + plan + worktree plan in one step
 
 ## References
 

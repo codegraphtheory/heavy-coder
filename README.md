@@ -45,6 +45,13 @@ Single-agent coding can work well for narrow tasks, but it can also overfit earl
 
 The installed profile sets `candidate_widths: [3, 5]` and requires an explicit user request for single-agent mode.
 
+**Coordinator quick start** (in the target repo):
+
+```bash
+python scripts/heavy_coding_flow.py "your task here" --repo .
+# then use delegate_task with team_plan.delegate_tasks from the JSON output
+```
+
 A run may escalate when tests fail, candidates disagree, or confidence is low. Candidate workers must not see one another's proposals before critique. The final verifier uses a fresh model context.
 
 ## Installation direction

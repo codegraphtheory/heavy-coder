@@ -1,33 +1,30 @@
 # Enforcement model
 
-Heavy Coder mixes **agent instructions** with a small amount of **deterministic Python**. It is easy to overstate what is enforced today.
+Heavy Coder combines **coordinator instructions**, **deterministic scripts**, and **Hermes `delegate_task`**.
 
-## Layers
+## What works today
 
-| Layer | What it does today |
-|--------|-------------------|
-| `SOUL.md`, `.hermes.md`, skills | Tell the coordinator how to work (default multi-candidate flow). |
-| `config.yaml` `heavy_coder.*` | Documents intended widths, labels, model role names, and `team_enforced` intent. |
-| `scripts/bootstrap_heavy_team.py` | Read-only check that config flags are consistent; prints JSON guidance. **Not** hooked into every Hermes turn automatically. |
-| `skills/.../doctor.py` | Read-only environment checks; may surface bootstrap output when config is readable. |
-| `src/heavy_coder/policy.py` | Deterministic merge **policy evaluation** for future automation (tests exist). |
-| Issue-to-merge scripts | Mostly dry-run or exit non-zero stubs until implemented. |
+| Step | Mechanism |
+|------|-----------|
+| Triage width 3/5 | `src/heavy_coder/triage.py`, `scripts/team_coordinator.py` |
+| Emit delegate specs | `team_coordinator.py` JSON field `delegate_tasks` |
+| One-shot flow | `scripts/heavy_coding_flow.py` (doctor + plan + worktree plan) |
+| Worktree isolation | `worktrees.py create --execute` (refuses dirty repos) |
+| Candidate validation | `validate_candidate.py` against JSON schema |
+| Blind critique | `scripts/critique_candidates.py` |
+| Issue claim / PR open | `claim_issue.py`, `publish_pr.py` with `--execute` and `gh` |
+| Merge | **Not implemented** (`merge_pr.py` fails closed) |
 
-## What is not true yet
+The Hermes coordinator must still call `delegate_task`; scripts do not spawn agents themselves.
 
-- Hermes does **not** kernel-block single-agent coding for this profile.
-- `team_enforced: true` is an **intent flag** for docs and diagnostics, not a Hermes core feature.
-- Autonomous issue-to-merge and unattended merge are **not** implemented.
-- `bootstrap_heavy_team.py` does **not** force `delegate_task` to run without the coordinator choosing to follow the skill.
+## Instruction layers
 
-## What good behavior looks like
+- `SOUL.md`, `.hermes.md`, and `heavy-team-default` define the required sequence.
+- `config.yaml` `heavy_coder.team_enforced` is an intent flag for doctor/bootstrap diagnostics.
 
-For substantive coding in this profile, the coordinator should still:
+## What is not true
 
-1. Use width 3 or 5 leaf candidates unless the user opts into single mode.
-2. Verify with real commands before claiming success.
-3. Use dry-run scripts and policy helpers instead of pretending GitHub automation exists.
+- Hermes does not kernel-block single-agent mode.
+- Unattended merge and CI repair loops are not implemented end to end.
 
-## Future work
-
-Wire optional hooks (cron, doctor, pre-task skill) without claiming mechanical enforcement until Hermes supports it. See `docs/implementation-backlog.md`.
+See `docs/implementation-backlog.md` for remaining work.
