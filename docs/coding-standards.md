@@ -16,7 +16,10 @@ These rules keep the Heavy Coder profile distribution installable and keep GitHu
 
 ## Profile manifest and releases
 
-- `distribution.yaml` is the profile version users see after `hermes profile install` / update.
+- `distribution.yaml` version is what users see after `hermes profile install` / update. The `pyproject.toml` version is only for the optional `heavy-coder-foundation` dev package and may differ.
+
+- Do not claim mechanical team enforcement in docs unless Hermes actually implements it. See `docs/enforcement-model.md`.
+
 - If you change any **release-relevant** path, you **must**:
   1. Bump `version:` in `distribution.yaml` (semver patch for routine fixes).
   2. Add a matching `## <version>` section at the top of `CHANGELOG.md` with bullet points for the change.

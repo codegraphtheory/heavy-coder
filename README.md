@@ -103,7 +103,7 @@ The profile scripts are defense in depth, not the security boundary.
 - `skills/heavy-coding-eval/` defines the future evaluation protocol.
 - `src/heavy_coder/` contains deterministic, testable Python foundations.
 - `schemas/` contains JSON schemas for candidate results, run state, and evaluation results.
-- `docs/` contains the architecture, state machine, security model, evaluation plan, and ADRs.
+- `docs/` contains the architecture, state machine, security model, evaluation plan, enforcement model, and ADRs.
 
 ## Development commands
 
@@ -144,7 +144,7 @@ See `docs/evaluation-plan.md`.
 ## Roadmap
 
 1. Validate Hermes distribution compatibility against the current installer.
-2. Implement environment doctor and repository discovery.
+2. Expand environment doctor (basic checks exist; credential and bootstrap integration remain).
 3. Implement safe worktree lifecycle.
 4. Add candidate delegation and candidate-result validation.
 5. Add blind critic, synthesis, and fresh verifier workflows.

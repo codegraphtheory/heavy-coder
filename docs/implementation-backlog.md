@@ -10,11 +10,11 @@ Confirm the repository installs with current Hermes, document required Hermes ve
 
 Depends on: none.
 
-## 2. Implement environment doctor
+## 2. Expand environment doctor
 
 Labels: `area:doctor`, `good first issue`
 
-Expand `skills/heavy-issue-to-merge/scripts/doctor.py` to check Python, git, gh, Hermes profile context, optional Docker, and model credential configuration without printing secrets.
+**Partial:** `skills/heavy-issue-to-merge/scripts/doctor.py` checks common tools, git state, Hermes profile presence, and team config flags. Still needed: optional credential presence checks (no secret output), invoking bootstrap advisory output, and clearer pass/fail summaries.
 
 Depends on: 1.
 

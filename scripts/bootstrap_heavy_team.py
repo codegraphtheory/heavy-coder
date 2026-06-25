@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-"""Bootstrap / forced first-action hook for Heavy Coder team enforcement.
+"""Advisory team-config check for Heavy Coder.
 
-This script MUST be the first action (or called via doctor/bootstrap) on every
-coding/repo session. It reads config.yaml, asserts team_enforced=true and
-widths >=3, then emits the mandatory team delegation pattern.
+Reads installed or local config.yaml and reports whether team-related settings
+match the profile policy (team_enforced, minimum candidate width).
 
-It is deterministic, not prompt text. Called automatically by profile doctor
-or first tool use in heavy-team-default flow.
-
-Hard rules preserved: read-only, no secrets, safe.
+This script does not run inside Hermes automatically. Coordinators may run it
+manually or via doctor.py for diagnostics.
 """
 from __future__ import annotations
 
@@ -25,7 +22,6 @@ except Exception:  # pragma: no cover
 def load_config(root: Path = Path(".")) -> dict[str, object]:
     cfg_path = root / "config.yaml"
     if not cfg_path.exists():
-        # Also check installed profile location as fallback
         home = Path.home()
         cfg_path = home / ".hermes" / "profiles" / "heavy-coder" / "config.yaml"
     if yaml is None:
@@ -42,7 +38,14 @@ def main() -> int:
         cfg = load_config(root)
         heavy: dict[str, object] = cfg.get("heavy_coder", {}) or {}
         team_enforced = bool(heavy.get("team_enforced", False))
-        widths = heavy.get("candidate_widths", []) or []
+        widths_raw = heavy.get("candidate_widths", [])
+        widths: list[int] = []
+        if isinstance(widths_raw, list):
+            for w in widths_raw:
+                if isinstance(w, int):
+                    widths.append(w)
+                elif isinstance(w, str) and w.isdigit():
+                    widths.append(int(w))
         default_w = heavy.get("default_width", 0)
         single_req = bool(heavy.get("single_mode_requires_explicit", False))
 
@@ -55,18 +58,33 @@ def main() -> int:
         }
 
         if not team_enforced or min(widths or [0]) < 3:
-            print(json.dumps({"status": "BLOCKED", "reason": "team_enforced or width<3 violated", "enforcement": enforcement}, indent=2))
+            print(
+                json.dumps(
+                    {
+                        "status": "ADVISORY_MISMATCH",
+                        "reason": "team_enforced is false or minimum candidate width is below 3",
+                        "enforcement": enforcement,
+                        "doc": "docs/enforcement-model.md",
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
             return 2
 
-        bootstrap_report = {
-            "status": "ENFORCED",
-            "hook": "bootstrap_heavy_team.py",
-            "first_action_pattern": "MANDATORY: triage -> delegate_task(width=3/5) -> blind_critic -> synthesizer -> verifier",
-            "enforcement": enforcement,
-            "note": "Single-agent blocked. heavy-team-default skill active. Config flag team_enforced=true guarantees this.",
-            "next": "Load heavy-team-default skill and begin coordinator triage with delegate_task calls.",
-        }
-        print(json.dumps(bootstrap_report, indent=2, sort_keys=True))
+        print(
+            json.dumps(
+                {
+                    "status": "OK",
+                    "hook": "bootstrap_heavy_team.py",
+                    "recommended_flow": "triage -> delegate_task(width=3|5) -> critique -> synthesize -> verify",
+                    "enforcement": enforcement,
+                    "note": "Advisory only; coordinator must follow heavy-team-default skill.",
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
         return 0
     except Exception as exc:
         print(json.dumps({"status": "ERROR", "error": str(exc)}, indent=2))
