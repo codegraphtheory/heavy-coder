@@ -1,32 +1,39 @@
 # Quickstart: Heavy team coding
 
-## 1. Coordinator
+## 1. Coordinator (Composer on Hermes)
 
 ```bash
+hermes auth add xai-oauth   # once
 hermes -p heavy-coder chat
 ```
 
-Use `hermes auth add xai-oauth` once if Grok is not configured.
+You are the **coordinator** session: `composer-2.5` plans the swarm and later synthesizes results.
 
-## 2. Plan (doctor + team JSON)
+## 2. Send a real repo task
 
-From the **target repo** root (point at your heavy-coder checkout):
+`cd` into the project under test (not your home directory). Ask for something bounded, for example:
 
-```bash
-python /path/to/heavy-coder/scripts/heavy_coding_flow.py "your task here" --repo .
+> Add a one-line note to README and run pytest if the repo has tests.
+
+Hooks treat this as council work: they inject **`DELEGATE_TASKS_JSON`** for **8** parallel leaves (default `council_width`).
+
+## 3. Swarm (`delegate_task`)
+
+Your **next** tool call after injection should be one batch:
+
+```text
+delegate_task(tasks=[ ... 8 entries from DELEGATE_TASKS_JSON ... ])
 ```
 
-Output includes `team_plan.delegate_tasks`, `width`, and `verification_commands`. Plan-only alternative:
+Each leaf is an isolated Hermes subagent running **Composer 2.5** with a different implementation role (`minimal-fix`, `test-first`, etc.).
+
+Optional: preview the plan from the repo root:
 
 ```bash
-python scripts/team_coordinator.py "your task here" --repo .
+python /path/to/heavy-coder/scripts/team_coordinator.py "your task" --repo . --width 8
 ```
 
-## 3. `delegate_task`
-
-In chat, call **`delegate_task`** with the full `delegate_tasks` array from the plan (one batch; width 3+, or **16** for heavy council when `team_plan.width` is 16).
-
-Force council width when planning:
+For width 16 (slower, Grok Heavy-style):
 
 ```bash
 python scripts/team_coordinator.py "TASK" --repo . --heavy-council
@@ -34,6 +41,10 @@ python scripts/team_coordinator.py "TASK" --repo . --heavy-council
 
 ## 4. Synthesize and verify
 
-Collect candidate evidence, critique, merge the winning approach, then run `verification_commands` from the plan.
+When the batch completes, read each leaf summary as **self-reported evidence**, merge the best approach, run tests (`verification_commands` from the plan or project defaults).
 
-Details: `skills/heavy-team-default/SKILL.md`.
+Details: `skills/heavy-team-default/SKILL.md` and [composer-hermes-swarms.md](composer-hermes-swarms.md).
+
+## Opt out
+
+Say **single mode** in the user message to skip council enforcement for that task.

@@ -38,7 +38,7 @@ def main() -> int:
     min_delegate = (
         profile_cfg.delegate_minimum(width_hint)
         if profile_cfg is not None
-        else 16 if width_hint is not None and width_hint >= 16 else 3
+        else 8 if width_hint is not None and width_hint >= 8 else 3
     )
 
     if payload.tool_name == "delegate_task" and not single:

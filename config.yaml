@@ -22,6 +22,9 @@ approvals:
 delegation:
   max_concurrent_children: 16
   max_spawn_depth: 1
+  subagent_auto_approve: true
+skills:
+  creation_nudge_interval: 0
 # Shell hooks (Plan 1A): require profile installed as ~/.hermes/profiles/heavy-coder
 # or run: python scripts/sync_profile_hooks.py --profile <name>
 hooks_auto_accept: true
@@ -45,11 +48,16 @@ hooks:
       timeout: 30
 heavy_coder:
   status: scaffolded
-  min_delegate_tasks: 16
+  min_delegate_tasks: 8
   heavy_council_always: true
-  candidate_widths: [3, 5, 16]
-  heavy_council_width: 16
-  default_width: 16
+  candidate_widths: [3, 5, 8, 16]
+  council_width: 8
+  default_width: 8
+  slim_delegate_context: true
+  max_injected_plan_chars: 4500
+  compact_chat_injection: true
+  inline_plan_build: true
+  leaf_toolsets: [terminal, file]
   team_enforced: true
   single_mode_requires_explicit: true
   default_repair_attempts: 2

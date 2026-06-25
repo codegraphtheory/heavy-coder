@@ -6,7 +6,18 @@ import json
 import re
 from pathlib import Path
 
-from hook_lib import emit_json, profile_root, read_payload
+from hook_lib import emit_json, read_payload
+
+try:
+    from heavy_coder.log_privacy import redact_absolute_paths
+except ImportError:
+    import sys as _sys
+    from pathlib import Path as _Path
+
+    _src = _Path(__file__).resolve().parents[1] / "src"
+    if str(_src) not in _sys.path:
+        _sys.path.insert(0, str(_src))
+    from heavy_coder.log_privacy import redact_absolute_paths
 
 
 def main() -> int:
@@ -35,8 +46,7 @@ def main() -> int:
         "assumptions": [],
         "residual_risks": [],
         "confidence": 0.5 if status == "completed" else 0.2,
-        "summary_excerpt": summary[:8000],
-        "profile_root": str(profile_root()),
+        "summary_excerpt": redact_absolute_paths(summary[:8000]),
     }
     out.write_text(json.dumps(record, indent=2, sort_keys=True), encoding="utf-8")
     emit_json({})

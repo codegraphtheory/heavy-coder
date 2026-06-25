@@ -4,28 +4,22 @@ Heavy Coder is a pure Hermes profile distribution. It packages profile configura
 
 ## Runtime model
 
-The profile is intended to run from the user's current repository directory. The current repository is the work target. The Heavy Coder distribution repository is only the installed profile source.
+The profile runs from the user's **current repository**. Hermes provides the CLI, tools, and `delegate_task` swarms; **Composer 2.5** (`xai-oauth`) runs on the coordinator and every leaf. Heavy Coder adds hooks, skills, and deterministic planners. See [composer-hermes-swarms.md](composer-hermes-swarms.md).
 
 ## Primary workflow
 
 ```text
-GitHub issue -> implementation candidates -> critique and synthesis -> tests -> pull request -> CI repair -> unattended merge
+Task -> council plan -> delegate_task (N parallel Composer leaves, default N=8)
+     -> synthesis -> tests -> pull request -> CI repair -> unattended merge (future)
 ```
 
-The implementation is split into deterministic helpers and agent skills:
+## Council width
 
-- Deterministic helpers validate state transitions, policy gates, and schema contracts.
-- Skills instruct Hermes agents how to coordinate candidates, critique results, synthesize changes, and verify evidence.
-- GitHub remains the durable source of truth for issue and pull-request state.
+- **8 (default):** `heavy_coder.council_width` - parallel swarms tuned for speed and quality.
+- **3 / 5:** triage for smaller or explicit user requests.
+- **16:** optional Grok Heavy-scale parallelism (`--heavy-council` or `council_width: 16`).
 
-## Adaptive team width
-
-The coordinator selects width 3 or 5 (`heavy_coder.candidate_widths` in `config.yaml`; default width 3):
-
-- Width 3: normal coding tasks.
-- Width 5: cross-cutting, risky, or ambiguous tasks.
-
-A run may escalate from 3 to 5 when tests fail, candidates disagree, or confidence is low. Single-agent execution requires an explicit user request (`single_mode_requires_explicit`).
+`heavy_council_always: true` means non-trivial coding goes through a full-width swarm unless the user says **single mode**.
 
 ## Model-role intent
 

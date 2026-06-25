@@ -26,15 +26,15 @@ def _load_pre_llm() -> types.ModuleType:
     return mod
 
 
-def test_pre_llm_injects_sixteen_task_requirement(
+def test_pre_llm_compact_injection_eight_task_requirement(
     monkeypatch: MonkeyPatch, tmp_path: Path, capsys: CaptureFixture[str]
 ) -> None:
     pre_llm = _load_pre_llm()
     hook_lib = sys.modules["hook_lib"]
 
     plan = {
-        "width": 16,
-        "delegate_tasks": [{"goal": f"g{i}", "context": "c"} for i in range(16)],
+        "width": 8,
+        "delegate_tasks": [{"goal": f"g{i}", "context": "c", "toolsets": ["terminal", "file"]} for i in range(8)],
     }
 
     def fake_run_team_plan(task: str, repo: Path) -> dict[str, Any]:
@@ -62,5 +62,6 @@ def test_pre_llm_injects_sixteen_task_requirement(
     out = capsys.readouterr().out
     data = json.loads(out)
     ctx = data["context"]
-    assert "exactly 16" in ctx
-    assert "TEAM_PLAN_JSON" in ctx
+    assert "exactly 8" in ctx
+    assert "DELEGATE_TASKS_JSON" in ctx
+    assert "TEAM_PLAN_JSON" not in ctx

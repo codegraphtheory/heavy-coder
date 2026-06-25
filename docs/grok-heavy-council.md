@@ -1,6 +1,8 @@
-# Grok Heavy vs Heavy Coder (16-agent council)
+# Grok Heavy vs Heavy Coder (parallel council)
 
 Heavy Coder can run the **same orchestration plan** as Grok Heavy at a high level. It cannot replicate xAI's closed-box multi-agent runtime **exactly**.
+
+**Default today:** **8** parallel Composer leaves via Hermes (`heavy_coder.council_width: 8`), with optional **16** for maximum parallelism. See [composer-hermes-swarms.md](composer-hermes-swarms.md).
 
 ## Same plan (yes)
 
@@ -14,7 +16,7 @@ Heavy Coder mapping:
 
 | Step | Grok Heavy (xAI) | Heavy Coder (Hermes) |
 |------|------------------|----------------------|
-| Parallel workers | Many Grok agents (up to ~16 in Heavy tiers) | `delegate_task(tasks=[...])` with **width 16** |
+| Parallel workers | Many Grok agents (up to ~16 in Heavy tiers) | `delegate_task(tasks=[...])` with width **8** (default) or **16** |
 | Isolation | Shared context + internal debate (opaque) | **Blind** leaf workers (no peer proposals pre-critique) |
 | Cross-check | Internal agent interaction | `critique_candidates.py` + coordinator rubric |
 | Synthesis | Leader agent | Coordinator session merges winning patch set |
@@ -36,9 +38,9 @@ delegate_task(tasks=team_plan.delegate_tasks)   # 16 entries when width=16
 
 Profile settings (`config.yaml`):
 
-- `heavy_coder.candidate_widths: [3, 5, 16]`
-- `heavy_coder.heavy_council_width: 16`
-- `delegation.max_concurrent_children: 16` (Hermes has no hard ceiling; cost scales linearly)
+- `heavy_coder.candidate_widths: [3, 5, 8, 16]`
+- `heavy_coder.council_width: 8` (set `16` for Grok Heavy-scale swarms)
+- `delegation.max_concurrent_children: 16` (Hermes ceiling; cost scales with width)
 
 Re-install or sync the profile after changing `config.yaml` so your Hermes session picks up delegation limits.
 
@@ -55,25 +57,26 @@ The public Grok Heavy idea that matches us best: **many parallel hypotheses, the
 
 ## When to use width 16
 
-- **Default** for non-trivial work when `heavy_council_always: true` (profile default since 0.2.6).
-- Research-grade or high-ambiguity coding where diversity beats latency.
+- High-ambiguity coding where diversity beats latency.
 - Demos and evaluations (`skills/heavy-coding-eval/`).
-- **Smaller teams** only when the user says **single mode** or explicitly asks for width 3/5.
+- Explicit `--heavy-council` or `council_width: 16` in config.
 
-Expect **~16x** subagent token cost versus one candidate, plus coordinator critique/synthesis.
+For day-to-day work, **width 8** is the default council (see README and [composer-hermes-swarms.md](composer-hermes-swarms.md)).
 
-## "Literally everything" team policy
+**Smaller teams** only when the user says **single mode** or explicitly asks for width 3/5.
 
-Plan 1A hooks treat most **non-trivial** user turns as team work:
+Expect subagent token cost to scale with council width (8 vs 16), plus coordinator synthesis.
 
-1. **`pre_llm`** injects a width-**16** `TEAM_PLAN_JSON` (heavy council).
-2. Your **first** tool call must be **`delegate_task`** with **16** parallel `tasks` (unless **single mode**).
-3. **`patch` / `write_file` / mutating `terminal` / `skill_manage` / `execute_code`** are blocked until candidates finish and you synthesize.
-4. Optional **`heavy-council`** Hermes plugin (install via `bootstrap_heavy_team.py`) adds the same checks at the plugin layer.
+## Team policy (Plan 1A hooks)
 
-**Not** forced: empty greetings, pure trivia ("what is Python?"), or messages with explicit **single mode** opt-out. Reads (`read_file`, `search_files`, read-only `terminal`) still work before delegation.
+For most **non-trivial** user turns:
 
-See `docs/plan-1a-shell-hooks.md` and `docs/enforcement-model.md` for limits (coordinator can still solo-read; terminal bypass is narrowed, not impossible).
+1. **`pre_llm`** injects compact **`DELEGATE_TASKS_JSON`** (full plan under `.heavy-coder/plans/`).
+2. Your **first** tool call must be **`delegate_task`** with the plan width parallel `tasks` (default **8**, unless config says 16).
+3. Mutating tools are blocked until candidates finish and you synthesize.
+4. Say **single mode** to opt out.
+
+See `docs/plan-1a-shell-hooks.md` and [composer-hermes-swarms.md](composer-hermes-swarms.md).
 
 ## Opt-out: single mode
 
@@ -81,14 +84,14 @@ When `single_mode_requires_explicit: true`, include a clear phrase in the **same
 
 - `single mode` / `composer only` / `no team` / `one agent`
 
-The coordinator may then use width 3 or solo edits without the 16-task gate.
+The coordinator may then use solo edits without the council gate.
 
 ## Worktrees
 
 For git-changing council runs:
 
 ```bash
-python skills/heavy-issue-to-merge/scripts/worktrees.py plan --width 16 --repo .
+python skills/heavy-issue-to-merge/scripts/worktrees.py plan --width 8 --repo .
 ```
 
 Use `--execute` only on a clean tree.
