@@ -8,7 +8,7 @@ Parallel independent candidates can reveal different fixes and reduce early-assu
 
 ## Decision
 
-Use width 1, 3, or 5. Escalate when tests fail, candidates disagree, or confidence is low.
+Use adaptive width 3 or 5 in the installed profile (`candidate_widths: [3, 5]`, `default_width: 3`). Escalate from 3 to 5 when tests fail, candidates disagree, or confidence is low. Single-agent mode is opt-in only (`single_mode_requires_explicit`).
 
 ## Consequences
 

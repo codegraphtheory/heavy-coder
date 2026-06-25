@@ -46,7 +46,7 @@ Depends on: 1.
 
 Labels: `area:coordination`
 
-Classify tasks into width 1, 3, or 5 using scope, ambiguity, risk, and prior failures. Add escalation rules.
+Classify tasks into width 3 or 5 using scope, ambiguity, risk, and prior failures (per `candidate_widths`). Add escalation rules from 3 to 5.
 
 Depends on: 3, 5.
 

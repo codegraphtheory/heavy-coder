@@ -11,7 +11,7 @@ The goal is to test whether adaptive candidate teams outperform a single-candida
 
 ## Treatment
 
-- Adaptive 1/3/5 Composer candidates.
+- Adaptive 3/5 Composer candidates (matching profile `candidate_widths`).
 - Blind comparative critic.
 - Reasoning-model synthesis when available.
 - Same final verifier and comparable runtime limits.

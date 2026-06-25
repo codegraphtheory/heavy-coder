@@ -16,4 +16,4 @@ Official Hermes documentation says `hermes profile install <source>` installs a 
 
 ## Uncertainty
 
-The profile defaults to Hermes provider `xai-oauth`. The main chat model is `grok-4.3` because Heavy Coder's interactive entrypoint acts as the coordinator. The role map sets candidate workers to `grok-composer-2.5-fast` and coordinator, critic, synthesizer, and verifier roles to `grok-4.3`, based on current Hermes source showing `grok-composer-2.5-fast` as an xAI OAuth curated extra and `grok-4.3` as the current replacement for retired Grok 4 fast/code refs. Future role-specific routing must still verify live model access at runtime.
+The profile defaults to Hermes provider `xai-oauth`. `config.yaml` sets `model.default` and all `heavy_coder.model_roles` to `composer-2.5` so the distribution does not pin unverified Grok model identifiers (see `AGENTS.md`). Role-specific Grok routing remains a future option and must be verified against live Hermes provider support before changing config defaults.

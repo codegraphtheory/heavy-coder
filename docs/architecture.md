@@ -20,23 +20,16 @@ The implementation is split into deterministic helpers and agent skills:
 
 ## Adaptive team width
 
-The coordinator selects width 1, 3, or 5:
+The coordinator selects width 3 or 5 (`heavy_coder.candidate_widths` in `config.yaml`; default width 3):
 
-- Width 1: small, localized, low-ambiguity tasks.
 - Width 3: normal coding tasks.
 - Width 5: cross-cutting, risky, or ambiguous tasks.
 
-A run may escalate from 1 to 3 or from 3 to 5 when tests fail, candidates disagree, or confidence is low.
+A run may escalate from 3 to 5 when tests fail, candidates disagree, or confidence is low. Single-agent execution requires an explicit user request (`single_mode_requires_explicit`).
 
 ## Model-role intent
 
-- Candidate implementation workers: Grok Composer.
-- Coordinator: Grok reasoning model when available, otherwise Composer.
-- Critic: Grok reasoning model when available, otherwise Composer.
-- Synthesizer: Grok reasoning model when available, otherwise Composer.
-- Final verifier: fresh model context.
-
-Exact identifiers are configuration. Defaults must be verified against current Hermes provider support before implementation.
+Installed `config.yaml` sets every role in `heavy_coder.model_roles` and `model.default` to `composer-2.5` on provider `xai-oauth`. Future role-specific routing (for example, faster workers vs reasoning coordinators) must stay in configurable fields and be verified against live Hermes provider support, not pinned as guessed Grok identifiers in config.
 
 ## Isolation
 
