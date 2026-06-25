@@ -113,6 +113,7 @@ python3.11 -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[dev]'
 python scripts/validate_distribution.py .
+python scripts/validate_release_guard.py --base origin/main --head HEAD
 python -m pytest
 python -m ruff check .
 python -m mypy src tests
