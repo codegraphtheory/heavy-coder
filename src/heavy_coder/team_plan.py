@@ -16,13 +16,15 @@ def build_team_plan(
     repo_root: Path | None = None,
     context_extra: str = "",
     width_override: int | None = None,
-    allowed_widths: tuple[int, ...] = (3, 5),
+    allowed_widths: tuple[int, ...] = (3, 5, 16),
     default_width: int = 3,
+    heavy_council_width: int = 16,
 ) -> dict[str, Any]:
     triage: TriageResult = classify_task(
         task,
         default_width=default_width,
         allowed_widths=allowed_widths,
+        heavy_council_width=heavy_council_width,
     )
     width = width_override if width_override in allowed_widths else triage.width
 

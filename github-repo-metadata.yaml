@@ -1,0 +1,31 @@
+# Canonical GitHub repository discovery fields for codegraphtheory/heavy-coder.
+# Apply with: python scripts/apply_github_repo_metadata.py --execute
+# Validate with: python scripts/validate_github_repo_metadata.py .
+
+description: >-
+  Hermes Agent profile for adaptive multi-candidate coding teams: GitHub
+  issue-to-PR scaffolding, blind critique and synthesis, and fail-closed
+  unattended merge policy. Python contracts, schemas, and CI. Install via
+  hermes profile install.
+
+topics:
+  - hermes-agent
+  - hermes-profile
+  - coding-agent
+  - ai-agents
+  - multi-agent
+  - agentic-coding
+  - issue-to-pr
+  - python
+  - developer-tools
+  - terminal
+  - software-engineering
+  - nous-research
+  - code-review
+  - ci-cd
+  - github-cli
+  - automation
+  - open-source
+  - llm
+  - json-schema
+  - profile-distribution

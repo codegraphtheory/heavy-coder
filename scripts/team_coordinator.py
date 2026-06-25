@@ -15,7 +15,8 @@ def main() -> int:
     parser.add_argument("task", nargs="?", help="Task description (or use --task-file)")
     parser.add_argument("--task-file", type=Path, help="Read task from a file")
     parser.add_argument("--repo", type=Path, default=Path("."), help="Target repository root")
-    parser.add_argument("--width", type=int, choices=[3, 5], help="Override triage width")
+    parser.add_argument("--width", type=int, help="Override triage width (3, 5, or 16 heavy council)")
+    parser.add_argument("--heavy-council", action="store_true", help="Force width 16 (Grok Heavy-style council)")
     parser.add_argument("--context", default="", help="Extra context appended to each candidate")
     args = parser.parse_args()
 
@@ -34,11 +35,16 @@ def main() -> int:
         print(json.dumps({"error": "task is empty"}, indent=2))
         return 2
 
+    width_override = 16 if args.heavy_council else args.width
+    if width_override is not None and width_override not in (3, 5, 16):
+        print(json.dumps({"error": f"unsupported width {width_override}; use 3, 5, or 16"}, indent=2))
+        return 2
+
     plan = build_team_plan(
         task,
         repo_root=args.repo.resolve(),
         context_extra=args.context,
-        width_override=args.width,
+        width_override=width_override,
     )
     print(json.dumps(plan, indent=2, sort_keys=True))
     return 0

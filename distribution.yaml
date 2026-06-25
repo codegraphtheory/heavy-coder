@@ -1,5 +1,5 @@
 name: heavy-coder
-version: 0.2.1
+version: 0.2.4
 description: "Hermes profile with shell-hook enforced multi-candidate coding teams (Plan 1A)."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
@@ -23,5 +23,6 @@ distribution_owned:
   - AGENTS.md
   - .env.EXAMPLE
   - .hermes.md
+  - github-repo-metadata.yaml
   - agent-hooks
 source: github.com/codegraphtheory/heavy-coder

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.4
+
+- Add Grok Heavy-style **heavy council** width 16: triage triggers, `--heavy-council`, `candidate_widths` and `delegation.max_concurrent_children` 16, docs `grok-heavy-council.md`.
+
+## 0.2.3
+
+- Restructure README: Grok Heavy-style team use case first, Hermes install, profile install, and Grok OAuth with X Premium / SuperGrok callout.
+
+## 0.2.2
+
+- Add version-controlled GitHub discovery metadata (`github-repo-metadata.yaml`) with validators, apply script, and docs.
+- Sync remote description and topics from the canonical file via `apply_github_repo_metadata.py`.
+
 ## 0.2.1
 
 - Fix `build_team_plan` width override emitting fewer `delegate_tasks` than `width`.
