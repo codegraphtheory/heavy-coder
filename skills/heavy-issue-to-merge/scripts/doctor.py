@@ -128,6 +128,21 @@ def main() -> int:
         "note": "Read-only checks. See docs/enforcement-model.md for what is enforced vs advisory.",
     }
     print(json.dumps(data, indent=2, sort_keys=True))
+
+    tools = data["checks"]["tools"]
+    if isinstance(tools, list):
+        for entry in tools:
+            if isinstance(entry, dict) and entry.get("name") in {"python3", "git"} and not entry.get("available"):
+                return 2
+
+    git_check = data["checks"]["git"]
+    if isinstance(git_check, dict) and git_check.get("is_git_repo") is False:
+        return 2
+
+    team = data["checks"].get("team_config")
+    if isinstance(team, dict) and team.get("readable") and team.get("team_enforced") is False:
+        return 1
+
     return 0
 
 

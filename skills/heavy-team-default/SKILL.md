@@ -1,35 +1,51 @@
 ---
 name: heavy-team-default
-description: Default multi-candidate workflow for Heavy Coder coding tasks (width 3/5 via delegate_task, then critique, synthesis, verification).
-version: 0.2.0
+description: Default multi-candidate workflow for Heavy Coder coding tasks (plan, delegate_task, critique, synthesis, verification).
+version: 0.3.0
 author: CodeGraphTheory
 license: MIT
 ---
 
 # Heavy team default workflow
 
-Use this skill when the user wants implementation, refactoring, debugging, or other repository-changing work.
+Use for implementation, refactoring, debugging, or repository-changing requests.
 
-## What this skill does
+## Required coordinator sequence
 
-It defines **how the coordinator should work**. Hermes does not automatically refuse single-tool-call execution; following this skill is a profile policy choice (see `docs/enforcement-model.md`).
+1. **Plan** (deterministic):
 
-## Workflow
+   ```bash
+   python scripts/team_coordinator.py "TASK DESCRIPTION HERE" --repo .
+   ```
 
-1. **Triage**: Classify scope and risk. Default to **3** parallel leaf candidates; use **5** for cross-cutting, ambiguous, or high-risk tasks.
-2. **Delegate**: `delegate_task` with isolated `context` per candidate. Pass file paths, constraints, and test commands explicitly.
-3. **Critique**: Compare candidate summaries on evidence (tests run, diffs, risks). Do not treat self-reported success as proof; verify artifacts.
-4. **Synthesize**: Pick or merge the best candidate output into one coherent change set.
-5. **Verify**: Run tests locally (or `scripts/ci_local.sh` in this distribution repo) before telling the user the task is done.
+   Or from the installed skill: `python skills/heavy-team-default/scripts/plan_team.py "TASK" --repo .`
+
+   The JSON includes `delegate_tasks`: pass that array to Hermes `delegate_task`.
+
+2. **Isolate** (when candidates will change git state):
+
+   ```bash
+   python skills/heavy-issue-to-merge/scripts/worktrees.py create --width 3 --execute --repo .
+   ```
+
+   Use `worktrees.py plan` first on a dirty tree. Run `worktrees.py remove --execute` when finished.
+
+3. **Delegate**: `delegate_task(tasks=<delegate_tasks from step 1>)`.
+
+4. **Validate**: Each candidate should write `candidate-result` JSON. Validate with:
+
+   `python skills/heavy-issue-to-merge/scripts/validate_candidate.py path/to/c1.json`
+
+5. **Critique**: Blind ranking:
+
+   `python scripts/critique_candidates.py .heavy-coder/evidence/c1.json .heavy-coder/evidence/c2.json ...`
+
+6. **Synthesize and verify**: Apply the winning approach, run `verification_commands` from the plan JSON.
 
 ## Single-agent exception
 
-If the user clearly requests **single mode**, **composer only**, or **no team**, you may execute without parallel candidates.
+Honor explicit **single mode** / **composer only** / **no team** requests.
 
-## Configuration
+## Diagnostics
 
-Read `heavy_coder.candidate_widths`, `default_width`, and `single_mode_requires_explicit` from the installed profile `config.yaml` when width is unclear.
-
-## Optional diagnostic
-
-Run `python scripts/bootstrap_heavy_team.py` from the profile or repo root to print whether team-related config flags are consistent (advisory only).
+`python scripts/bootstrap_heavy_team.py` and `python skills/heavy-issue-to-merge/scripts/doctor.py`

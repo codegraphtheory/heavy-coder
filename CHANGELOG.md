@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.9
+
+- Implement working team pipeline: triage, `team_coordinator.py`, `heavy_coding_flow.py`, critique and candidate schema validation.
+- Implement git worktree lifecycle (`worktrees.py`), guarded `claim_issue` / `publish_pr` with `--execute`.
+- Document required coordinator sequence in `heavy-team-default` skill; update enforcement model.
+
 ## 0.1.8
 
 - Honesty pass: document advisory vs mechanical enforcement in `docs/enforcement-model.md`; tone down SOUL, `.hermes.md`, and `heavy-team-default` overclaims.

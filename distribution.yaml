@@ -1,6 +1,6 @@
 name: heavy-coder
-version: 0.1.8
-description: "Terminal-first Hermes profile for adaptive multi-candidate coding teams (scaffolded issue-to-merge)."
+version: 0.1.9
+description: "Terminal-first Hermes profile for multi-candidate coding teams with coordinator scripts and guarded GitHub actions."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"
