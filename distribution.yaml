@@ -1,5 +1,5 @@
 name: heavy-coder
-version: 0.1.3
+version: 0.1.4
 description: "Terminal-first Hermes profile distribution for adaptive Heavy-style coding-agent teams."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
@@ -12,13 +12,15 @@ distribution_owned:
   - SOUL.md
   - config.yaml
   - mcp.json
-  - skills/
-  - scripts/
-  - schemas/
-  - src/
-  - docs/
-  - examples/
+  - skills
+  - scripts
+  - schemas
+  - src
+  - docs
+  - examples
   - distribution.yaml
   - README.md
   - AGENTS.md
   - .env.EXAMPLE
+  - .hermes.md
+source: github.com/codegraphtheory/heavy-coder
