@@ -8,7 +8,7 @@ After `hermes profile install github.com/codegraphtheory/heavy-coder --name heav
 
 | Mechanism | What you get |
 |-----------|----------------|
-| Shipped **`config.yaml`** | TUI, verbose tool progress, `max_async_children: 16`, `compression.threshold: 0.85`, swarm hooks |
+| Shipped **`config.yaml`** | TUI, **`display.skin: heavy-coder`** (Grok × Hermes banner), verbose tool progress, `max_async_children: 16`, `compression.threshold: 0.85`, swarm hooks |
 | **`on_session_start` hook** | Merges missing display/delegation/compression keys after upgrades; installs `heavy-council` plugin |
 | **`--alias`** | `heavy-coder chat` runs this profile (wrapper in `~/.local/bin`) |
 
@@ -16,7 +16,9 @@ No manual `hermes config set` required on a fresh install. Updaters who kept an 
 
 ## Recommended: Ink TUI (default for this profile)
 
-Profile `config.yaml` sets `display.interface: tui`.
+Profile `config.yaml` sets `display.interface: tui` and `display.skin: heavy-coder`.
+
+The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile on install). It customizes the TUI wordmark, caduceus panel art, colors (cyan/violet Grok + Hermes gold), swarm spinner verbs, and branding (`Heavy Coder`, welcome mentions *Powered by Hermes · Grok*). Switch anytime with `/skin heavy-coder` or another Hermes skin via `/skin list`.
 
 ```bash
 hermes -p heavy-coder chat
@@ -91,6 +93,7 @@ delegation:
 
 display:
   interface: tui
+  skin: heavy-coder
   tool_progress: verbose
   timestamps: true
   tui_agents_nudge: true
@@ -101,6 +104,7 @@ Apply without reinstalling the profile:
 
 ```bash
 hermes -p heavy-coder config set display.interface tui
+hermes -p heavy-coder config set display.skin heavy-coder
 hermes -p heavy-coder config set display.tool_progress verbose
 hermes -p heavy-coder config set delegation.max_async_children 16
 hermes -p heavy-coder config set compression.enabled true

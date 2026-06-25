@@ -13,6 +13,7 @@ def test_ensure_swarm_display_defaults_merges_missing(tmp_path: Path) -> None:
     assert result["changed"] is True
     data = yaml.safe_load(cfg.read_text(encoding="utf-8"))
     assert data["display"]["interface"] == "tui"
+    assert data["display"]["skin"] == "heavy-coder"
     assert data["delegation"]["max_async_children"] == 16
     assert data["compression"]["enabled"] is True
     assert data["compression"]["threshold"] == 0.85

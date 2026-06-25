@@ -29,6 +29,7 @@ delegation:
   subagent_auto_approve: true
 display:
   interface: tui
+  skin: heavy-coder
   tool_progress: verbose
   timestamps: true
   tui_agents_nudge: true

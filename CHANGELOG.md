@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.14
+
+- **Heavy Coder TUI skin:** ship `skins/heavy-coder.yaml` (Grok cyan/violet, Hermes gold, caduceus banner, swarm spinner verbs) via `distribution_owned`.
+- **Default skin on install:** `config.yaml` and `profile_bootstrap` merge `display.skin: heavy-coder` when missing.
+- **Docs:** [cli-observability.md](docs/cli-observability.md) documents `/skin heavy-coder` and install layout.
+
 ## 0.2.13
 
 - **Fast swarm watcher:** add `scripts/swarm_watch.py` with low-latency, change-aware redraws and in-place terminal repainting.

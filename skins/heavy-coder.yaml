@@ -1,0 +1,114 @@
+# Heavy Coder profile skin - Grok (xAI Composer) × Hermes messenger aesthetic.
+# Installed to ~/.hermes/profiles/<profile>/skins/ via profile distribution.
+name: heavy-coder
+description: "Heavy Coder - electric Grok cyan, Hermes gold, swarm-ready"
+
+colors:
+  banner_border: "#5B21B6"
+  banner_title: "#22D3EE"
+  banner_accent: "#FFD700"
+  banner_dim: "#7C3AED"
+  banner_text: "#E0F2FE"
+  ui_accent: "#38BDF8"
+  ui_label: "#FBBF24"
+  ui_primary: "#67E8F9"
+  ui_border: "#6D28D9"
+  ui_text: "#F0F9FF"
+  ui_ok: "#34D399"
+  ui_error: "#FB7185"
+  ui_warn: "#FBBF24"
+  prompt: "#E0F2FE"
+  input_rule: "#7C3AED"
+  response_border: "#22D3EE"
+  status_bar_bg: "#0F0A1A"
+  status_bar_text: "#CBD5E1"
+  status_bar_strong: "#22D3EE"
+  status_bar_dim: "#64748B"
+  status_bar_good: "#6EE7B7"
+  status_bar_warn: "#FDE047"
+  status_bar_bad: "#FB923C"
+  status_bar_critical: "#F87171"
+  session_label: "#FBBF24"
+  session_border: "#94A3B8"
+  selection_bg: "#1E1B4B"
+  completion_menu_bg: "#0F0A1A"
+  completion_menu_current_bg: "#312E81"
+  completion_menu_meta_bg: "#0F0A1A"
+  completion_menu_meta_current_bg: "#312E81"
+  shell_dollar: "#38BDF8"
+
+spinner:
+  waiting_faces:
+    - "(⛓)"
+    - "(◈)"
+    - "(⌁)"
+    - "(⚔)"
+    - "(✦)"
+  thinking_faces:
+    - "(◈)"
+    - "(⛓)"
+    - "(⌁)"
+    - "(<>)"
+  thinking_verbs:
+    - "spawning candidates"
+    - "running the council"
+    - "synthesizing evidence"
+    - "delegating leaves"
+    - "composing in parallel"
+    - "forging a merge path"
+    - "cross-checking Grok"
+    - "routing through Hermes"
+  wings:
+    - ["⟪◈", "◈⟫"]
+    - ["⟪⛓", "⛓⟫"]
+    - ["⟪⚕", "⚕⟫"]
+    - ["⟪✦", "✦⟫"]
+
+branding:
+  agent_name: "Heavy Coder"
+  welcome: "Composer swarms on Hermes - type a task, /agents during batches, /help for commands. Powered by Hermes · Grok (xAI)."
+  goodbye: "Council adjourned. ⚕ ◈"
+  response_label: " ◈ Heavy "
+  prompt_symbol: "⛓"
+  help_header: "(⛓) Heavy Coder · Hermes commands"
+
+tool_prefix: "╎"
+
+tool_emojis:
+  terminal: "⚔"
+  delegate_task: "⛓"
+  patch: "◈"
+  read_file: "⌁"
+  write_file: "✦"
+
+banner_logo: |
+  [bold #22D3EE]██╗  ██╗███████╗ █████╗ ██╗   ██╗[/]
+  [bold #06B6D4]██║  ██║██╔════╝██╔══██╗╚██╗ ██╔╝[/]
+  [#0EA5E9]███████║█████╗  ███████║ ╚████╔╝ [/]
+  [#38BDF8]██╔══██║██╔══╝  ██╔══██║  ╚██╔╝  [/]
+  [bold #67E8F9]██║  ██║███████╗██║  ██║   ██║   [/]
+  [dim #155E75]╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   [/]
+  [bold #FFD700] ██████╗ ██████╗ ██████╗ ███████╗██████╗ [/]
+  [#FBBF24]██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗[/]
+  [#F59E0B]██║     ██║   ██║██║  ██║█████╗  ██████╔╝[/]
+  [#D97706]██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗[/]
+  [bold #FFD700]╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║[/]
+  [dim #92400E] ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝[/]
+  [dim #7C3AED]  Hermes orchestration[/] [bold #22D3EE]×[/] [dim #A78BFA]Grok Composer[/] [dim #64748B]· multi-candidate coding[/]
+
+banner_hero: |
+  [#7C3AED]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⣀⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#6D28D9]⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣇⠸⣿⣿⠇⣸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀[/]
+  [#22D3EE]⠀⢀⣠⣴⣶⠿⠋⣩⡿⣿⡿⠻⣿⡇⢠⡄⢸⣿⠟⢿⣿⢿⣍⠙⠿⣶⣦⣄⡀⠀[/]
+  [#06B6D4]⠀⠀⠉⠉⠁⠶⠟⠋⠀⠉⠀⢀⣈⣁⡈⢁⣈⣁⡀⠀⠉⠀⠙⠻⠶⠈⠉⠉⠀⠀[/]
+  [#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢁⡈⠛⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#FBBF24]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⣿⣦⣤⣈⠁⢠⣴⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#38BDF8]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⢿⣿⣦⡉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#0EA5E9]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣦⣈⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#5B21B6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⠦⠈⠙⠿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#7C3AED]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣤⡈⠁⢤⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#22D3EE]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠷⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#06B6D4]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠑⢶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⢰⡆⠈⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#A78BFA]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⠈⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [dim #4C1D95]⠀⠀⠀⠀⠀⠀⠀⠀⚕ swarm caduceus⠀⠀⠀⠀⠀⠀⠀[/]

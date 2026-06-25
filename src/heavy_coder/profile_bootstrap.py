@@ -17,6 +17,7 @@ MARKER_NAME = f".profile-bootstrap-{MARKER_VERSION}"
 # Shipped defaults for swarm observability (merged only when keys are missing).
 SWARM_DISPLAY_DEFAULTS: dict[str, Any] = {
     "interface": "tui",
+    "skin": "heavy-coder",
     "tool_progress": "verbose",
     "timestamps": True,
     "tui_agents_nudge": True,
