@@ -1,0 +1,118 @@
+{
+  "width": 16,
+  "workflow_state": "TRIAGED",
+  "delegate_tasks": [
+    {
+      "candidate_id": "c1",
+      "role": "minimal-fix",
+      "goal": "Candidate c1 (minimal-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: minimal-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c2",
+      "role": "robust-fix",
+      "goal": "Candidate c2 (robust-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: robust-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c3",
+      "role": "test-first",
+      "goal": "Candidate c3 (test-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: test-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c4",
+      "role": "compatibility-first",
+      "goal": "Candidate c4 (compatibility-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: compatibility-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c5",
+      "role": "refactor-safe",
+      "goal": "Candidate c5 (refactor-safe): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: refactor-safe\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c6",
+      "role": "minimal-fix",
+      "goal": "Candidate c6 (minimal-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: minimal-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c7",
+      "role": "robust-fix",
+      "goal": "Candidate c7 (robust-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: robust-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c8",
+      "role": "test-first",
+      "goal": "Candidate c8 (test-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: test-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c9",
+      "role": "compatibility-first",
+      "goal": "Candidate c9 (compatibility-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: compatibility-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c10",
+      "role": "refactor-safe",
+      "goal": "Candidate c10 (refactor-safe): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: refactor-safe\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c11",
+      "role": "minimal-fix",
+      "goal": "Candidate c11 (minimal-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: minimal-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c12",
+      "role": "robust-fix",
+      "goal": "Candidate c12 (robust-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: robust-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c13",
+      "role": "test-first",
+      "goal": "Candidate c13 (test-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: test-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c14",
+      "role": "compatibility-first",
+      "goal": "Candidate c14 (compatibility-first): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: compatibility-first\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c15",
+      "role": "refactor-safe",
+      "goal": "Candidate c15 (refactor-safe): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: refactor-safe\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "candidate_id": "c16",
+      "role": "minimal-fix",
+      "goal": "Candidate c16 (minimal-fix): implement the requested task independently. Return a candidate-result JSON matching schemas/candidate-result.schema.json when done.",
+      "context": "Repository root: /path/to/heavy-coder\nUser task:\nAdd examples/delegate_tasks_16.sample.json as a minimal delegate_tasks sample from team_coordinator.\n\nCandidate role: minimal-fix\nRules: do not depend on other candidates; run real tests; list changed files and commands.",
+      "toolsets": ["terminal", "file", "web"]
+    }
+  ]
+}

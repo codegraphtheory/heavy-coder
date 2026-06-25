@@ -13,6 +13,8 @@ import json
 import sys
 from pathlib import Path
 
+from heavy_coder.install_heavy_council_plugin import install_heavy_council_plugin
+
 try:
     import yaml
 except Exception:  # pragma: no cover
@@ -57,6 +59,8 @@ def main() -> int:
             "min_width": min(widths) if widths else 0,
         }
 
+        plugin_result = install_heavy_council_plugin(root=root, force=False, enable=True)
+
         if not team_enforced or min(widths or [0]) < 3:
             print(
                 json.dumps(
@@ -64,6 +68,7 @@ def main() -> int:
                         "status": "ADVISORY_MISMATCH",
                         "reason": "team_enforced is false or minimum candidate width is below 3",
                         "enforcement": enforcement,
+                        "heavy_council_plugin": plugin_result,
                         "doc": "docs/enforcement-model.md",
                     },
                     indent=2,
@@ -79,6 +84,7 @@ def main() -> int:
                     "hook": "bootstrap_heavy_team.py",
                     "recommended_flow": "triage -> delegate_task(width=3|5|16) -> critique -> synthesize -> verify",
                     "enforcement": enforcement,
+                    "heavy_council_plugin": plugin_result,
                     "note": "Advisory only; coordinator must follow heavy-team-default skill.",
                 },
                 indent=2,

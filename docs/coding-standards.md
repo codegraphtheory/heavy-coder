@@ -45,7 +45,7 @@ Release-relevant paths (see `scripts/validate_release_guard.py`):
 
 ## Security and profile boundaries
 
-- Pure Hermes **profile distribution** only (no Hermes plugin).
+- Pure Hermes **profile distribution** only, except the shipped `plugins/heavy-council/` helper (see `AGENTS.md`).
 - Dangerous scripts stay dry-run or return explicit not-implemented until policy gates exist.
 - No personal identity in public commits; use `GraphTheory <codegraphtheory@pm.me>` per `AGENTS.md`.
 

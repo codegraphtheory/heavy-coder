@@ -4,6 +4,8 @@ Terminal-first [Hermes Agent](https://hermes-agent.nousresearch.com/docs/) profi
 
 **Status:** scaffolded. Team workflow, hooks, schemas, and Python tooling are real; **autonomous issue-to-merge is not live yet** (see [Safety boundaries](#safety-boundaries)).
 
+Plan 1A **shell hooks** default non-trivial coding to a Grok Heavy-style **16-agent council**: `pre_llm_call` injects a `team_coordinator.py --heavy-council` plan with sixteen `delegate_tasks`, and `pre_tool_call` rejects undersized `delegate_task` batches and solo file or terminal edits until candidates finish (say **single mode** to opt out). Details: [docs/plan-1a-shell-hooks.md](docs/plan-1a-shell-hooks.md); sample batch: [examples/delegate_tasks_16.sample.json](examples/delegate_tasks_16.sample.json). The distribution also owns an empty profile `plugins/` tree for optional profile-scoped Hermes plugins (none bundled; see [ADR 0002](docs/adr/0002-pure-profile-distribution.md)).
+
 ---
 
 ## Use case
