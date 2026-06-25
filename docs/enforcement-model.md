@@ -17,6 +17,8 @@ Heavy Coder combines **coordinator instructions**, **deterministic scripts**, an
 
 The Hermes coordinator must still call `delegate_task`; scripts do not spawn agents themselves.
 
+**Plan 1A (0.2.0+):** Profile `config.yaml` registers **shell hooks** that inject the team plan, block solo `patch`/`write_file` before delegation, require `delegate_task` width 3+, and capture `subagent_stop` evidence. See `docs/plan-1a-shell-hooks.md`.
+
 ## Instruction layers
 
 - `SOUL.md`, `.hermes.md`, and `heavy-team-default` define the required sequence.
