@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from heavy_coder.triage import TriageResult, classify_task
+from heavy_coder.triage import ROLE_ROTATION, TriageResult, classify_task
 
 DEFAULT_TOOLSETS = ["terminal", "file", "web"]
 
@@ -26,12 +26,17 @@ def build_team_plan(
     )
     width = width_override if width_override in allowed_widths else triage.width
 
+    roles = list(triage.candidate_roles)
+    while len(roles) < width:
+        roles.append(ROLE_ROTATION[len(roles) % len(ROLE_ROTATION)])
+    roles = roles[:width]
+
     repo_note = ""
     if repo_root is not None:
         repo_note = f"Repository root: {repo_root.resolve()}\n"
 
     tasks = []
-    for i, role in enumerate(triage.candidate_roles[:width], start=1):
+    for i, role in enumerate(roles, start=1):
         cid = f"c{i}"
         goal = (
             f"Candidate {cid} ({role}): implement the requested task independently. "

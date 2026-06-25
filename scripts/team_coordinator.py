@@ -20,7 +20,11 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.task_file:
-        task = args.task_file.read_text(encoding="utf-8")
+        try:
+            task = args.task_file.read_text(encoding="utf-8")
+        except OSError as exc:
+            print(json.dumps({"error": f"task-file: {exc}"}, indent=2))
+            return 2
     elif args.task:
         task = args.task
     else:

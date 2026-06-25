@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Fix `build_team_plan` width override emitting fewer `delegate_tasks` than `width`.
+- Harden candidate validation and hook stdin JSON parsing; avoid resetting hook phase on async delegation completion.
+- Add unit tests for candidate results, state machine, and team plan edge cases.
+- Add tag-triggered GitHub Release workflow and scripts/ship_release.sh for repeatable ships.
+
 ## 0.2.0
 
 - Plan 1A: Hermes shell hooks (`pre_llm_call`, `pre_tool_call`, `post_tool_call`, `subagent_stop`) enforce team workflow.
