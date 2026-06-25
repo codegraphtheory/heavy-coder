@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Add a release guard workflow and script that fail when release-relevant profile-distribution changes do not bump `distribution.yaml` version.
+- Add pull request checklist items requiring version and changelog discipline for visible profile updates.
+
 ## 0.1.1
 
 - Default the profile to Hermes `xai-oauth` with `grok-4.3` as the coordinator chat model.

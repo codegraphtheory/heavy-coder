@@ -9,6 +9,7 @@ python3.11 -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[dev]'
 python scripts/validate_distribution.py .
+python scripts/validate_release_guard.py --base origin/main --head HEAD
 python -m pytest
 ```
 
@@ -20,6 +21,7 @@ python -m pytest
 - Keep dangerous behavior dry-run only until policy gates are implemented and tested.
 - Update docs and schemas when changing contracts.
 - Mark capabilities as planned, scaffolded, or implemented.
+- Any release-relevant profile-distribution change must bump `distribution.yaml` version and add a matching `CHANGELOG.md` entry. This keeps `hermes profile show` from displaying a stale distribution version after users update.
 
 ## Good first areas
 
