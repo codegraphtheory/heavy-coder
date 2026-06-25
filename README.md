@@ -59,9 +59,11 @@ A run may escalate when tests fail, candidates disagree, or confidence is low. C
 This is a pure Hermes profile distribution. It should install with Hermes profile distribution support:
 
 ```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder
+hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --force --yes
 hermes -p heavy-coder chat
 ```
+
+Use profile name **`heavy-coder`** so Plan 1A shell hooks in `config.yaml` resolve (`docs/plan-1a-shell-hooks.md`).
 
 For local development:
 

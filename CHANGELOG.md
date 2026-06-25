@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+- Plan 1A: Hermes shell hooks (`pre_llm_call`, `pre_tool_call`, `post_tool_call`, `subagent_stop`) enforce team workflow.
+- Add `agent-hooks/` scripts, `hooks_auto_accept`, `docs/plan-1a-shell-hooks.md`, `scripts/sync_profile_hooks.py`.
+
 ## 0.1.9
 
 - Implement working team pipeline: triage, `team_coordinator.py`, `heavy_coding_flow.py`, critique and candidate schema validation.

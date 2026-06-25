@@ -22,6 +22,27 @@ approvals:
 delegation:
   max_concurrent_children: 5
   max_spawn_depth: 1
+# Shell hooks (Plan 1A): require profile installed as ~/.hermes/profiles/heavy-coder
+# or run: python scripts/sync_profile_hooks.py --profile <name>
+hooks_auto_accept: true
+hooks:
+  pre_llm_call:
+    - command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_llm_heavy_team.py"
+      timeout: 120
+  pre_tool_call:
+    - matcher: "delegate_task"
+      command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_tool_heavy_team.py"
+      timeout: 30
+    - matcher: "patch|write_file"
+      command: "~/.hermes/profiles/heavy-coder/agent-hooks/pre_tool_heavy_team.py"
+      timeout: 30
+  post_tool_call:
+    - matcher: "delegate_task"
+      command: "~/.hermes/profiles/heavy-coder/agent-hooks/post_delegate_task.py"
+      timeout: 30
+  subagent_stop:
+    - command: "~/.hermes/profiles/heavy-coder/agent-hooks/subagent_stop_evidence.py"
+      timeout: 30
 heavy_coder:
   status: scaffolded
   candidate_widths: [3, 5]
@@ -44,3 +65,4 @@ heavy_coder:
     critic: composer-2.5
     synthesizer: composer-2.5
     verifier: composer-2.5
+  shell_hooks_profile: heavy-coder

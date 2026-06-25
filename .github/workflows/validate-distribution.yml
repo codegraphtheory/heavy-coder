@@ -15,4 +15,4 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install PyYAML
       - run: python scripts/validate_distribution.py .
-      - run: python -m py_compile skills/heavy-issue-to-merge/scripts/*.py skills/heavy-coding-eval/scripts/*.py skills/heavy-team-default/scripts/*.py scripts/*.py
+      - run: python -m py_compile agent-hooks/*.py skills/heavy-issue-to-merge/scripts/*.py skills/heavy-coding-eval/scripts/*.py skills/heavy-team-default/scripts/*.py scripts/*.py

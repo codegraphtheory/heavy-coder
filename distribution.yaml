@@ -1,6 +1,6 @@
 name: heavy-coder
-version: 0.1.9
-description: "Terminal-first Hermes profile for multi-candidate coding teams with coordinator scripts and guarded GitHub actions."
+version: 0.2.0
+description: "Hermes profile with shell-hook enforced multi-candidate coding teams (Plan 1A)."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"
@@ -23,4 +23,5 @@ distribution_owned:
   - AGENTS.md
   - .env.EXAMPLE
   - .hermes.md
+  - agent-hooks
 source: github.com/codegraphtheory/heavy-coder
