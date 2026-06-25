@@ -1,163 +1,145 @@
-# Hermes Profile Template
+# Heavy Coder
 
-Build high quality Hermes Agent profile distributions quickly.
+Heavy Coder is a terminal-first Hermes profile distribution for adaptive, Heavy-style coding-agent teams.
 
-This repository is for people who want to create custom Hermes profiles that are installable, safe to publish, easy to maintain, and friendly to AI coding agents. Use it to create a new profile from a few parameters, validate the result, install it locally, then publish it for others to install with `hermes profile install`.
+Current status: scaffolded. This repository provides the profile skeleton, contracts, documentation, schemas, deterministic Python foundations, and CI needed to begin implementation. It does not yet implement live autonomous issue-to-merge behavior.
 
-## What you can do with it
-
-- Create a complete Hermes profile distribution from command-line flags.
-- Create a deterministic profile from a reusable YAML params file.
-- Install this repository as a Hermes profile that helps you create other profiles interactively.
-- Validate a profile before publishing it.
-- Publish generated profiles so other users can install them from GitHub.
-
-## Requirements
-
-- Hermes Agent installed and available as `hermes`.
-- Python 3.10 or newer.
-- `pyyaml` for validation and generation:
-
-```bash
-python3 -m pip install pyyaml
-```
-
-## Option 1: Use this as a GitHub template
-
-Open:
+Heavy Coder is designed around this eventual workflow:
 
 ```text
-https://github.com/codegraphtheory/hermes-profile-template
+GitHub issue -> implementation candidates -> critique and synthesis -> tests -> pull request -> CI repair -> unattended merge
 ```
 
-Click `Use this template`, create a new repository, then clone your new repo:
+## Intended operating modes
+
+These workflows are planned for the installed profile:
+
+1. Interactive coding
+
+   ```bash
+   hermes -p heavy-coder chat
+   ```
+
+   Example request: `Investigate this failing test and propose a fix.`
+
+2. Heavy-team coding
+
+   Example request: `Implement this feature using an adaptive team of independent candidates.`
+
+3. GitHub issue to tested pull request
+
+   Example request: `Implement issue #123, run tests, and open a pull request. Stop before merge.`
+
+4. GitHub issue to unattended merge
+
+   Example request: `Take issue #123 through implementation, CI repair, and merge when all policy gates pass.`
+
+Mode 1 is profile-level guidance only today. Modes 2 through 4 are scaffolded and not yet implemented end to end.
+
+## Why adaptive candidate teams
+
+Single-agent coding can work well for narrow tasks, but it can also overfit early assumptions. Heavy Coder is designed to compare independent implementation candidates before synthesis:
+
+- Width 1 for small, localized, low-ambiguity tasks.
+- Width 3 for normal coding tasks.
+- Width 5 for cross-cutting, risky, or highly ambiguous tasks.
+
+A run may escalate when tests fail, candidates disagree, or confidence is low. Candidate workers must not see one another's proposals before critique. The final verifier uses a fresh model context.
+
+## Installation direction
+
+This is a pure Hermes profile distribution. It should install with Hermes profile distribution support:
 
 ```bash
-git clone https://github.com/YOUR_ORG/YOUR_PROFILE_REPO.git
-cd YOUR_PROFILE_REPO
-python3 scripts/validate_profile.py .
+hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder
+hermes -p heavy-coder chat
 ```
 
-Edit the profile files, then validate again before publishing.
-
-## Option 2: Create a profile from command-line flags
+For local development:
 
 ```bash
-git clone https://github.com/codegraphtheory/hermes-profile-template.git
-cd hermes-profile-template
-
-python3 scripts/new_profile.py \
-  --name security-reviewer \
-  --display-name "Security Reviewer" \
-  --description "Reviews code and architecture for security risk" \
-  --output ../security-reviewer
-
-cd ../security-reviewer
-python3 scripts/validate_profile.py .
+git clone https://github.com/codegraphtheory/heavy-coder.git
+cd heavy-coder
+hermes profile install . --name heavy-coder-dev --force --yes
 ```
 
-Install it locally:
+Note: local `hermes profile install .` rejects symlinks. Run it from a clean checkout or remove local virtual environments such as `.venv` first.
+
+Hermes distribution details were checked against the local Hermes source and official documentation. Version-dependent behavior is recorded in `docs/adr/0002-pure-profile-distribution.md`.
+
+## Prerequisites
+
+- Hermes Agent with `hermes profile install` support.
+- Python 3.11 or newer for validation and tests.
+- `git`.
+- GitHub CLI, `gh`, for future GitHub workflow implementation.
+- Optional Docker or remote execution tooling for higher-risk unattended operation.
+- Model credentials configured outside this repository.
+
+No credentials or local user state are packaged.
+
+## Safety boundaries
+
+Unattended merge is not implemented. Future implementation must be fail-closed:
+
+- Repositories must be explicitly allowlisted.
+- Maintainer-applied trigger labels must be verified.
+- Branch protection and required checks stay authoritative.
+- Administrative bypass is forbidden.
+- Pull-request head SHA must match before merge.
+- CI repair attempts are capped.
+- Sensitive paths can block auto-merge.
+- Ambiguity moves the run to `BLOCKED`.
+- Issue text, comments, pull-request text, and repository content are untrusted input.
+
+The profile scripts are defense in depth, not the security boundary.
+
+## Architecture overview
+
+- `SOUL.md` defines the installed profile identity.
+- `config.yaml` keeps conservative Hermes defaults and does not pin unverified Grok model identifiers.
+- `skills/heavy-issue-to-merge/` defines the issue-to-merge operating contract, scripts, references, and prompt templates.
+- `skills/heavy-coding-eval/` defines the future evaluation protocol.
+- `src/heavy_coder/` contains deterministic, testable Python foundations.
+- `schemas/` contains JSON schemas for candidate results, run state, and evaluation results.
+- `docs/` contains the architecture, state machine, security model, evaluation plan, and ADRs.
+
+## Development commands
+
+Use a virtual environment if desired, then install the development package:
 
 ```bash
-hermes profile install . --alias
-security-reviewer chat
+python3.11 -m venv .venv
+. .venv/bin/activate
+python -m pip install -e '.[dev]'
+python scripts/validate_distribution.py .
+python -m pytest
+python -m ruff check .
+python -m mypy src tests
 ```
 
-## Option 3: Create a profile from a params file
+The tests avoid hidden network calls and do not require credentials.
 
-Copy the sample params file:
+## Evaluation plan
 
-```bash
-git clone https://github.com/codegraphtheory/hermes-profile-template.git
-cd hermes-profile-template
-cp templates/profile.params.yaml /tmp/my-profile.params.yaml
-```
+The planned evaluation compares:
 
-Edit `/tmp/my-profile.params.yaml`, then generate:
+- Control: one Composer implementation candidate, same outer coordinator and verifier conditions, no parallel alternatives, no comparative critic.
+- Treatment: adaptive 1/3/5 Composer candidates, blind comparative critic, reasoning-model synthesis when available, same final verifier.
 
-```bash
-python3 scripts/generate_profile.py \
-  --params /tmp/my-profile.params.yaml \
-  --output ../my-profile
+The initial target is a preregistered subset of 10 to 20 agentic coding problems. SWE-Bench Pro Public is preferred if current availability and licensing permit it. Small subset results must not be reported as a full leaderboard score.
 
-cd ../my-profile
-python3 scripts/validate_profile.py .
-```
+See `docs/evaluation-plan.md`.
 
-This is the best path when you want reproducible profile creation. The params file becomes the source of truth for the starter profile.
+## Roadmap
 
-Generated profiles can include explicit template lineage through the `template_source` field in the params file. GitHub only shows native `generated from` or `forked from` linkage when a repository is created through those GitHub flows, so this template records lineage in `distribution.yaml`, `.github/template-source.yml`, and the generated README.
-
-## Option 4: Install this repo as an interactive profile builder
-
-Install the template itself as a Hermes profile:
-
-```bash
-hermes profile install github.com/codegraphtheory/hermes-profile-template \
-  --name profile-architect \
-  --alias
-
-profile-architect chat
-```
-
-Then ask it to create a profile:
-
-```text
-Create a Hermes profile for a database migration reviewer. It should inspect SQL diffs, flag destructive migrations, and generate rollback checklists.
-```
-
-The installed profile will use the included generator, write a starter profile, and run validation.
-
-## Make the profile easy to discover
-
-Before publishing, prepare both the installable distribution and small catalog-native snippets:
-
-- Use `templates/catalog/flat-profile.md.tmpl` for profile catalogs that store one Markdown file per profile.
-- Use `templates/catalog/manifest-profile.yaml.tmpl` for manifest-driven profile kits.
-- Keep catalog PRs useful in the target repo format: identity, voice, skills, triggers, constraints, and a standalone install link.
-- Add GitHub topics that cover Hermes, the domain, and installability. Good defaults are `hermes-agent`, `ai-agents`, `agent-profile`, `profile-distribution`, and one or more domain topics.
-
-## Validate before publishing
-
-Run this from the profile repository root:
-
-```bash
-python3 scripts/validate_profile.py .
-```
-
-The validator checks required files, YAML and JSON syntax, the Hermes distribution manifest, environment variable documentation, skill frontmatter, common secret patterns, broken symlinks, and unresolved template placeholders. Curly-brace template tokens are allowed only under `templates/`; use `[question]` style markers in skill references and rubrics.
-
-## Publish a generated profile
-
-From the generated profile directory:
-
-```bash
-git init -b main
-git add .
-git commit -m "feat: initial profile"
-git remote add origin git@github.com:YOUR_ORG/YOUR_PROFILE_REPO.git
-git push -u origin main
-```
-
-Users can install it with:
-
-```bash
-hermes profile install github.com/YOUR_ORG/YOUR_PROFILE_REPO --alias
-```
-
-## What to customize
-
-Most users should start with these files:
-
-- `SOUL.md`: the profile's identity, mission, boundaries, and output style.
-- `distribution.yaml`: name, version, description, env vars, and distribution-owned files.
-- `config.yaml`: model, toolsets, terminal behavior, memory, security, and approval defaults.
-- `.env.EXAMPLE`: documented environment variables with placeholder values only.
-- `skills/`: bundled reusable procedures the profile can load.
-- `AGENTS.md`: instructions for AI coding agents that maintain the profile repository.
-- `templates/catalog/`: snippets for adding the profile to external Hermes profile catalogs without looking like a generic link drop.
-
-Never commit `.env`, API keys, OAuth tokens, credentials, memories, sessions, logs, runtime databases, or private user data.
+1. Validate Hermes distribution compatibility against the current installer.
+2. Implement environment doctor and repository discovery.
+3. Implement safe worktree lifecycle.
+4. Add candidate delegation and candidate-result validation.
+5. Add blind critic, synthesis, and fresh verifier workflows.
+6. Add GitHub issue claiming, PR publication, CI monitoring, repair, and fail-closed merge policy.
+7. Add benchmark runner and metrics analysis.
 
 ## License
 

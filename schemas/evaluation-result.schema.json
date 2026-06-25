@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codegraphtheory.github.io/heavy-coder/schemas/evaluation-result.schema.json",
+  "title": "Heavy Coder Evaluation Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id",
+    "condition",
+    "task_id",
+    "run_index",
+    "resolved",
+    "wall_clock_seconds",
+    "model_call_count",
+    "estimated_cost_usd"
+  ],
+  "properties": {
+    "experiment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition": {
+      "enum": [
+        "control",
+        "treatment"
+      ]
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_index": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "resolved": {
+      "type": "boolean"
+    },
+    "resolution_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "wall_clock_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "model_call_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "estimated_cost_usd": {
+      "type": "number",
+      "minimum": 0
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

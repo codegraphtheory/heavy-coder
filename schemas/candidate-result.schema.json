@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codegraphtheory.github.io/heavy-coder/schemas/candidate-result.schema.json",
+  "title": "Heavy Coder Candidate Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_id",
+    "role",
+    "commit_sha",
+    "changed_files",
+    "tests",
+    "assumptions",
+    "residual_risks",
+    "confidence"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^c[0-9]+$"
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "commit_sha": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "changed_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "command",
+          "exit_code",
+          "summary"
+        ],
+        "properties": {
+          "command": {
+            "type": "string"
+          },
+          "exit_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "residual_risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    }
+  }
+}

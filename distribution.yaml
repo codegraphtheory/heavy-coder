@@ -1,23 +1,29 @@
-name: hermes-profile-template
+name: heavy-coder
 version: 0.1.0
-description: "Starter distribution for building custom Hermes Agent profiles with AI assistance."
+description: "Terminal-first Hermes profile distribution for adaptive Heavy-style coding-agent teams."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"
 env_requires:
+  - name: XAI_API_KEY
+    description: "Optional xAI/Grok API key when using xAI models directly. Model credentials may also be configured through Hermes provider settings."
+    required: false
   - name: OPENROUTER_API_KEY
-    description: "Optional model provider key. Use your preferred Hermes provider instead if already configured."
+    description: "Optional OpenRouter API key if Grok or fallback models are routed through OpenRouter."
     required: false
   - name: GITHUB_TOKEN
-    description: "Optional token for GitHub-heavy profiles. Prefer gh auth when possible."
+    description: "Optional token for GitHub API access. Prefer gh auth for local terminal workflows."
     required: false
 distribution_owned:
   - SOUL.md
   - config.yaml
   - mcp.json
   - skills/
-  - templates/
   - scripts/
+  - schemas/
+  - src/
+  - docs/
+  - examples/
   - distribution.yaml
   - README.md
   - AGENTS.md

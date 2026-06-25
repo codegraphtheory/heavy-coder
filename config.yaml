@@ -1,28 +1,42 @@
 model:
-  default: anthropic/claude-sonnet-4
   provider: openrouter
+  default: x-ai/grok-code-fast-1
+agent:
+  max_turns: 120
+  tool_use_enforcement: true
 toolsets:
   - file
   - terminal
   - skills
   - web
+  - delegation
   - session_search
-  - clarify
   - todo
-agent:
-  max_turns: 90
-  tool_use_enforcement: true
 terminal:
   backend: local
   cwd: "."
-compression:
-  enabled: true
-display:
-  tool_progress: true
-memory:
-  memory_enabled: true
-  user_profile_enabled: true
 security:
   redact_secrets: true
 approvals:
   mode: manual
+delegation:
+  max_concurrent_children: 5
+  max_spawn_depth: 1
+heavy_coder:
+  status: scaffolded
+  candidate_widths: [1, 3, 5]
+  default_repair_attempts: 2
+  trigger_label: hermes:auto
+  state_labels:
+    queued: hermes:queued
+    running: hermes:running
+    pr_open: hermes:pr-open
+    repairing: hermes:repairing
+    blocked: hermes:blocked
+    merged: hermes:merged
+  model_roles:
+    candidate: "configurable-grok-composer"
+    coordinator: "configurable-grok-reasoning-or-composer"
+    critic: "configurable-grok-reasoning-or-composer"
+    synthesizer: "configurable-grok-reasoning-or-composer"
+    verifier: "fresh-configured-context"
