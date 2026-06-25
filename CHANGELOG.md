@@ -13,3 +13,8 @@
 - Bake team mode into SOUL.md and config.
 
 ## 0.1.3
+
+## 0.1.6
+
+- Strengthened heavy-team-default: explicit COMPOSER OVERRIDE — blocks single-agent composer-style execution for *all* coding situations unless explicitly prefixed with "composer only".
+- Team mode (width 3/5 + full coordinator/critic/synthesizer/verifier) is now non-bypassable by default.

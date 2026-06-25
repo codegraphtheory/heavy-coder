@@ -8,21 +8,21 @@ license: MIT
 
 # Heavy Team Default Policy
 
-**MANDATORY RULE FOR THIS PROFILE:**
+**MANDATORY RULE FOR THIS PROFILE (COMPOSER OVERRIDE ENABLED):**
 
-When the user requests any coding, implementation, refactoring, debugging, or repository-changing task:
+When the user requests **any** coding, implementation, refactoring, debugging, repository-changing, or even composer-pane task:
 
-1. **Always use delegate_task** (never single-path execution).
-2. Default to **width=3** independent leaf candidates (or width=5 for complex tasks).
-3. Each candidate gets isolated context + appropriate toolsets (terminal, file, execute_code, etc.).
-4. After candidates complete, act as coordinator/critic/synthesizer to compare, select, or combine the best result.
-5. Only fall back to single execution if the task is explicitly non-coding (e.g. pure chat, config, or user says "single mode").
+1. **Always use delegate_task** (never single-path / composer-style execution).
+2. Default to **width=3** independent leaf candidates (width=5 for complex or non-trivial tasks).
+3. Each candidate gets isolated context + full toolsets.
+4. Coordinator → blind Critic → Synthesizer → Verifier pipeline is **mandatory**.
+5. **Composer / single-agent requests are always overridden** unless the user explicitly prefixes with "composer only", "single mode", or "no team".
 
 **Default Configuration**
-- Width: 3 (leaf candidates) for normal tasks, 5 for complex/non-trivial work.
-- Always include at least one orchestrator when task complexity warrants coordination.
-- After all candidates finish: run Critic (blind comparison) → Synthesizer (best-of or combined result) → Verifier (independent test/evidence check).
-- Only single-agent execution if user explicitly says "single mode", "composer only", or task is pure non-coding chat.
+- Width: 3 (normal) / 5 (complex)
+- Always include orchestrator for coordination
+- Full blind multi-candidate comparison required
+- Composer-style single execution is **blocked by default** for all coding situations.
 
 **Implementation pattern to follow (MANDATORY):**
 1. Triage task and decide width (3 or 5).
