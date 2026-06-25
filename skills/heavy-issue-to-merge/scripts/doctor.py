@@ -82,18 +82,50 @@ def check_hermes_context() -> dict[str, object]:
     }
 
 
+def check_team_config() -> dict[str, object]:
+    """Read profile config for team settings without importing bootstrap as a module."""
+    try:
+        import yaml
+    except Exception:
+        return {"readable": False, "error": "PyYAML not installed"}
+
+    for cfg_path in (
+        Path("config.yaml"),
+        Path.home() / ".hermes" / "profiles" / "heavy-coder" / "config.yaml",
+    ):
+        if not cfg_path.exists():
+            continue
+        data = yaml.safe_load(cfg_path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            continue
+        heavy = data.get("heavy_coder") or {}
+        if not isinstance(heavy, dict):
+            heavy = {}
+        widths = heavy.get("candidate_widths") or []
+        return {
+            "readable": True,
+            "path": str(cfg_path),
+            "status": heavy.get("status"),
+            "team_enforced": bool(heavy.get("team_enforced")),
+            "candidate_widths": widths,
+            "default_width": heavy.get("default_width"),
+        }
+    return {"readable": False, "error": "config.yaml not found in cwd or heavy-coder profile"}
+
+
 def main() -> int:
     data = {
-        "status": "improved",
+        "status": "scaffolded",
         "checks": {
             "tools": [
                 check_command(n) for n in ["python3", "git", "gh", "hermes", "docker", "ruff", "mypy", "pytest"]
             ],
             "git": check_git_state(),
             "hermes": check_hermes_context(),
+            "team_config": check_team_config(),
         },
         "dangerous_operations": "none",
-        "note": "All checks are read-only and safe.",
+        "note": "Read-only checks. See docs/enforcement-model.md for what is enforced vs advisory.",
     }
     print(json.dumps(data, indent=2, sort_keys=True))
     return 0

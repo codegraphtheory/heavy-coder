@@ -1,6 +1,6 @@
 name: heavy-coder
-version: 0.1.7
-description: "Terminal-first Hermes profile distribution for adaptive Heavy-style coding-agent teams. Heavy team mode (width 3+ delegate_task, blind critic etc.) is DEFAULT and ENFORCED via SOUL.md, config.yaml, .hermes.md and heavy-team-default skill for all coding/repo tasks."
+version: 0.1.8
+description: "Terminal-first Hermes profile for adaptive multi-candidate coding teams (scaffolded issue-to-merge)."
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"

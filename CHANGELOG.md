@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.8
+
+- Honesty pass: document advisory vs mechanical enforcement in `docs/enforcement-model.md`; tone down SOUL, `.hermes.md`, and `heavy-team-default` overclaims.
+- `bootstrap_heavy_team.py` and `doctor.py` report team config as diagnostics only.
+- Shorten `distribution.yaml` description; clarify pyproject vs profile version in coding standards.
+
 ## 0.1.7
 
 - Fix CI failures: remove Unicode en/em dashes from tracked text, bump `distribution.yaml` when release-relevant files change, and align docs with `config.yaml`.

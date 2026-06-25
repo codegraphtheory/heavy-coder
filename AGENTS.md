@@ -15,7 +15,7 @@ This repository is a Hermes profile distribution scaffold. Preserve installabili
 
 ## Coding standards
 
-Follow **`docs/coding-standards.md`** for typography, skills, release versioning, and config/doc alignment. Agents and humans must run **`./scripts/ci_local.sh`** (or the equivalent commands in that doc) before pushing to `main`.
+Follow **`docs/coding-standards.md`** and **`docs/enforcement-model.md`**. Do not describe team mode as mechanically enforced by Hermes unless that is actually implemented. Run **`./scripts/ci_local.sh`** before pushing to `main`.
 
 Release-relevant edits without a `distribution.yaml` version bump and matching `CHANGELOG.md` heading will fail the **Release guard** workflow on GitHub.
 

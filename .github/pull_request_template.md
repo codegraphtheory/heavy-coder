@@ -2,9 +2,7 @@
 
 ## Verification
 
-- [ ] `python scripts/validate_distribution.py .`
-- [ ] `python scripts/validate_release_guard.py --base origin/main --head HEAD` when profile behavior, config, docs, schemas, scripts, skills, or templates changed.
-- [ ] `python -m pytest`
+- [ ] `./scripts/ci_local.sh` (or equivalent steps in `CONTRIBUTING.md`)
 
 ## Distribution version discipline
 
@@ -16,4 +14,4 @@
 
 - [ ] No secrets committed.
 - [ ] Dangerous behavior is dry-run, absent, or explicitly gated.
-- [ ] Planned capabilities are not described as implemented.
+- [ ] Planned capabilities are not described as implemented or mechanically enforced unless true (`docs/enforcement-model.md`).

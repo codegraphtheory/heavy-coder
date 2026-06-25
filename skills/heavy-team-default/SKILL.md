@@ -1,39 +1,35 @@
 ---
 name: heavy-team-default
-description: Enforce multi-agent Heavy Coder candidate teams (width 3/5) as default for all coding tasks. Replaces single-agent Composer behavior.
-version: 0.1.0
-author: Heavy Coder (user-directed)
+description: Default multi-candidate workflow for Heavy Coder coding tasks (width 3/5 via delegate_task, then critique, synthesis, verification).
+version: 0.2.0
+author: CodeGraphTheory
 license: MIT
 ---
 
-# Heavy Team Default Policy
+# Heavy team default workflow
 
-**MANDATORY RULE FOR THIS PROFILE (COMPOSER OVERRIDE ENABLED):**
+Use this skill when the user wants implementation, refactoring, debugging, or other repository-changing work.
 
-When the user requests **any** coding, implementation, refactoring, debugging, repository-changing, or even composer-pane task:
+## What this skill does
 
-1. **Always use delegate_task** (never single-path / composer-style execution).
-2. Default to **width=3** independent leaf candidates (width=5 for complex or non-trivial tasks).
-3. Each candidate gets isolated context + full toolsets.
-4. Coordinator → blind Critic → Synthesizer → Verifier pipeline is **mandatory**.
-5. **Composer / single-agent requests are always overridden** unless the user explicitly prefixes with "composer only", "single mode", or "no team".
+It defines **how the coordinator should work**. Hermes does not automatically refuse single-tool-call execution; following this skill is a profile policy choice (see `docs/enforcement-model.md`).
 
-**Default Configuration**
-- Width: 3 (normal) / 5 (complex)
-- Always include orchestrator for coordination
-- Full blind multi-candidate comparison required
-- Composer-style single execution is **blocked by default** for all coding situations.
+## Workflow
 
-**Implementation pattern to follow (MANDATORY):**
-1. Triage task and decide width (3 or 5).
-2. Call `delegate_task` with multiple leaf tasks (isolated contexts).
-3. On completion, act as Coordinator/Critic:
-   - Compare outputs blindly.
-   - Synthesize best result or merge.
-4. Run final verification (tests, evidence, correctness).
-5. Deliver only after team consensus or clear winner.
+1. **Triage**: Classify scope and risk. Default to **3** parallel leaf candidates; use **5** for cross-cutting, ambiguous, or high-risk tasks.
+2. **Delegate**: `delegate_task` with isolated `context` per candidate. Pass file paths, constraints, and test commands explicitly.
+3. **Critique**: Compare candidate summaries on evidence (tests run, diffs, risks). Do not treat self-reported success as proof; verify artifacts.
+4. **Synthesize**: Pick or merge the best candidate output into one coherent change set.
+5. **Verify**: Run tests locally (or `scripts/ci_local.sh` in this distribution repo) before telling the user the task is done.
 
-**Auto-loading**
-This skill is always pre-loaded for the heavy-coder profile via `.hermes.md` and memory. Future sessions start with team mode active.
+## Single-agent exception
 
-**Status:** User-directed enforcement active. Full Heavy-style team pipeline now default.
+If the user clearly requests **single mode**, **composer only**, or **no team**, you may execute without parallel candidates.
+
+## Configuration
+
+Read `heavy_coder.candidate_widths`, `default_width`, and `single_mode_requires_explicit` from the installed profile `config.yaml` when width is unclear.
+
+## Optional diagnostic
+
+Run `python scripts/bootstrap_heavy_team.py` from the profile or repo root to print whether team-related config flags are consistent (advisory only).
