@@ -8,10 +8,12 @@ colors:
   banner_border: "#D946EF"
   banner_title: "#00F5FF"
   banner_accent: "#FFE566"
-  banner_dim: "#A855F7"
+  # Muted/secondary (TUI maps banner_dim -> color.muted for status bar, tools, help hints).
+  # Keep luminance high enough for Ink dimColor on dark terminals.
+  banner_dim: "#D8B4FE"
   banner_text: "#E0F7FA"
   ui_accent: "#00E5FF"
-  ui_label: "#F0ABFC"
+  ui_label: "#F5D0FE"
   ui_primary: "#67E8F9"
   ui_border: "#C026D3"
   ui_text: "#F0FDFF"
@@ -22,15 +24,15 @@ colors:
   input_rule: "#FF2BD6"
   response_border: "#00F5FF"
   status_bar_bg: "#030308"
-  status_bar_text: "#A8B4C8"
+  status_bar_text: "#CBD5E1"
   status_bar_strong: "#5EEAD4"
-  status_bar_dim: "#52525B"
+  status_bar_dim: "#94A3B8"
   status_bar_good: "#4ADE80"
   status_bar_warn: "#FACC15"
   status_bar_bad: "#FB7185"
   status_bar_critical: "#F43F5E"
   session_label: "#FBBF24"
-  session_border: "#64748B"
+  session_border: "#94A3B8"
   selection_bg: "#2E1065"
   completion_menu_bg: "#05040A"
   completion_menu_current_bg: "#134E4A"
@@ -83,7 +85,9 @@ branding:
   welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. Dispatch a task; during batches hit /agents for live leaves. /help · Powered by Hermes x Grok"
   goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
   response_label: " ⟨◈ HEAVY⟩ "
-  prompt_symbol: "⛓▸"
+  # Chain only: a second arrow (▸, ❯, …) often paints one cell into the composer
+  # on Cursor/VS Code terminals, so it sits beside your first typed character.
+  prompt_symbol: "⛓"
   help_header: "╭─ ⛓ HEAVY CODER · command deck ─╮"
 
 tool_prefix: "▌"
@@ -109,9 +113,9 @@ banner_logo: |
   [#67E8F9]##     ## ##       #########  ##   ##     ##    ##       ##     ## ##     ## ##       ##   ##[/]
   [#A855F7]##     ## ##       ##     ##   ## ##      ##    ##    ## ##     ## ##     ## ##       ##    ##[/]
   [bold #FF2BD6]##     ## ######## ##     ##    ###       ##     ######   #######  ########  ######## ##     ##[/]
-  [dim #4C1D95]────────────────────────────────────────────────────────────────────────────────────────────[/]
+  [dim #6B21A8]────────────────────────────────────────────────────────────────────────────────────────────[/]
   [bold #FFE566]◈ HERMES MESH × GROK COMPOSER · multi-candidate forge · /agents for live swarms[/]
-  [dim #7C3AED]▓▓▒▒░░ SWARM_NET · fail-closed · evidence-first · terminal-first ░░▒▒▓▓[/]
+  [dim #9333EA]▓▓▒▒░░ SWARM_NET · fail-closed · evidence-first · terminal-first ░░▒▒▓▓[/]
 
 banner_hero: |
   [dim #1E1033]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/]

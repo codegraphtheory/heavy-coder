@@ -1,0 +1,77 @@
+# Heavy Coder light-terminal variant (Cursor / VS Code white or light-grey panels).
+# Same branding as heavy-coder; darker foregrounds so muted/help/status text stays readable.
+name: heavy-coder-light
+description: "Heavy Coder - readable on light IDE terminals"
+
+colors:
+  banner_border: "#7C3AED"
+  banner_title: "#0E7490"
+  banner_accent: "#B45309"
+  banner_dim: "#5B21B6"
+  banner_text: "#1E293B"
+  ui_accent: "#0891B2"
+  ui_label: "#6D28D9"
+  ui_primary: "#0E7490"
+  ui_border: "#A21CAF"
+  ui_text: "#0F172A"
+  ui_ok: "#15803D"
+  ui_error: "#BE123C"
+  ui_warn: "#C2410C"
+  prompt: "#0F172A"
+  input_rule: "#DB2777"
+  response_border: "#0891B2"
+  status_bar_bg: "#E2E8F0"
+  status_bar_text: "#334155"
+  status_bar_strong: "#0F766E"
+  status_bar_dim: "#475569"
+  status_bar_good: "#15803D"
+  status_bar_warn: "#A16207"
+  status_bar_bad: "#BE123C"
+  status_bar_critical: "#9F1239"
+  session_label: "#A16207"
+  session_border: "#64748B"
+  selection_bg: "#BFDBFE"
+  completion_menu_bg: "#F1F5F9"
+  completion_menu_current_bg: "#CCFBF1"
+  completion_menu_meta_bg: "#F1F5F9"
+  completion_menu_meta_current_bg: "#99F6E4"
+  shell_dollar: "#0369A1"
+  voice_status_bg: "#E2E8F0"
+
+spinner:
+  waiting_faces:
+    - "(⛓)"
+    - "(◈)"
+    - "(⌁)"
+  thinking_faces:
+    - "(◈)"
+    - "(⛓)"
+  thinking_verbs:
+    - "spawning parallel leaves"
+    - "synthesizing candidate evidence"
+  wings:
+    - ["⟨◈", "◈⟩"]
+    - ["⟨⛓", "⛓⟩"]
+
+branding:
+  agent_name: "Heavy Coder"
+  welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. /help · light-terminal skin"
+  goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
+  response_label: " ⟨◈ HEAVY⟩ "
+  prompt_symbol: "⛓"
+  help_header: "╭─ ⛓ HEAVY CODER · command deck ─╮"
+
+tool_prefix: "▌"
+
+banner_logo: |
+  [bold #0E7490]##     ## ########    ###    ##     ## ##    ##  ######   #######  ########  ######## ########[/]
+  [#0369A1]##     ## ##         ## ##   ##     ##  ##  ##  ##    ## ##     ## ##     ## ##       ##     ##[/]
+  [#0891B2]##     ## ##        ##   ##  ##     ##   ####   ##       ##     ## ##     ## ##       ##     ##[/]
+  [#0E7490]######### ######   ##     ## ##     ##    ##    ##       ##     ## ##     ## ######   ########[/]
+  [#6D28D9]##     ## ##       #########  ##   ##     ##    ##       ##     ## ##     ## ##       ##   ##[/]
+  [#7C3AED]##     ## ##       ##     ##   ## ##      ##    ##    ## ##     ## ##     ## ##       ##    ##[/]
+  [bold #A21CAF]##     ## ######## ##     ##    ###       ##     ######   #######  ########  ######## ##     ##[/]
+  [dim #64748B]────────────────────────────────────────────────────────────────────────────────────────────[/]
+  [bold #B45309]◈ HERMES MESH × GROK COMPOSER · /agents for live swarms[/]
+
+banner_hero: ""

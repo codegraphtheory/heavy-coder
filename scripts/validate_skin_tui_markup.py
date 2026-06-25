@@ -4,6 +4,9 @@
 The TUI parseRichMarkup() emits one vertical row per Rich tag on a line.
 Skins must use at most one [#hex]...[/] (optional bold/dim) wrapper per
 physical line in banner_logo and banner_hero.
+
+Also validates branding.prompt_symbol for IDE composer overlap (see
+docs/ide-terminal-composer.md).
 """
 
 from __future__ import annotations
@@ -17,6 +20,9 @@ import yaml
 RICH_TAG_RE = re.compile(
     r"\[(?:bold\s+)?(?:dim\s+)?#(?:[0-9a-fA-F]{3,8})\][\s\S]*?\[/\]"
 )
+
+# Second arrow after ⛓ overlaps the Ink composer on Cursor/VS Code terminals.
+_PROMPT_ARROW_SUFFIXES = ("❯", "›", ">", "→", "»", "▸", "▹")
 
 
 def rich_tag_count(line: str) -> int:
@@ -34,9 +40,25 @@ def validate_banner_field(field: str, markup: str) -> list[str]:
             errors.append(
                 f"{field} line {i}: {n} Rich tags (TUI renders each as its own row); use one tag per line"
             )
-        # stray markup without closing
         if "[" in line and n == 0 and "[/" not in line:
             errors.append(f"{field} line {i}: looks like Rich markup but no valid [#hex]...[/] pair")
+    return errors
+
+
+def validate_prompt_symbol(data: dict) -> list[str]:
+    errors: list[str] = []
+    branding = data.get("branding")
+    if not isinstance(branding, dict):
+        return errors
+    raw = branding.get("prompt_symbol")
+    if not isinstance(raw, str) or not raw.strip():
+        return errors
+    cleaned = raw.strip()
+    if "⛓" in cleaned and any(arrow in cleaned for arrow in _PROMPT_ARROW_SUFFIXES):
+        errors.append(
+            "branding.prompt_symbol: use ⛓ alone; a second arrow glyph overlaps the "
+            "composer input on IDE built-in terminals (stray letter beside first typed char)"
+        )
     return errors
 
 
@@ -45,6 +67,7 @@ def validate_skin(path: Path) -> list[str]:
     if not isinstance(data, dict):
         return [f"{path}: root must be a mapping"]
     errors: list[str] = []
+    errors.extend(validate_prompt_symbol(data))
     for key in ("banner_logo", "banner_hero"):
         block = data.get(key)
         if not block:

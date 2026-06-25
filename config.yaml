@@ -30,6 +30,7 @@ delegation:
 display:
   interface: tui
   skin: heavy-coder
+  # Light IDE terminal (Cursor/VS Code): export HERMES_TUI_THEME=light and /skin heavy-coder-light
   tool_progress: verbose
   timestamps: true
   tui_agents_nudge: true

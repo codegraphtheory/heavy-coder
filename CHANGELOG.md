@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.21
+
+- **Readability:** brighten `banner_dim`, status bar, and session border colors in `heavy-coder` skin; add `skins/heavy-coder-light.yaml` for light IDE terminals; document `HERMES_TUI_THEME=light` in [ide-terminal-composer.md](docs/ide-terminal-composer.md).
+
+## 0.2.20
+
+- **IDE ghost typing:** document Ink fast-echo right-margin debris (`t tt r re re`) in [ide-terminal-composer.md](docs/ide-terminal-composer.md); add `scripts/ide_safe_chat.sh` (`HERMES_TUI_FAST_ECHO=0`).
+
+## 0.2.19
+
+- **IDE composer overlap:** `prompt_symbol` is **`⛓` only** (no trailing arrow); fixes stray glyph beside the first typed character on Cursor/VS Code terminals. See [ide-terminal-composer.md](docs/ide-terminal-composer.md).
+- **Skin validation:** reject `⛓` + second arrow in `prompt_symbol`.
+
+## 0.2.18
+
+- **TUI composer prompt:** replace `⛓▸` with `⛓❯` in `skins/heavy-coder.yaml` so Cursor/IDE terminals do not show a stray letter-like glyph at the caret; document the rule in [cli-observability.md](docs/cli-observability.md).
+- **Skin validation:** `validate_skin_tui_markup.py` rejects `▸`/`▹` in `branding.prompt_symbol`.
+
 ## 0.2.17
 
 - **TUI wordmark:** replace box-drawing **HEAVY CODER** art with single-word **HEAVYCODER** Banner3 figlet so **V/Y** no longer read as stray **U** glyphs; doc note in [cli-observability.md](docs/cli-observability.md).

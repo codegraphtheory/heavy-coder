@@ -24,6 +24,8 @@ The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile
 
 **Wordmark tip:** avoid box-drawing block fonts where **V** and **Y** share the same `██╗   ██╗` top row; they read as stray **U** glyphs. The shipped logo uses a single-word **HEAVYCODER** Banner3-style `#` figlet (one tag per line).
 
+**Composer prompt tip:** use **`⛓` alone** for `branding.prompt_symbol`. A second arrow (`▸`, `❯`, …) often overlaps the input field in **Cursor / VS Code** terminals (stray letter beside your first typed character; miscolored letter in the prefix). **Right-margin ghost typing** (`t tt r re re`) is Ink **fast-echo** with the same root cause - see [ide-terminal-composer.md](ide-terminal-composer.md). If overlap persists, reinstall with `--name hc` or use `scripts/ide_safe_chat.sh chat` after rebuilding Hermes ui-tui.
+
 ```bash
 hermes -p heavy-coder chat
 ```

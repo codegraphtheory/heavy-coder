@@ -1,15 +1,34 @@
-## heavy-coder 0.2.17
+## heavy-coder 0.2.21
 
 ### Highlights
-- **Clearer banner:** **HEAVYCODER** figlet wordmark (fixes the “extra U” look from the old box-letter **V/Y** shapes).
-- **Control surface:** neon input rule, teal completion highlight, `⛓▸` prompt, deck-style help header.
+- **IDE TUI readability:** brighter muted/status colors on `heavy-coder`; new **`heavy-coder-light`** skin for light Cursor/VS Code terminal panels (`HERMES_TUI_THEME=light` + `/skin heavy-coder-light`).
+- **IDE composer:** `⛓` only prompt; docs for prefix overlap, fast-echo ghost typing, and `scripts/ide_safe_chat.sh`.
+- **Validation:** skin checks for `⛓` + extra arrow in `prompt_symbol`.
 
-### Install / update
+### Install / update (local tree or GitHub)
+
 ```bash
-hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --alias --force --yes
+# From a tagged checkout (recommended for testing this release):
+git checkout v0.2.21
+
+hermes profile install . --name heavy-coder --alias --force --yes
 heavy-coder chat
 ```
 
-Pin this release: `git checkout v0.2.17` then `hermes profile install .` from a clean tree (no symlinks). Hermes install URLs do not support `@tag` suffixes.
+From GitHub after push:
 
-Full changelog: [CHANGELOG.md](https://github.com/codegraphtheory/heavy-coder/blob/v0.2.17/CHANGELOG.md)
+```bash
+hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --alias --force --yes
+```
+
+**Light IDE terminal:**
+
+```bash
+export HERMES_TUI_THEME=light
+heavy-coder chat
+# in TUI: /skin heavy-coder-light
+```
+
+Pin: `git checkout v0.2.21` then `hermes profile install .` (no symlinks). Hermes install URLs do not support `@tag` suffixes.
+
+Full changelog: [CHANGELOG.md](https://github.com/codegraphtheory/heavy-coder/blob/v0.2.21/CHANGELOG.md)
