@@ -142,7 +142,9 @@ def format_compact_chat_context(
         f"1) Your NEXT tool call MUST be delegate_task with exactly {width} tasks "
         f"(one batch, tasks= array below).\n"
         "2) Leaves run independently; synthesize the best evidence when the batch completes.\n"
-        "3) Do NOT patch/write_file until synthesis. Keep coordinator turns short after dispatch.\n\n"
+        "3) Do NOT patch/write_file until synthesis. Keep coordinator turns short after dispatch.\n"
+        "4) Immediately after delegate_task returns dispatched, reply to the user with swarm UX: "
+        "TUI `/agents`, classic CLI status bar ⛓, file `.heavy-coder/swarm-progress.json`.\n\n"
         f"User task (excerpt):\n{excerpt}\n\n"
         "DELEGATE_TASKS_JSON (pass as delegate_task tasks=... verbatim):\n"
     )

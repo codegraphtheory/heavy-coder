@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.12
+
+- **Context compression on install:** shipped `config.yaml` sets `compression.enabled: true` and `compression.threshold: 0.85`; `on_session_start` merges missing compression keys and upgrades legacy thresholds at or below 0.5 to 0.85.
+
+## 0.2.11
+
+
+- **Install-by-default swarm UX:** shipped `config.yaml` uses TUI + verbose tool progress; `on_session_start` hook merges missing display/delegation keys and installs `heavy-council` plugin; canonical install uses `--alias` (`heavy-coder chat`). See [cli-observability.md](docs/cli-observability.md).
+
+## 0.2.10
+
+- **Swarm UX:** Default `display.interface: tui`, `tool_progress: verbose`, `delegation.max_async_children: 16`; live `.heavy-coder/swarm-progress.json` updated per leaf; coordinator instructed to tell users about `/agents` and status bar ⛓.
+- **Docs:** [cli-observability.md](docs/cli-observability.md).
+
+## 0.2.9
+
+- **Candidate evidence:** `coerce_candidate_id()` maps delegate child ids to schema `cN` ids; `subagent_stop_evidence` no longer writes invalid `candidate_id` values (fixes blind critique schema penalties).
+- **Validation UX:** clearer jsonschema paths via `_format_validation_error`; cached `load_validator()`; `critique_candidates` handles read errors and validates in-memory payloads.
+- **Tests:** `test_critique_candidates.py` plus expanded `test_candidate_result.py`.
+
 ## 0.2.8
 
 - **Default Composer swarm (width 8):** `heavy_coder.council_width` and `min_delegate_tasks` default to 8 for fast, high-quality parallel `delegate_task` on composer-2.5 (set `council_width: 16` for Grok Heavy-scale).

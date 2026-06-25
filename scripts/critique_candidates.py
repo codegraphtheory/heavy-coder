@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from heavy_coder.candidate_result import validate_candidate_file
+from heavy_coder.candidate_result import validate_candidate_result
 
 
 def _as_list(value: Any) -> list[Any]:
@@ -44,14 +44,19 @@ def main() -> int:
     rankings: list[dict[str, Any]] = []
     for path in args.paths:
         try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
+            raw = path.read_text(encoding="utf-8")
+        except OSError as exc:
+            rankings.append({"path": str(path), "error": f"read: {exc}", "score": -999})
+            continue
+        try:
+            payload = json.loads(raw)
         except json.JSONDecodeError as exc:
             rankings.append({"path": str(path), "error": f"json: {exc}", "score": -999})
             continue
         if not isinstance(payload, dict):
             rankings.append({"path": str(path), "error": "root must be object", "score": -999})
             continue
-        errors = validate_candidate_file(path)
+        errors = validate_candidate_result(payload)
         entry = score_candidate(payload, errors)
         entry["path"] = str(path)
         rankings.append(entry)
