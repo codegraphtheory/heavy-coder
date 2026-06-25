@@ -44,7 +44,7 @@ def test_delegate_minimum_sixteen_when_plan_width_sixteen() -> None:
         {"heavy_council_always": False, "min_delegate_tasks": 3, "heavy_council_width": 16}
     )
     assert cfg.delegate_minimum(plan_width=16) == 16
-    assert cfg.delegate_minimum(plan_width=5) == 3
+    assert cfg.delegate_minimum(plan_width=5) == 5
 
 
 def test_required_min_delegate_count_aligns_with_profile_config() -> None:

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.8
+
+- **Default Composer swarm (width 8):** `heavy_coder.council_width` and `min_delegate_tasks` default to 8 for fast, high-quality parallel `delegate_task` on composer-2.5 (set `council_width: 16` for Grok Heavy-scale).
+- **Compact injection:** `pre_llm_call` injects `DELEGATE_TASKS_JSON` (capped by `max_injected_plan_chars`); full plan under `.heavy-coder/plans/`. In-process plan build via `council_injection` (no coordinator subprocess on the hot path).
+- **Profile defaults:** `skills.creation_nudge_interval: 0`, `delegation.subagent_auto_approve: true`, slim leaf context, `terminal`+`file` toolsets.
+- **Docs:** [composer-hermes-swarms.md](docs/composer-hermes-swarms.md) explains Composer + Hermes swarms + profile hooks.
+
+## 0.2.7
+
+- Stop embedding resolved repository paths in `delegate_tasks` context and redact absolute paths in `pre_llm_call` TEAM_PLAN_JSON before chat/session logs persist them.
+
 ## 0.2.6
 
 - Register `terminal` on `pre_tool_call` hook matcher; block solo terminal before delegation.

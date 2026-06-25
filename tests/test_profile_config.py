@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_load_profile_config_from_repo_config() -> None:
     cfg = load_profile_config(ROOT)
     assert isinstance(cfg, ProfileConfig)
-    assert cfg.min_delegate_tasks == 16
+    assert cfg.min_delegate_tasks == 8
     assert cfg.heavy_council_always is True
-    assert cfg.council_width == 16
+    assert cfg.council_width == 8
 
 
 def test_resolve_config_path_prefers_repo_root() -> None:

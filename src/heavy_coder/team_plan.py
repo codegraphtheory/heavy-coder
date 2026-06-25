@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from heavy_coder.log_privacy import repo_context_note
 from heavy_coder.triage import ROLE_ROTATION, TriageResult, classify_task
 
 DEFAULT_TOOLSETS = ["terminal", "file", "web"]
@@ -16,10 +17,12 @@ def build_team_plan(
     repo_root: Path | None = None,
     context_extra: str = "",
     width_override: int | None = None,
-    allowed_widths: tuple[int, ...] = (3, 5, 16),
+    allowed_widths: tuple[int, ...] = (3, 5, 8, 16),
     default_width: int = 3,
     heavy_council_width: int = 16,
     heavy_council_always: bool = False,
+    slim_delegate_context: bool = False,
+    leaf_toolsets: list[str] | None = None,
 ) -> dict[str, Any]:
     triage: TriageResult = classify_task(
         task,
@@ -35,29 +38,41 @@ def build_team_plan(
         roles.append(ROLE_ROTATION[len(roles) % len(ROLE_ROTATION)])
     roles = roles[:width]
 
-    repo_note = ""
-    if repo_root is not None:
-        repo_note = f"Repository root: {repo_root.resolve()}\n"
+    repo_note = repo_context_note() if repo_root is not None else ""
+
+    toolsets = list(leaf_toolsets) if leaf_toolsets else list(DEFAULT_TOOLSETS)
+    task_body = task.strip()
+    if slim_delegate_context:
+        task_body = task_body[:1200]
 
     tasks = []
     for i, role in enumerate(roles, start=1):
         cid = f"c{i}"
         goal = (
-            f"Candidate {cid} ({role}): implement the requested task independently. "
-            f"Return a candidate-result JSON matching schemas/candidate-result.schema.json when done."
+            f"Candidate {cid} ({role}): implement the user task; return candidate-result JSON "
+            f"(schemas/candidate-result.schema.json)."
         )
-        context = (
-            f"{repo_note}"
-            f"User task:\n{task.strip()}\n\n"
-            f"Candidate role: {role}\n"
-            f"Rules: do not depend on other candidates; run real tests; list changed files and commands.\n"
-            f"{context_extra}".strip()
-        )
+        if slim_delegate_context:
+            context = (
+                f"{repo_note}"
+                f"Role: {role}\n"
+                f"Task:\n{task_body}\n"
+                f"Rules: independent; run tests; list changed files and commands.\n"
+                f"{context_extra}".strip()
+            )
+        else:
+            context = (
+                f"{repo_note}"
+                f"User task:\n{task.strip()}\n\n"
+                f"Candidate role: {role}\n"
+                f"Rules: do not depend on other candidates; run real tests; list changed files and commands.\n"
+                f"{context_extra}".strip()
+            )
         tasks.append(
             {
                 "goal": goal,
                 "context": context,
-                "toolsets": list(DEFAULT_TOOLSETS),
+                "toolsets": toolsets,
                 "candidate_id": cid,
                 "role": role,
             }

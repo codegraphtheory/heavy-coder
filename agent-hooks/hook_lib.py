@@ -29,7 +29,7 @@ TRIVIAL_RE = re.compile(
 PHASE_IDLE = "IDLE"
 PHASE_AWAITING_DELEGATE = "AWAITING_DELEGATE"
 PHASE_AWAITING_SYNTHESIS = "AWAITING_SYNTHESIS"
-HEAVY_COUNCIL_WIDTH = 16
+DEFAULT_COUNCIL_WIDTH = 8
 
 
 @dataclass
@@ -140,6 +140,62 @@ def load_profile_config_for_hook() -> Any:
 
 def run_team_plan(task: str, repo: Path) -> dict[str, Any]:
     root = profile_root()
+    try:
+        cfg = load_profile_config_for_hook()
+    except Exception:
+        return _run_team_plan_subprocess(task, repo, root, heavy_council_always=True)
+
+    if cfg.presentation.inline_plan_build:
+        try:
+            from heavy_coder.council_injection import build_council_plan
+            from heavy_coder.profile_config import load_yaml_mapping, resolve_config_path
+
+            mapping = load_yaml_mapping(resolve_config_path(root))
+            block = mapping.get("heavy_coder")
+            heavy = block if isinstance(block, dict) else {}
+            default_raw = heavy.get("default_width", 3)
+            default_width = default_raw if isinstance(default_raw, int) else 3
+            allowed = (3, 5, 8, 16)
+            raw_widths = heavy.get("candidate_widths")
+            if isinstance(raw_widths, list):
+                widths = []
+                for item in raw_widths:
+                    if isinstance(item, int):
+                        widths.append(item)
+                    elif isinstance(item, str) and item.strip().isdigit():
+                        widths.append(int(item.strip()))
+                if widths:
+                    allowed = tuple(widths)
+
+            return build_council_plan(
+                task,
+                repo_root=repo if repo.is_dir() else root,
+                council_width=cfg.council_width,
+                heavy_council_always=bool(cfg.heavy_council_always),
+                default_width=default_width,
+                allowed_widths=allowed,
+                presentation=cfg.presentation,
+            )
+        except Exception as exc:
+            return {"error": str(exc)[:2000]}
+
+    return _run_team_plan_subprocess(
+        task,
+        repo,
+        root,
+        heavy_council_always=bool(cfg.heavy_council_always),
+        council_width=int(cfg.council_width),
+    )
+
+
+def _run_team_plan_subprocess(
+    task: str,
+    repo: Path,
+    root: Path,
+    *,
+    heavy_council_always: bool,
+    council_width: int = DEFAULT_COUNCIL_WIDTH,
+) -> dict[str, Any]:
     script = root / "scripts" / "team_coordinator.py"
     src = root / "src"
     env = os.environ.copy()
@@ -148,16 +204,9 @@ def run_team_plan(task: str, repo: Path) -> dict[str, Any]:
         py_path = py_path + os.pathsep + env["PYTHONPATH"]
     env["PYTHONPATH"] = py_path
 
-    heavy_council_always = False
-    try:
-        cfg = load_profile_config_for_hook()
-        heavy_council_always = bool(cfg.heavy_council_always)
-    except Exception:
-        heavy_council_always = False
-
     cmd = [sys.executable, str(script), task, "--repo", str(repo)]
     if heavy_council_always:
-        cmd.append("--heavy-council")
+        cmd.extend(["--width", str(council_width)])
 
     proc = subprocess.run(
         cmd,
@@ -247,7 +296,7 @@ def required_min_delegate_count(
     *,
     min_delegate_tasks: int,
     heavy_council_always: bool,
-    council_width: int = HEAVY_COUNCIL_WIDTH,
+    council_width: int = DEFAULT_COUNCIL_WIDTH,
     plan_width: int | None = None,
 ) -> int:
     if heavy_council_always:

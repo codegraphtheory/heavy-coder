@@ -11,9 +11,11 @@ try:
 except Exception:  # pragma: no cover
     yaml = None
 
-DEFAULT_MIN_DELEGATE_TASKS = 3
+from heavy_coder.council_injection import CouncilPresentation, parse_council_presentation
+
+DEFAULT_MIN_DELEGATE_TASKS = 8
 DEFAULT_HEAVY_COUNCIL_ALWAYS = False
-DEFAULT_COUNCIL_WIDTH = 16
+DEFAULT_COUNCIL_WIDTH = 8
 
 
 @dataclass(frozen=True)
@@ -21,11 +23,17 @@ class ProfileConfig:
     min_delegate_tasks: int
     heavy_council_always: bool
     council_width: int
+    presentation: CouncilPresentation
+
+    def effective_council_width(self) -> int:
+        return self.council_width
 
     def delegate_minimum(self, plan_width: int | None = None) -> int:
         """Parallel delegate_task count required by shell hooks."""
-        if plan_width is not None and plan_width >= self.council_width:
-            return self.council_width
+        if plan_width is not None and plan_width > 0:
+            if self.heavy_council_always:
+                return max(plan_width, self.min_delegate_tasks, self.council_width)
+            return max(plan_width, self.min_delegate_tasks)
         if self.heavy_council_always:
             return max(self.min_delegate_tasks, self.council_width)
         return self.min_delegate_tasks
@@ -78,6 +86,7 @@ def parse_heavy_coder_block(heavy: dict[str, Any] | None) -> ProfileConfig:
         min_delegate_tasks=min_delegate_tasks,
         heavy_council_always=heavy_council_always,
         council_width=council_width,
+        presentation=parse_council_presentation(block),
     )
 
 

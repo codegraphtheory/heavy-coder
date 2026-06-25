@@ -1,10 +1,18 @@
 # Heavy Coder
 
-Terminal-first [Hermes Agent](https://hermes-agent.nousresearch.com/docs/) profile for **Grok Heavy-style coding teams**: you stay in the CLI as coordinator while Hermes runs parallel implementers on **Grok Composer** (`composer-2.5` via `xai-oauth`), then critique, synthesis, and verification before anything ships.
+Terminal-first [Hermes Agent](https://hermes-agent.nousresearch.com/docs/) profile for **Grok Heavy-style coding swarms**: you stay in the CLI as **coordinator** on **Grok Composer** (`composer-2.5` via `xai-oauth`), while Hermes runs **parallel leaf agents** (`delegate_task`), then critique, synthesis, and verification before anything ships.
 
 **Status:** scaffolded. Team workflow, hooks, schemas, and Python tooling are real; **autonomous issue-to-merge is not live yet** (see [Safety boundaries](#safety-boundaries)).
 
-Plan 1A **shell hooks** default non-trivial coding to a Grok Heavy-style **16-agent council**: `pre_llm_call` injects a `team_coordinator.py --heavy-council` plan with sixteen `delegate_tasks`, and `pre_tool_call` rejects undersized `delegate_task` batches and solo file or terminal edits until candidates finish (say **single mode** to opt out). Details: [docs/plan-1a-shell-hooks.md](docs/plan-1a-shell-hooks.md); sample batch: [examples/delegate_tasks_16.sample.json](examples/delegate_tasks_16.sample.json). The distribution also owns an empty profile `plugins/` tree for optional profile-scoped Hermes plugins (none bundled; see [ADR 0002](docs/adr/0002-pure-profile-distribution.md)).
+**How the stack fits together**
+
+| Layer | Role |
+|-------|------|
+| **Composer 2.5** (`xai-oauth`) | Same model on coordinator and every leaf: planning, coding, critique, synthesis. |
+| **Hermes** | CLI, tools, sessions, `delegate_task` swarms, hooks, subagent isolation. |
+| **Heavy Coder profile** | Shell hooks + skills + scripts that **enforce** multi-candidate workflow and slim council injection. |
+
+Default non-trivial coding: Plan 1A **shell hooks** inject a compact `DELEGATE_TASKS_JSON` batch (not a 12k plan blob), block solo edits until candidates finish, and require a full-width `delegate_task` in one call. Say **single mode** to opt out. Details: [docs/composer-hermes-swarms.md](docs/composer-hermes-swarms.md), [docs/plan-1a-shell-hooks.md](docs/plan-1a-shell-hooks.md).
 
 ---
 
@@ -12,24 +20,24 @@ Plan 1A **shell hooks** default non-trivial coding to a Grok Heavy-style **16-ag
 
 You want the feel of **xAI Grok Heavy** for software work, but **inside your repo and your terminal**, with Hermes handling tools, sessions, and delegation.
 
-Step-by-step: [docs/quickstart-heavy-team.md](docs/quickstart-heavy-team.md). Grok Heavy mapping (16-agent council): [docs/grok-heavy-council.md](docs/grok-heavy-council.md).
+Step-by-step: [docs/quickstart-heavy-team.md](docs/quickstart-heavy-team.md). Composer + Hermes swarms: [docs/composer-hermes-swarms.md](docs/composer-hermes-swarms.md). Grok Heavy mapping: [docs/grok-heavy-council.md](docs/grok-heavy-council.md).
 
 Heavy Coder configures that pattern by default:
 
 | Piece | What Heavy Coder does |
 |-------|------------------------|
-| **Coordinator** | Your main `hermes -p heavy-coder chat` session plans work and calls `delegate_task`. |
-| **Workers** | Up to 3, 5, or **16** (Grok Heavy-style **heavy council**) parallel leaf agents with isolated context. |
-| **Model** | `composer-2.5` on provider `xai-oauth` for coordinator and all `heavy_coder.model_roles` (candidate, critic, synthesizer, verifier). |
-| **Discipline** | Plan 1A **shell hooks** push team delegation before solo edits; workers should not see each other's patches before critique. |
+| **Coordinator** | Your main `hermes -p heavy-coder chat` session (Composer 2.5) plans work and issues **one** `delegate_task` batch. |
+| **Swarm (leaves)** | **8** parallel Hermes subagents by default (`heavy_coder.council_width`); each leaf is Composer 2.5 with isolated context and role diversity. |
+| **Model** | `composer-2.5` on `xai-oauth` for coordinator and all `heavy_coder.model_roles`. |
+| **Discipline** | Plan 1A hooks: compact task injection, no solo repo edits until the swarm returns, then synthesis + tests. |
 | **Target workflow** | GitHub issue -> candidates -> critique -> synthesis -> tests -> PR -> CI repair -> **fail-closed** merge (merge step still future). |
 
 ```text
-Your task -> triage (width 3, 5, or 16) -> delegate_task
-                                    +---> leaf candidate (isolated)
-                                    +---> leaf candidate (isolated)
-                                    +---> leaf candidate (isolated)   [+2 more when width=5, +13 when width=16]
-          -> critique -> synthesis -> tests -> PR (scaffolded / partial today)
+Your task -> hooks build council plan -> delegate_task (N parallel leaves, default N=8)
+                                    +---> leaf (Composer 2.5, role A)
+                                    +---> leaf (Composer 2.5, role B)
+                                    +---> ... N isolated workers
+          -> batch complete -> coordinator synthesizes -> tests -> PR (scaffolded)
 ```
 
 **Example asks** (in any project directory):
@@ -167,15 +175,15 @@ No API keys are bundled in this repo. Tokens live under your Hermes profile (for
 
 ---
 
-## Why adaptive candidate teams
+## Why parallel swarms on Composer
 
-Single-agent coding can overfit early assumptions. Heavy Coder compares **independent** implementations before synthesis:
+Single-agent coding can overfit early assumptions. Heavy Coder runs **independent** Composer leaves (different implementation roles), then the **same** coordinator model synthesizes the strongest evidence:
 
-- **Width 3** - default normal tasks (`heavy_coder.default_width`).
-- **Width 5** - cross-cutting, risky, or ambiguous tasks.
-- **Width 16 (heavy council)** - Grok Heavy-style parallel council (`--heavy-council` or task phrases like `Grok Heavy` / `heavy council`). See `docs/grok-heavy-council.md`.
+- **Width 8 (default)** - fast, high-quality council: parallel diversity without 5-minute fan-out (`heavy_coder.council_width`).
+- **Width 3 / 5** - smaller tasks or explicit user request.
+- **Width 16** - maximum parallelism when you set `council_width: 16` or use `--heavy-council` (Grok Heavy-style spectacle; slower).
 
-Configured in `config.yaml`: `candidate_widths: [3, 5, 16]`, `heavy_council_width: 16`, `delegation.max_concurrent_children: 16`.
+Configured in `config.yaml`: `candidate_widths: [3, 5, 8, 16]`, `council_width: 8`, `delegation.max_concurrent_children: 16`.
 
 ---
 
@@ -192,7 +200,7 @@ Unattended merge is **not** implemented. Future behavior must be fail-closed: al
 - `skills/heavy-issue-to-merge/`, `skills/heavy-team-default/` - operating contracts.
 - `src/heavy_coder/` - deterministic Python (triage, state, validation).
 - `schemas/` - candidate results, run state, evaluation.
-- `docs/` - architecture, enforcement model, ADRs.
+- `docs/` - architecture, enforcement model, ADRs, [composer-hermes-swarms.md](docs/composer-hermes-swarms.md).
 - `github-repo-metadata.yaml` - GitHub description/topics (`docs/github-discovery.md`).
 
 ---
