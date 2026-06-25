@@ -36,6 +36,7 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.root).resolve()
     errors: list[str] = []
+    skill_names: dict[str, list[str]] = {}
 
     for rel in REQUIRED_ROOT:
         if not (root / rel).exists():
@@ -54,10 +55,21 @@ def main() -> int:
     except Exception as exc:
         fail(errors, f"manifest parse failed: {exc}")
 
-    for skill_md in root.glob("skills/*/SKILL.md"):
+    for skill_md in root.glob("skills/**/SKILL.md"):
         text = skill_md.read_text(encoding="utf-8")
         if not text.startswith("---\n") or "name:" not in text.split("---", 2)[1]:
             fail(errors, f"invalid skill frontmatter: {skill_md.relative_to(root)}")
+            continue
+        front = text.split("---", 2)[1]
+        name_match = re.search(r"^name:\s*([^\s#]+)", front, re.MULTILINE)
+        if not name_match:
+            fail(errors, f"skill missing name in frontmatter: {skill_md.relative_to(root)}")
+            continue
+        skill_names.setdefault(name_match.group(1), []).append(skill_md.relative_to(root).as_posix())
+
+    for name, paths in skill_names.items():
+        if len(paths) > 1:
+            fail(errors, f"duplicate skill name '{name}': {', '.join(paths)}")
 
     for schema in root.glob("schemas/*.json"):
         try:

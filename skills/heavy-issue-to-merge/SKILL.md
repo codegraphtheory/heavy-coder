@@ -17,7 +17,7 @@ Scaffolded. Do not claim autonomous issue-to-merge is implemented.
 ## Required workflow
 
 1. Discover the current repository and verify prerequisites.
-2. Triage the task and choose width 1, 3, or 5.
+2. Triage the task and choose width 3 or 5 per `heavy_coder.candidate_widths` (default 3). Use single-agent mode only when the user explicitly requests it.
 3. Keep candidate workers independent until critique.
 4. For repository-changing candidates, use isolated git worktrees once worktree lifecycle is implemented.
 5. Require structured candidate output matching `schemas/candidate-result.schema.json`.

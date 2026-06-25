@@ -40,9 +40,10 @@ Mode 1 is profile-level guidance only today. Modes 2 through 4 are scaffolded an
 
 Single-agent coding can work well for narrow tasks, but it can also overfit early assumptions. Heavy Coder is designed to compare independent implementation candidates before synthesis:
 
-- Width 1 for small, localized, low-ambiguity tasks.
-- Width 3 for normal coding tasks.
+- Width 3 for normal coding tasks (default in `config.yaml`).
 - Width 5 for cross-cutting, risky, or highly ambiguous tasks.
+
+The installed profile sets `candidate_widths: [3, 5]` and requires an explicit user request for single-agent mode.
 
 A run may escalate when tests fail, candidates disagree, or confidence is low. Candidate workers must not see one another's proposals before critique. The final verifier uses a fresh model context.
 
@@ -76,7 +77,7 @@ Hermes distribution details were checked against the local Hermes source and off
 - Optional Docker or remote execution tooling for higher-risk unattended operation.
 - xAI Grok OAuth configured in Hermes. Run `hermes auth add xai-oauth` or select `xAI Grok OAuth (SuperGrok / Premium+)` in `hermes model`.
 
-No credentials or local user state are packaged. The default profile config uses provider `xai-oauth` and model `grok-4.3` for the main coordinator chat. The role map keeps candidate implementation workers on `grok-composer-2.5-fast` and uses `grok-4.3` for coordinator, critic, synthesizer, and fresh verifier roles. Exact model access still depends on the user's active xAI subscription and current Hermes provider support.
+No credentials or local user state are packaged. The default profile config uses provider `xai-oauth` and model `composer-2.5` for the main chat and for `heavy_coder.model_roles` (candidate, coordinator, critic, synthesizer, verifier). Exact model access still depends on the user's active xAI subscription and current Hermes provider support.
 
 ## Safety boundaries
 
@@ -112,6 +113,14 @@ Use a virtual environment if desired, then install the development package:
 python3.11 -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[dev]'
+./scripts/ci_local.sh
+```
+
+See `docs/coding-standards.md` for why checks exist and what breaks CI on `main`.
+
+Manual equivalent:
+
+```bash
 python scripts/validate_distribution.py .
 python scripts/validate_release_guard.py --base origin/main --head HEAD
 python -m pytest
@@ -126,7 +135,7 @@ The tests avoid hidden network calls and do not require credentials.
 The planned evaluation compares:
 
 - Control: one Composer implementation candidate, same outer coordinator and verifier conditions, no parallel alternatives, no comparative critic.
-- Treatment: adaptive 1/3/5 Composer candidates, blind comparative critic, reasoning-model synthesis when available, same final verifier.
+- Treatment: adaptive 3/5 Composer candidates (per profile `candidate_widths`), blind comparative critic, reasoning-model synthesis when available, same final verifier.
 
 The initial target is a preregistered subset of 10 to 20 agentic coding problems. SWE-Bench Pro Public is preferred if current availability and licensing permit it. Small subset results must not be reported as a full leaderboard score.
 

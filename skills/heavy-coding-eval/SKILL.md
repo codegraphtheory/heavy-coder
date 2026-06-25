@@ -17,7 +17,7 @@ Scaffolded. Benchmark execution is not implemented.
 ## Protocol
 
 - Control: one Composer candidate, same outer coordinator and verifier, no comparative critic.
-- Treatment: adaptive 1/3/5 Composer candidates, blind comparative critic, reasoning-model synthesis when available, same verifier.
+- Treatment: adaptive 3/5 Composer candidates (per profile `candidate_widths`), blind comparative critic, reasoning-model synthesis when available, same verifier.
 - Initial target: preregistered 10 to 20 task subset, preferably SWE-Bench Pro Public if current licensing permits.
 - Three runs per task per condition when feasible.
 - Primary endpoint: official benchmark resolution.

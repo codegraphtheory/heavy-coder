@@ -13,6 +13,12 @@ This repository is a Hermes profile distribution scaffold. Preserve installabili
 7. Run local validation and tests after substantive edits.
 8. No documentation may claim autonomous issue-to-merge is currently available.
 
+## Coding standards
+
+Follow **`docs/coding-standards.md`** for typography, skills, release versioning, and config/doc alignment. Agents and humans must run **`./scripts/ci_local.sh`** (or the equivalent commands in that doc) before pushing to `main`.
+
+Release-relevant edits without a `distribution.yaml` version bump and matching `CHANGELOG.md` heading will fail the **Release guard** workflow on GitHub.
+
 ## Validation
 
 ```bash

@@ -4,3 +4,17 @@ repos:
     hooks:
       - id: ruff
       - id: ruff-format
+  - repo: local
+    hooks:
+      - id: validate-distribution
+        name: validate distribution (ASCII dashes, skills, manifest)
+        entry: python scripts/validate_distribution.py .
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: validate-release-guard
+        name: validate release guard vs main
+        entry: bash -c 'git rev-parse --verify origin/main >/dev/null 2>&1 && python scripts/validate_release_guard.py --base origin/main --head HEAD || exit 0'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
