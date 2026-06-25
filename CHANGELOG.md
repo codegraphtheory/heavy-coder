@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.16
+
+- **TUI skin fix:** rewrite `skins/heavy-coder.yaml` banner art to use one Rich color tag per line so the Ink TUI no longer stacks multi-tag rows vertically (broken wordmark/hero).
+- **Skin validation:** `scripts/validate_skin_tui_markup.py` and `tests/test_skin_tui_markup.py` guard banner markup; [cli-observability.md](docs/cli-observability.md) documents the rule.
+
 ## 0.2.15
 
 - **Cyberpunk TUI skin:** neon cyan/magenta chrome, framed wordmark, scanline caduceus hero, richer swarm spinner verbs/wings, and council-themed branding in `skins/heavy-coder.yaml`.

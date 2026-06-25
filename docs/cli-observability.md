@@ -20,6 +20,8 @@ Profile `config.yaml` sets `display.interface: tui` and `display.skin: heavy-cod
 
 The skin lives at `skins/heavy-coder.yaml` in this repo (copied into the profile on install). It customizes the TUI chrome-framed wordmark, neon caduceus hero (scanline frame + relay tagline), cyberpunk palette (electric cyan/magenta + Hermes gold), swarm spinner verbs, and branding (`Heavy Coder`, *CYBER COUNCIL ONLINE* welcome). Switch anytime with `/skin heavy-coder` or another Hermes skin via `/skin list`.
 
+**TUI banner rule:** each physical line in `banner_logo` / `banner_hero` must use **at most one** Rich `[#hex]…[/]` tag. The Ink TUI renders every tag as its own row; multiple tags on one line stack vertically and break the layout. Run `python scripts/validate_skin_tui_markup.py` after editing the skin.
+
 ```bash
 hermes -p heavy-coder chat
 ```

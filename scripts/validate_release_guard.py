@@ -27,6 +27,7 @@ RELEASE_RELEVANT_PREFIXES = (
     "scripts/",
     "docs/",
     "examples/",
+    "skins/",
 )
 IGNORED_PREFIXES = (
     ".github/",
