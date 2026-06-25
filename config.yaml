@@ -20,7 +20,7 @@ security:
 approvals:
   mode: manual
 delegation:
-  max_concurrent_children: 5
+  max_concurrent_children: 16
   max_spawn_depth: 1
 # Shell hooks (Plan 1A): require profile installed as ~/.hermes/profiles/heavy-coder
 # or run: python scripts/sync_profile_hooks.py --profile <name>
@@ -45,7 +45,8 @@ hooks:
       timeout: 30
 heavy_coder:
   status: scaffolded
-  candidate_widths: [3, 5]
+  candidate_widths: [3, 5, 16]
+  heavy_council_width: 16
   default_width: 3
   team_enforced: true
   single_mode_requires_explicit: true

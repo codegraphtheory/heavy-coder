@@ -41,5 +41,5 @@ strict = true
 mypy_path = "src"
 
 [[tool.mypy.overrides]]
-module = ["jsonschema"]
+module = ["jsonschema", "yaml"]
 ignore_missing_imports = true

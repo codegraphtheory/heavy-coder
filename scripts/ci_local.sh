@@ -14,6 +14,9 @@ python -m pip install -q -e '.[dev]'
 echo "== validate_distribution =="
 python scripts/validate_distribution.py .
 
+echo "== validate_github_repo_metadata =="
+python scripts/validate_github_repo_metadata.py .
+
 echo "== py_compile (skill + repo scripts) =="
 python -m py_compile agent-hooks/*.py skills/heavy-issue-to-merge/scripts/*.py skills/heavy-coding-eval/scripts/*.py skills/heavy-team-default/scripts/*.py scripts/*.py
 

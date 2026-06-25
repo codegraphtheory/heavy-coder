@@ -4,6 +4,18 @@ from heavy_coder.team_plan import build_team_plan
 from heavy_coder.triage import classify_task
 
 
+def test_classify_heavy_council_width_sixteen() -> None:
+    result = classify_task("Emulate Grok Heavy council on this refactor")
+    assert result.width == 16
+    assert len(result.candidate_roles) == 16
+
+
+def test_team_plan_heavy_council_sixteen_tasks() -> None:
+    plan = build_team_plan("Fix typo", width_override=16)
+    assert plan["width"] == 16
+    assert len(plan["delegate_tasks"]) == 16
+
+
 def test_classify_width_five_for_security_task() -> None:
     result = classify_task("Refactor security middleware across packages")
     assert result.width == 5
