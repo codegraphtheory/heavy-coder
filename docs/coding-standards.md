@@ -23,6 +23,9 @@ These rules keep the Heavy Coder profile distribution installable and keep GitHu
 - If you change any **release-relevant** path, you **must**:
   1. Bump `version:` in `distribution.yaml` (semver patch for routine fixes).
   2. Add a matching `## <version>` section at the top of `CHANGELOG.md` with bullet points for the change.
+  3. Update `RELEASE_NOTES.md` for the same version before tagging.
+
+Agents: when profile work is **finished**, commit and run `./scripts/ship_release.sh` (see `AGENTS.md` **Finished work: ship a GitHub release**).
 
 Release-relevant paths (see `scripts/validate_release_guard.py`):
 

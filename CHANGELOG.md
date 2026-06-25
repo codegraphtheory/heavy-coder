@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.22
+
+- **Skills:** add `heavy-explore-first`, `heavy-leaf-brief`, `heavy-synthesize-winner`, `heavy-ship-gate` for coordinator software-development discipline; extend `heavy-team-default` with companion-skill map (v0.5.0).
+- **TUI:** align HEAVYCODER figlet row widths; add `heavy-coder-ide` skin (ASCII `>` prompt); figlet width check in `validate_skin_tui_markup.py`.
+
 ## 0.2.21
 
 - **Readability:** brighten `banner_dim`, status bar, and session border colors in `heavy-coder` skin; add `skins/heavy-coder-light.yaml` for light IDE terminals; document `HERMES_TUI_THEME=light` in [ide-terminal-composer.md](docs/ide-terminal-composer.md).

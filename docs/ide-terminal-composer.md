@@ -2,9 +2,10 @@
 
 Symptoms in the Ink TUI (`hermes -p heavy-coder chat`):
 
-- A **stray letter** beside the **first character you type**
+- A **stray letter** beside the **first character you type** (often **h**, **c**, **a**, **t** - fragments of the `heavy-coder` prefix as columns drift)
 - A **miscolored letter** inside the prompt prefix (`heavy-coder ⛓ …`)
 - **Ghost text on the right edge** while typing, like `t tt r re re` (each key leaves debris on the margin)
+- **One vertical `#` out of step** in the **HEAVYCODER** banner (figlet rows were not the same width)
 
 These are usually **not** random font bugs. The composer splits the row into:
 
@@ -17,7 +18,9 @@ The **`t tt r re re` pattern** is Ink **fast-echo**: keystrokes are written stra
 
 ## What we ship in the profile skin
 
-- **`branding.prompt_symbol: "⛓"`** (chain **only**). Do **not** add `▸`, `❯`, etc. after the chain; that second glyph is the usual source of the ghost beside your first typed character.
+- **`branding.prompt_symbol: "⛓"`** (chain **only**) on **`heavy-coder`**. Do **not** add `▸`, `❯`, etc. after the chain; that second glyph is the usual source of the ghost beside your first typed character.
+- **`heavy-coder-ide`** and **`heavy-coder-light`**: ASCII **`>`** prompt (no emoji width drift) - use in Cursor/VS Code: `/skin heavy-coder-ide` or `/skin heavy-coder-light`.
+- **Banner figlet**: all seven **HEAVYCODER** rows are padded to the same width so no lone `#` column sticks out vertically.
 
 ## Quick mitigations
 

@@ -31,6 +31,7 @@ display:
   interface: tui
   skin: heavy-coder
   # Light IDE terminal (Cursor/VS Code): export HERMES_TUI_THEME=light and /skin heavy-coder-light
+  # IDE composer bleed: /skin heavy-coder-ide or heavy-coder-light (> prompt); see docs/ide-terminal-composer.md
   tool_progress: verbose
   timestamps: true
   tui_agents_nudge: true

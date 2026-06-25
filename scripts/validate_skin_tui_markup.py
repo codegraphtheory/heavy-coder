@@ -29,6 +29,45 @@ def rich_tag_count(line: str) -> int:
     return len(RICH_TAG_RE.findall(line))
 
 
+FIGLET_LOGO_ROWS = 7
+FIGLET_TARGET_WIDTH = 95
+
+
+def strip_rich_body(line: str) -> str:
+    m = RICH_TAG_RE.search(line)
+    if not m:
+        return line.strip()
+    inner = m.group(0)
+    start = inner.index("]") + 1
+    end = inner.rindex("[/")
+    return inner[start:end]
+
+
+def validate_figlet_logo_width(markup: str) -> list[str]:
+    errors: list[str] = []
+    rows: list[tuple[int, int]] = []
+    for i, raw in enumerate(markup.split("\n"), start=1):
+        if not raw.strip():
+            continue
+        if len(rows) >= FIGLET_LOGO_ROWS:
+            break
+        body = strip_rich_body(raw)
+        rows.append((i, len(body)))
+    if not rows:
+        return errors
+    widths = {w for _, w in rows}
+    if len(widths) > 1:
+        errors.append(
+            f"banner_logo figlet rows 1-{FIGLET_LOGO_ROWS} must share one width "
+            f"(got {sorted(widths)}); uneven rows leave a stray vertical # column"
+        )
+    elif rows and rows[0][1] != FIGLET_TARGET_WIDTH:
+        errors.append(
+            f"banner_logo figlet width is {rows[0][1]}; expected {FIGLET_TARGET_WIDTH} for HEAVYCODER banner3"
+        )
+    return errors
+
+
 def validate_banner_field(field: str, markup: str) -> list[str]:
     errors: list[str] = []
     for i, raw in enumerate(markup.split("\n"), start=1):
@@ -75,6 +114,8 @@ def validate_skin(path: Path) -> list[str]:
         if not isinstance(block, str):
             errors.append(f"{key} must be a string")
             continue
+        if key == "banner_logo":
+            errors.extend(validate_figlet_logo_width(block))
         errors.extend(validate_banner_field(key, block))
     return errors
 

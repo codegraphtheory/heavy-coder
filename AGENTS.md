@@ -13,6 +13,17 @@ This repository is a Hermes profile distribution scaffold. Preserve installabili
 7. Run local validation and tests after substantive edits.
 8. No documentation may claim autonomous issue-to-merge is currently available.
 
+## Finished work: ship a GitHub release
+
+When profile-distribution work for this repo is **complete** (user asked for a deliverable, fix, or feature set), finish the job on GitHub so the user can `hermes profile install` or pin a tag without re-prompting each session:
+
+1. Ensure `distribution.yaml` version and top `CHANGELOG.md` heading match; update `RELEASE_NOTES.md` for that version.
+2. Run `./scripts/ci_local.sh`.
+3. Commit on `main` with message `release: heavy-coder X.Y.Z - <short summary>`.
+4. Run `./scripts/ship_release.sh` (pushes `main`, tags `vX.Y.Z`, triggers GitHub Release workflow).
+
+If the user only wanted a local experiment or explicitly said not to publish, skip the tag push. Otherwise treat **tag + GitHub release** as part of done.
+
 ## Coding standards
 
 Follow **`docs/coding-standards.md`** and **`docs/enforcement-model.md`**. Do not describe team mode as mechanically enforced by Hermes unless that is actually implemented. Run **`./scripts/ci_local.sh`** before pushing to `main`.

@@ -1,8 +1,8 @@
 # Heavy Coder profile skin - cyberpunk ops terminal x Hermes swarm council.
 # Grok electric cyan/magenta, Hermes gold telemetry, deep void chrome.
 # Installed to ~/.hermes/profiles/<profile>/skins/ via profile distribution.
-name: heavy-coder
-description: "Heavy Coder - neon cyber terminal, swarm council, Grok x Hermes"
+name: heavy-coder-ide
+description: "Heavy Coder - Cursor/VS Code IDE terminal (ASCII prompt, no composer bleed)"
 
 colors:
   banner_border: "#D946EF"
@@ -82,12 +82,12 @@ spinner:
 
 branding:
   agent_name: "Heavy Coder"
-  welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. Dispatch a task; during batches hit /agents for live leaves. /help · Powered by Hermes x Grok"
+  welcome: "◈ IDE-safe composer (> prompt). Tip: install profile as --name hc --alias for shorter prefix. /skin heavy-coder for full neon."
   goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
   response_label: " ⟨◈ HEAVY⟩ "
   # Chain only: a second arrow (▸, ❯, …) often paints one cell into the composer
   # on Cursor/VS Code terminals, so it sits beside your first typed character.
-  prompt_symbol: "⛓"
+  prompt_symbol: ">"
   help_header: "╭─ ⛓ HEAVY CODER · command deck ─╮"
 
 tool_prefix: "▌"

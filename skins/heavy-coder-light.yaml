@@ -58,18 +58,19 @@ branding:
   welcome: "◈ CYBER COUNCIL ONLINE - Composer swarms on Hermes. /help · light-terminal skin"
   goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
   response_label: " ⟨◈ HEAVY⟩ "
-  prompt_symbol: "⛓"
+  # ASCII marker avoids ⛓ width drift in Cursor/VS Code (stray letters beside caret).
+  prompt_symbol: ">"
   help_header: "╭─ ⛓ HEAVY CODER · command deck ─╮"
 
 tool_prefix: "▌"
 
 banner_logo: |
-  [bold #0E7490]##     ## ########    ###    ##     ## ##    ##  ######   #######  ########  ######## ########[/]
+  [bold #0E7490]##     ## ########    ###    ##     ## ##    ##  ######   #######  ########  ######## ######## [/]
   [#0369A1]##     ## ##         ## ##   ##     ##  ##  ##  ##    ## ##     ## ##     ## ##       ##     ##[/]
   [#0891B2]##     ## ##        ##   ##  ##     ##   ####   ##       ##     ## ##     ## ##       ##     ##[/]
-  [#0E7490]######### ######   ##     ## ##     ##    ##    ##       ##     ## ##     ## ######   ########[/]
-  [#6D28D9]##     ## ##       #########  ##   ##     ##    ##       ##     ## ##     ## ##       ##   ##[/]
-  [#7C3AED]##     ## ##       ##     ##   ## ##      ##    ##    ## ##     ## ##     ## ##       ##    ##[/]
+  [#0E7490]######### ######   ##     ## ##     ##    ##    ##       ##     ## ##     ## ######   ######## [/]
+  [#6D28D9]##     ## ##       #########  ##   ##     ##    ##       ##     ## ##     ## ##       ##   ##  [/]
+  [#7C3AED]##     ## ##       ##     ##   ## ##      ##    ##    ## ##     ## ##     ## ##       ##    ## [/]
   [bold #A21CAF]##     ## ######## ##     ##    ###       ##     ######   #######  ########  ######## ##     ##[/]
   [dim #64748B]────────────────────────────────────────────────────────────────────────────────────────────[/]
   [bold #B45309]◈ HERMES MESH × GROK COMPOSER · /agents for live swarms[/]

@@ -1,9 +1,18 @@
 ---
 name: heavy-team-default
 description: Default Composer swarm workflow for Heavy Coder (plan, delegate_task, critique, synthesis, verification).
-version: 0.4.0
+version: 0.5.0
 author: CodeGraphTheory
 license: MIT
+metadata:
+  hermes:
+    tags: [heavy-coder, swarm, delegation, coordinator]
+    related_skills:
+      - heavy-explore-first
+      - heavy-leaf-brief
+      - heavy-synthesize-winner
+      - heavy-ship-gate
+      - heavy-issue-to-merge
 ---
 
 # Heavy team default workflow
@@ -11,6 +20,16 @@ license: MIT
 Use for implementation, refactoring, debugging, or repository-changing requests.
 
 **Model:** `composer-2.5` on coordinator and all leaves (`xai-oauth`). **Swarm:** Hermes `delegate_task` with default width **8** (`heavy_coder.council_width`).
+
+## Companion skills (load when relevant)
+
+| Phase | Skill |
+|-------|--------|
+| Before plan | `heavy-explore-first` |
+| Building `delegate_task` | `heavy-leaf-brief` |
+| After leaves return | `heavy-synthesize-winner` |
+| Before "done" | `heavy-ship-gate` |
+| GitHub issue/PR | `heavy-issue-to-merge` |
 
 ## Required coordinator sequence
 
