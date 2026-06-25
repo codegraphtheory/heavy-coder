@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+
+- Fix install docs: Hermes does not support `@tag` on `hermes profile install` URLs; add `docs/release-checklist.md`.
+
 ## 0.2.4
 
 - Add Grok Heavy-style **heavy council** width 16: triage triggers, `--heavy-council`, `candidate_widths` and `delegation.max_concurrent_children` 16, docs `grok-heavy-council.md`.
