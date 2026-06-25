@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.23
+
+- **IDE TUI bootstrap:** `display.auto_ide_skin` (default true) selects **`heavy-coder-ide`** in Cursor / VS Code / Windsurf and **`heavy-coder-light`** when `HERMES_TUI_THEME=light` (`profile_bootstrap.py`, shipped `config.yaml`).
+- **heavy-coder-ide:** compact banner (no tall `banner_hero`); brighter muted/status colors; welcome steers **`--name hc --alias`** for composer prefix bleed.
+- **Docs:** `ide-terminal-composer.md` documents **`Iky`-style** multi-character composer junk and auto skin selection.
+- **Tests:** IDE/light skin bootstrap in `tests/test_profile_bootstrap.py`.
+
 ## 0.2.22
 
 - **Skills:** add `heavy-explore-first`, `heavy-leaf-brief`, `heavy-synthesize-winner`, `heavy-ship-gate` for coordinator software-development discipline; extend `heavy-team-default` with companion-skill map (v0.5.0).

@@ -10,7 +10,7 @@ colors:
   banner_accent: "#FFE566"
   # Muted/secondary (TUI maps banner_dim -> color.muted for status bar, tools, help hints).
   # Keep luminance high enough for Ink dimColor on dark terminals.
-  banner_dim: "#D8B4FE"
+  banner_dim: "#E9D5FF"
   banner_text: "#E0F7FA"
   ui_accent: "#00E5FF"
   ui_label: "#F5D0FE"
@@ -24,9 +24,9 @@ colors:
   input_rule: "#FF2BD6"
   response_border: "#00F5FF"
   status_bar_bg: "#030308"
-  status_bar_text: "#CBD5E1"
+  status_bar_text: "#E2E8F0"
   status_bar_strong: "#5EEAD4"
-  status_bar_dim: "#94A3B8"
+  status_bar_dim: "#A8B4C8"
   status_bar_good: "#4ADE80"
   status_bar_warn: "#FACC15"
   status_bar_bad: "#FB7185"
@@ -82,7 +82,7 @@ spinner:
 
 branding:
   agent_name: "Heavy Coder"
-  welcome: "◈ IDE-safe composer (> prompt). Tip: install profile as --name hc --alias for shorter prefix. /skin heavy-coder for full neon."
+  welcome: "IDE skin (ASCII > prompt, compact banner). Best fix for composer bleed: reinstall profile as --name hc --alias. /skin heavy-coder for full neon hero."
   goodbye: "Link closed. Council adjourned. ◈ ⛓ ⚕"
   response_label: " ⟨◈ HEAVY⟩ "
   # Chain only: a second arrow (▸, ❯, …) often paints one cell into the composer
@@ -117,26 +117,4 @@ banner_logo: |
   [bold #FFE566]◈ HERMES MESH × GROK COMPOSER · multi-candidate forge · /agents for live swarms[/]
   [dim #9333EA]▓▓▒▒░░ SWARM_NET · fail-closed · evidence-first · terminal-first ░░▒▒▓▓[/]
 
-banner_hero: |
-  [dim #1E1033]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/]
-  [#FF2BD6]⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀[/]
-  [#D946EF]⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀[/]
-  [#00F5FF]⠀⠀⣰⣿⡿⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠻⣿⣆⠀⠀[/]
-  [#06B6D4]⠀⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣷⠀[/]
-  [#22D3EE]⣾⡟⠀⠀⠀⠀⢀⣀⡀⠀⣀⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣷[/]
-  [#38BDF8]⣿⠀⠀⠀⢀⣠⣴⣾⣿⣿⣇⠸⣿⣿⠇⣸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#FFE566]⣿⠀⢀⣠⣶⠿⠋⣩⡿⣿⡿⠻⣿⡇⢠⡄⢸⣿⠟⢿⣿⢿⣍⠙⠿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#FBBF24]⣿⠀⠉⠉⠁⠶⠟⠋⠀⠉⠀⢀⣈⣁⡈⢁⣈⣁⡀⠀⠉⠀⠙⠻⠶⠈⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#FFD700]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢁⡈⠛⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#F59E0B]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⣿⣦⣤⣈⠁⢠⣴⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#00E5FF]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⢿⣿⣦⡉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#5B21B6]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣦⣈⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#7C3AED]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⠦⠈⠙⠿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#A855F7]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣤⡈⠁⢤⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#22D3EE]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠷⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#06B6D4]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠑⢶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#FF2BD6]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⢰⡆⠈⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#D946EF]⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⠈⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿[/]
-  [#00F5FF]⠸⣿⣦⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣦⣿⠇[/]
-  [dim #1E1033]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/]
-  [bold #00F5FF]◈ caduceus relay ⚕ parallel council ⛓ · neon terminal ops[/]
+banner_hero: ""

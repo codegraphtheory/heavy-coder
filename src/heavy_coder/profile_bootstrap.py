@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -18,12 +19,29 @@ MARKER_NAME = f".profile-bootstrap-{MARKER_VERSION}"
 SWARM_DISPLAY_DEFAULTS: dict[str, Any] = {
     "interface": "tui",
     "skin": "heavy-coder",
+    "auto_ide_skin": True,
     "tool_progress": "verbose",
     "timestamps": True,
     "tui_agents_nudge": True,
     "cli_refresh_interval": 1.0,
     "bell_on_complete": True,
 }
+
+IDE_SKIN_NAME = "heavy-coder-ide"
+LIGHT_SKIN_NAME = "heavy-coder-light"
+DEFAULT_SKIN_NAME = "heavy-coder"
+
+
+def is_vscode_like_terminal() -> bool:
+    """True for Cursor / VS Code / Windsurf built-in terminals."""
+    term = (os.environ.get("TERM_PROGRAM") or "").lower()
+    return (
+        term in {"vscode", "cursor", "windsurf"}
+        or bool(os.environ.get("VSCODE_GIT_ASKPASS_NODE"))
+        or bool(os.environ.get("VSCODE_IPC_HOOK_CLI"))
+        or bool(os.environ.get("CURSOR_TRACE_ID"))
+        or bool(os.environ.get("CURSOR_SESSION_ID"))
+    )
 
 COMPRESSION_DEFAULTS: dict[str, Any] = {
     "enabled": True,
@@ -70,6 +88,19 @@ def ensure_swarm_display_defaults(config_path: Path) -> dict[str, Any]:
         changed = True
     if _deep_merge_missing(display, SWARM_DISPLAY_DEFAULTS):
         changed = True
+
+    auto_ide = display.get("auto_ide_skin", True)
+    current_skin = display.get("skin")
+    theme = (os.environ.get("HERMES_TUI_THEME") or "").strip().lower()
+    if auto_ide and (current_skin is None or current_skin in {DEFAULT_SKIN_NAME, IDE_SKIN_NAME}):
+        if theme == "light":
+            display["skin"] = LIGHT_SKIN_NAME
+            changed = True
+        elif is_vscode_like_terminal() and (
+            current_skin is None or current_skin == DEFAULT_SKIN_NAME
+        ):
+            display["skin"] = IDE_SKIN_NAME
+            changed = True
 
     delegation = data.get("delegation")
     if not isinstance(delegation, dict):

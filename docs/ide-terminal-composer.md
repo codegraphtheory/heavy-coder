@@ -3,6 +3,7 @@
 Symptoms in the Ink TUI (`hermes -p heavy-coder chat`):
 
 - A **stray letter** beside the **first character you type** (often **h**, **c**, **a**, **t** - fragments of the `heavy-coder` prefix as columns drift)
+- **Multi-character junk** in the composer even with the IDE skin, e.g. `heavy-coder > Iky "refactor the auth module"` where **`Iky`** is not your text - prefix column math is still off until you shorten the profile name (see mitigations)
 - A **miscolored letter** inside the prompt prefix (`heavy-coder ⛓ …`)
 - **Ghost text on the right edge** while typing, like `t tt r re re` (each key leaves debris on the margin)
 - **One vertical `#` out of step** in the **HEAVYCODER** banner (figlet rows were not the same width)
@@ -18,20 +19,21 @@ The **`t tt r re re` pattern** is Ink **fast-echo**: keystrokes are written stra
 
 ## What we ship in the profile skin
 
+- **`display.auto_ide_skin: true`** (default): on session start, profile bootstrap sets **`heavy-coder-ide`** in Cursor / VS Code / Windsurf terminals (ASCII `>` prompt, no tall hero art). Set `display.auto_ide_skin: false` to keep **`heavy-coder`** everywhere.
 - **`branding.prompt_symbol: "⛓"`** (chain **only**) on **`heavy-coder`**. Do **not** add `▸`, `❯`, etc. after the chain; that second glyph is the usual source of the ghost beside your first typed character.
-- **`heavy-coder-ide`** and **`heavy-coder-light`**: ASCII **`>`** prompt (no emoji width drift) - use in Cursor/VS Code: `/skin heavy-coder-ide` or `/skin heavy-coder-light`.
+- **`heavy-coder-ide`** and **`heavy-coder-light`**: ASCII **`>`** prompt (no emoji width drift). Light panels: `export HERMES_TUI_THEME=light` - bootstrap picks **`heavy-coder-light`** when `auto_ide_skin` is on.
 - **Banner figlet**: all seven **HEAVYCODER** rows are padded to the same width so no lone `#` column sticks out vertically.
 
 ## Quick mitigations
 
-1. **Shorten the profile prefix** (helps overlap and fast-echo drift):
+1. **Shorten the profile prefix** (most effective for `Iky`-style bleed; `>` skin alone may not be enough):
 
    ```bash
    hermes profile install github.com/codegraphtheory/heavy-coder --name hc --alias --force --yes
    hc chat
    ```
 
-   Prompt becomes `hc ⛓` instead of `heavy-coder ⛓`.
+   Prompt becomes `hc >` instead of `heavy-coder >`.
 
 2. **IDE-safe launcher** (after Hermes honors `HERMES_TUI_FAST_ECHO=0`):
 
@@ -62,8 +64,7 @@ The cyberpunk **heavy-coder** skin targets **dark** terminal backgrounds. Second
 ```bash
 export HERMES_TUI_THEME=light
 hermes -p heavy-coder chat
-# then in the TUI:
-/skin heavy-coder-light
+# bootstrap sets heavy-coder-light when display.auto_ide_skin is true; or /skin heavy-coder-light
 ```
 
 Or set your IDE terminal profile to a **dark** background and keep `/skin heavy-coder`.
