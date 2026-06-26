@@ -1,5 +1,8 @@
 # Heavy Coder
 
+
+<p><strong>Docs:</strong> <a href="https://graphtheory.xyz/heavy-coder/">https://graphtheory.xyz/heavy-coder/</a></p>
+
 Terminal-first [Hermes Agent](https://hermes-agent.nousresearch.com/docs/) profile for **Grok Heavy-style coding swarms**: you stay in the CLI as **coordinator** on **Grok Composer** (`composer-2.5` via `xai-oauth`), while Hermes runs **parallel leaf agents** (`delegate_task`), then critique, synthesis, and verification before anything ships.
 
 **Status:** scaffolded. Team workflow, hooks, schemas, and Python tooling are real; **autonomous issue-to-merge is not live yet** (see [Safety boundaries](#safety-boundaries)).
