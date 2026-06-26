@@ -4,6 +4,10 @@ description: "Hermes profile with shell-hook enforced multi-candidate coding tea
 hermes_requires: ">=0.12.0"
 author: "CodeGraphTheory"
 license: "MIT"
+template_source:
+  name: codegraphtheory/hermes-profile-template
+  url: https://github.com/codegraphtheory/hermes-profile-template
+  relationship: built-from-template
 env_requires:
   - name: GITHUB_TOKEN
     description: "Optional token for GitHub API access. Prefer gh auth for local terminal workflows."
