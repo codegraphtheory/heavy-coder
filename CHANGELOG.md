@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+- Link the public GraphTheory developer docs from the profile README.
+
 ## 0.3.1
 
 - **Orchestration:** centralize council width policy in `width_policy.py`; align triage and `team_coordinator.py` defaults with shipped `council_width` / `default_width` **8** (Grok Heavy phrases still widen to **16**).
