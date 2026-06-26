@@ -82,7 +82,7 @@ def main() -> int:
                 {
                     "status": "OK",
                     "hook": "bootstrap_heavy_team.py",
-                    "recommended_flow": "triage -> delegate_task(width=3|5|16) -> critique -> synthesize -> verify",
+                    "recommended_flow": "triage -> delegate_task(width=3|5|8|16, default council 8) -> critique -> synthesize -> verify",
                     "enforcement": enforcement,
                     "heavy_council_plugin": plugin_result,
                     "note": "Advisory only; coordinator must follow heavy-team-default skill.",

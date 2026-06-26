@@ -26,6 +26,16 @@ TRIVIAL_RE = re.compile(
     re.IGNORECASE,
 )
 
+READ_ONLY_TASK_RE = re.compile(
+    r"\b(inspect|audit|explore|check out|review|opportunities|what's wrong with|explain)\b",
+    re.IGNORECASE,
+)
+
+IMPLEMENTATION_TASK_RE = re.compile(
+    r"\b(implement|improvements?|fix|add|build|patch|refactor|debug|migrate|ship|update|remove)\b",
+    re.IGNORECASE,
+)
+
 PHASE_IDLE = "IDLE"
 PHASE_AWAITING_DELEGATE = "AWAITING_DELEGATE"
 PHASE_AWAITING_SYNTHESIS = "AWAITING_SYNTHESIS"
@@ -118,7 +128,9 @@ def should_trigger_team_plan(text: str) -> bool:
         return False
     if is_single_mode(text):
         return False
-    return not TRIVIAL_RE.search(text.strip())
+    if TRIVIAL_RE.search(text.strip()):
+        return False
+    return not (READ_ONLY_TASK_RE.search(text) and not IMPLEMENTATION_TASK_RE.search(text))
 
 
 def emit_json(payload: dict[str, Any]) -> None:
@@ -153,19 +165,10 @@ def run_team_plan(task: str, repo: Path) -> dict[str, Any]:
             mapping = load_yaml_mapping(resolve_config_path(root))
             block = mapping.get("heavy_coder")
             heavy = block if isinstance(block, dict) else {}
-            default_raw = heavy.get("default_width", 3)
-            default_width = default_raw if isinstance(default_raw, int) else 3
-            allowed = (3, 5, 8, 16)
-            raw_widths = heavy.get("candidate_widths")
-            if isinstance(raw_widths, list):
-                widths = []
-                for item in raw_widths:
-                    if isinstance(item, int):
-                        widths.append(item)
-                    elif isinstance(item, str) and item.strip().isdigit():
-                        widths.append(int(item.strip()))
-                if widths:
-                    allowed = tuple(widths)
+            from heavy_coder.profile_config import coerce_candidate_widths, parse_default_width
+
+            default_width = parse_default_width(heavy)
+            allowed = coerce_candidate_widths(heavy.get("candidate_widths"))
 
             return build_council_plan(
                 task,

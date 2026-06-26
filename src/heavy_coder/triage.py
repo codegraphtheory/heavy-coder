@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from heavy_coder.width_policy import DEFAULT_CANDIDATE_WIDTHS, DEFAULT_COUNCIL_WIDTH
+
 HIGH_RISK_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     re.compile(p, re.IGNORECASE)
     for p in (
@@ -63,9 +65,9 @@ def is_single_mode(text: str) -> bool:
 def classify_task(
     task: str,
     *,
-    default_width: int = 3,
-    allowed_widths: tuple[int, ...] = (3, 5, 16),
-    heavy_council_width: int = HEAVY_COUNCIL_WIDTH,
+    default_width: int = DEFAULT_COUNCIL_WIDTH,
+    allowed_widths: tuple[int, ...] = DEFAULT_CANDIDATE_WIDTHS,
+    heavy_council_width: int = DEFAULT_COUNCIL_WIDTH,
     heavy_council_always: bool = False,
 ) -> TriageResult:
     text = task.strip()
@@ -73,7 +75,7 @@ def classify_task(
     council_w = heavy_council_width if heavy_council_width in allowed_widths else max(allowed_widths)
 
     if any(p.search(text) for p in HEAVY_COUNCIL_PATTERNS):
-        width = council_w
+        width = HEAVY_COUNCIL_WIDTH if HEAVY_COUNCIL_WIDTH in allowed_widths else council_w
         reasons.append("heavy council / Grok Heavy emulation signals in task text")
     elif heavy_council_always and not is_single_mode(text):
         width = council_w

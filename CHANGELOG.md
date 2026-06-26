@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1
+
+- **Orchestration:** centralize council width policy in `width_policy.py`; align triage and `team_coordinator.py` defaults with shipped `council_width` / `default_width` **8** (Grok Heavy phrases still widen to **16**).
+- **Hooks:** `should_trigger_team_plan` skips read-only inspect/audit turns unless the user also asks to implement or improve; shared width parsing in `hook_lib` inline plan build.
+- **Bootstrap:** advisory `recommended_flow` documents widths **3|5|8|16** with default council **8**.
+- **Tests:** triage width expectations, `test_hook_lib.py`, width policy parsing.
+
 ## 0.3.0
 
 - **Coordinator skills:** add eight strategic skills for routing, dispatch discipline, pre-dispatch enrich, candidate JSON, hook phases, repair waves, context budget, and single mode: `heavy-scope-router`, `heavy-swarm-dispatch`, `heavy-pre-dispatch-enrich`, `heavy-leaf-candidate-output`, `heavy-hook-phases`, `heavy-repair-wave`, `heavy-context-budget`, `heavy-single-mode`.

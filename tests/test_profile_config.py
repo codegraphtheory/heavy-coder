@@ -4,7 +4,9 @@ import pytest
 
 from heavy_coder.profile_config import (
     ProfileConfig,
+    coerce_candidate_widths,
     load_profile_config,
+    parse_default_width,
     parse_heavy_coder_block,
     resolve_config_path,
 )
@@ -61,3 +63,14 @@ def test_delegate_minimum_when_heavy_council_always() -> None:
         }
     )
     assert cfg.delegate_minimum() == 16
+
+
+def test_coerce_candidate_widths_defaults() -> None:
+    assert coerce_candidate_widths(None) == (3, 5, 8, 16)
+    assert coerce_candidate_widths([8, "16", 5]) == (8, 16, 5)
+
+
+def test_parse_default_width_from_block() -> None:
+    assert parse_default_width({"default_width": 8}) == 8
+    assert parse_default_width({"default_width": "5"}) == 5
+    assert parse_default_width({}) == 8

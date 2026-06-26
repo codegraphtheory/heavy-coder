@@ -12,10 +12,31 @@ except Exception:  # pragma: no cover
     yaml = None
 
 from heavy_coder.council_injection import CouncilPresentation, parse_council_presentation
+from heavy_coder.width_policy import (
+    DEFAULT_CANDIDATE_WIDTHS,
+    DEFAULT_COUNCIL_WIDTH,
+    DEFAULT_MIN_DELEGATE_TASKS,
+    DEFAULT_TRIAGE_WIDTH,
+    coerce_candidate_widths,
+    parse_default_width,
+)
 
-DEFAULT_MIN_DELEGATE_TASKS = 8
+# Re-export for callers that import from profile_config.
+__all__ = [
+    "DEFAULT_CANDIDATE_WIDTHS",
+    "DEFAULT_COUNCIL_WIDTH",
+    "DEFAULT_MIN_DELEGATE_TASKS",
+    "DEFAULT_TRIAGE_WIDTH",
+    "ProfileConfig",
+    "coerce_candidate_widths",
+    "load_profile_config",
+    "load_yaml_mapping",
+    "parse_default_width",
+    "parse_heavy_coder_block",
+    "resolve_config_path",
+]
+
 DEFAULT_HEAVY_COUNCIL_ALWAYS = False
-DEFAULT_COUNCIL_WIDTH = 8
 
 
 @dataclass(frozen=True)

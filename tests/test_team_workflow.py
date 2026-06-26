@@ -21,32 +21,42 @@ def test_classify_width_five_for_security_task() -> None:
     assert result.width == 5
 
 
-def test_classify_width_three_for_small_fix() -> None:
+def test_classify_width_eight_for_small_fix_by_default() -> None:
     result = classify_task("Fix typo in README")
+    assert result.width == 8
+    assert len(result.candidate_roles) == 8
+
+
+def test_classify_adaptive_width_three_when_configured() -> None:
+    result = classify_task("Fix typo in README", default_width=3)
     assert result.width == 3
     assert len(result.candidate_roles) == 3
 
 
-def test_classify_heavy_council_always_defaults_to_sixteen() -> None:
-    result = classify_task("Fix typo in README", heavy_council_always=True)
-    assert result.width == 16
+def test_classify_heavy_council_always_uses_configured_council_width() -> None:
+    result = classify_task("Fix typo in README", heavy_council_always=True, heavy_council_width=8)
+    assert result.width == 8
     assert any("heavy_council_always" in r for r in result.reasons)
 
 
 def test_classify_heavy_council_always_skips_width_five_escalation() -> None:
-    result = classify_task("Refactor security middleware across packages", heavy_council_always=True)
-    assert result.width == 16
+    result = classify_task(
+        "Refactor security middleware across packages",
+        heavy_council_always=True,
+        heavy_council_width=8,
+    )
+    assert result.width == 8
 
 
 def test_classify_heavy_council_always_single_mode_uses_adaptive_width() -> None:
-    result = classify_task("composer only: fix typo", heavy_council_always=True)
+    result = classify_task("composer only: fix typo", heavy_council_always=True, default_width=3)
     assert result.width == 3
 
 
-def test_team_plan_heavy_council_always_width_sixteen() -> None:
-    plan = build_team_plan("Fix typo", heavy_council_always=True)
-    assert plan["width"] == 16
-    assert len(plan["delegate_tasks"]) == 16
+def test_team_plan_heavy_council_always_width_eight() -> None:
+    plan = build_team_plan("Fix typo", heavy_council_always=True, heavy_council_width=8)
+    assert plan["width"] == 8
+    assert len(plan["delegate_tasks"]) == 8
 
 
 def test_team_plan_emits_delegate_tasks() -> None:

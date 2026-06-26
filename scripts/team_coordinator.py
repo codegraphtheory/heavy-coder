@@ -7,32 +7,26 @@ import json
 import sys
 from pathlib import Path
 
-from heavy_coder.profile_config import load_profile_config
+from heavy_coder.profile_config import (
+    coerce_candidate_widths,
+    load_profile_config,
+    parse_default_width,
+)
 from heavy_coder.team_plan import build_team_plan
 from heavy_coder.triage import is_single_mode
-
-
-def _coerce_widths(raw: object) -> tuple[int, ...]:
-    if not isinstance(raw, list):
-        return (3, 5, 16)
-    widths: list[int] = []
-    for item in raw:
-        if isinstance(item, int):
-            widths.append(item)
-        elif isinstance(item, str) and item.strip().isdigit():
-            widths.append(int(item.strip()))
-    return tuple(widths) if widths else (3, 5, 16)
 
 
 def _load_team_plan_kwargs(repo: Path) -> dict[str, object]:
     try:
         profile = load_profile_config(repo)
     except (FileNotFoundError, RuntimeError, ValueError):
+        from heavy_coder.width_policy import DEFAULT_CANDIDATE_WIDTHS, DEFAULT_TRIAGE_WIDTH
+
         return {
             "heavy_council_always": False,
-            "heavy_council_width": 16,
-            "default_width": 3,
-            "allowed_widths": (3, 5, 16),
+            "heavy_council_width": 8,
+            "default_width": DEFAULT_TRIAGE_WIDTH,
+            "allowed_widths": DEFAULT_CANDIDATE_WIDTHS,
         }
 
     from heavy_coder.profile_config import load_yaml_mapping, resolve_config_path
@@ -40,14 +34,12 @@ def _load_team_plan_kwargs(repo: Path) -> dict[str, object]:
     mapping = load_yaml_mapping(resolve_config_path(repo))
     heavy = mapping.get("heavy_coder")
     block = heavy if isinstance(heavy, dict) else {}
-    default_raw = block.get("default_width", 3)
-    default_width = default_raw if isinstance(default_raw, int) else 3
 
     return {
         "heavy_council_always": profile.heavy_council_always,
         "heavy_council_width": profile.council_width,
-        "default_width": default_width,
-        "allowed_widths": _coerce_widths(block.get("candidate_widths")),
+        "default_width": parse_default_width(block),
+        "allowed_widths": coerce_candidate_widths(block.get("candidate_widths")),
     }
 
 
@@ -56,7 +48,7 @@ def main() -> int:
     parser.add_argument("task", nargs="?", help="Task description (or use --task-file)")
     parser.add_argument("--task-file", type=Path, help="Read task from a file")
     parser.add_argument("--repo", type=Path, default=Path("."), help="Target repository root")
-    parser.add_argument("--width", type=int, help="Override triage width (3, 5, or 16 heavy council)")
+    parser.add_argument("--width", type=int, help="Override triage width (must be in candidate_widths, e.g. 3, 5, 8, 16)")
     parser.add_argument(
         "--heavy-council",
         action="store_true",
