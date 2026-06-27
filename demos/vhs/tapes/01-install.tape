@@ -3,7 +3,7 @@ Set Shell "bash"
 Set FontSize 22
 Set Width 1920
 Set Height 1080
-Set Theme demos/vhs/theme.json
+Set Theme "Catppuccin Mocha"
 Set TypingSpeed 45ms
 
 Type "# Heavy Coder · Hermes profile install" Enter

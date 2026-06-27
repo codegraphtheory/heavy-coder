@@ -25,11 +25,14 @@ fi
 
 for tape in "${tapes[@]}"; do
   echo "==> vhs $tape"
-  vhs "$tape"
+  if ! vhs "$tape"; then
+    echo "hint: run ./demos/vhs/doctor.sh and use Set Theme \"Catppuccin Mocha\" in .tape files" >&2
+    exit 1
+  fi
 done
 
 echo ""
 echo "Done. Clips:"
 ls -1 demos/vhs/out/*.mp4 2>/dev/null || true
 echo ""
-echo "Edit order: 01-install → 02-council-plan → 03-swarm-dashboard → 04-ship-gate"
+echo "Edit order: 01-install -> 02-council-plan -> 03-swarm-dashboard -> 04-ship-gate"

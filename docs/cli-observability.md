@@ -128,11 +128,13 @@ For per-leaf detail before the batch ends, use **TUI `/agents`** or inspect `.he
 
 ## Launch demo footage (VHS)
 
-Primary README asset: **`demos/demo.gif`** (30s, `demos/vhs/demo-30s.tape`). Render locally:
+Primary README asset: **`demos/demo.gif`** (30s). From repo root:
 
 ```bash
-./demos/vhs/render_demo_gif.sh
+./demos/vhs/render.sh
 ```
+
+Optional MP4 launch tapes: `./demos/vhs/render.sh --all`. Preflight: `./demos/vhs/render.sh --doctor`.
 
 All **codegraphtheory** public repos: `/path/to/codegraphtheory/scripts/render_org_demo_gifs.sh`. Details: [demo-vhs.md](demo-vhs.md).
 

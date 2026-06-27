@@ -1,62 +1,46 @@
 # Launch demo videos (VHS)
 
-Reproducible **1920x1080** terminal clips for a Heavy Coder launch edit. No screen recorder required.
+Reproducible terminal demos for README **`demos/demo.gif`** and optional launch MP4s.
 
-## Prerequisites
+## Quick start (repo root)
 
 ```bash
 brew install vhs ffmpeg
+./demos/vhs/render.sh          # README GIF (default)
+./demos/vhs/render.sh --doctor # preflight only
+./demos/vhs/render.sh --all    # demos/vhs/out/*.mp4
 ```
 
-From the **heavy-coder repo root**:
+`render.sh` runs `doctor.sh`, fixes execute bits on `demos/vhs/bin/*.sh`, then records.
+
+## Common failure: theme does not exist
+
+VHS cannot load `Set Theme demos/vhs/theme.json` reliably. All tapes use **`Set Theme "Catppuccin Mocha"`** instead.
+
+## Outputs
+
+| Command | Output |
+|---------|--------|
+| `./demos/vhs/render.sh` | `demos/demo.gif` (~30s) |
+| `./demos/vhs/render.sh --all` | `demos/vhs/out/01-install.mp4` ... `04-ship-gate.mp4` |
+
+After re-rendering the GIF, sync to graphtheory.xyz:
 
 ```bash
-chmod +x demos/vhs/render_all.sh demos/vhs/bin/*.sh
-./demos/vhs/render_all.sh
+../codegraphtheory.github.io/scripts/sync_demo_gifs.sh
 ```
-
-Outputs land in `demos/vhs/out/`:
-
-| Clip | Tape |
-|------|------|
-| `01-install.mp4` | Profile install (canned transcript) |
-| `02-council-plan.mp4` | Real `team_coordinator.py` JSON summary |
-| `03-swarm-dashboard.mp4` | Staged `swarm_watch.py` animation |
-| `04-ship-gate.mp4` | Coordinator excerpt + real `pytest` |
-
-Edit order and titles: `launch-manifest.json`.
 
 ## What is real vs staged
 
 | Beat | Real? |
 |------|--------|
-| Council plan | Yes (local script, no API) |
-| Swarm progress file | **Staged** via `scripts/demo_vhs_apply_fixture.py` |
-| `swarm_watch` UI | Yes (reads staged `.heavy-coder/swarm-progress.json`) |
-| Coordinator chat / live 8 leaves | No (use OBS + `hermes -p heavy-coder chat` if you need it) |
-| Ship-gate pytest | Yes (one test module) |
+| Council plan | Yes (`team_coordinator.py`, no API) |
+| Swarm progress | **Staged** (`scripts/demo_vhs_apply_fixture.py`) |
+| `swarm_watch` UI | Yes |
+| Ship-gate pytest | Yes (`tests/test_swarm_progress.py`) |
 
-## One-off staging (no VHS)
+## Bin scripts
 
-```bash
-source demos/vhs/env.sh
-python scripts/demo_vhs_apply_fixture.py --repo "$DEMO_REPO" --scene mid
-python scripts/swarm_watch.py --repo "$DEMO_REPO" --once
-```
-
-Scenes: `start`, `mid`, `complete`, `idle`.
-
-## Customize
-
-- **Theme / resolution:** edit `theme.json` and `Set Width` / `Set Height` in each `.tape`.
-- **Task text:** `assets/demo-task.txt`.
-- **Timing:** `Sleep` and `Set TypingSpeed` in tapes; re-run `vhs demos/vhs/tapes/03-swarm-dashboard.tape` only while iterating.
-- **Single tape:** `vhs demos/vhs/tapes/02-council-plan.tape`
-
-## Hybrid launch video (recommended)
-
-1. Render these four clips (deterministic B-roll).
-2. Record one **live** TUI segment (`/agents` or `hermes chat --cli` during a real small task).
-3. Cut together in DaVinci Resolve / Final Cut; add logo and music.
+`demos/vhs/bin/show-team-plan.sh` and `animate-swarm.sh` source `demos/vhs/env.sh` themselves. Tapes invoke them with `bash demos/vhs/bin/...` from repo root.
 
 See also: [docs/demo-vhs.md](../../docs/demo-vhs.md).
