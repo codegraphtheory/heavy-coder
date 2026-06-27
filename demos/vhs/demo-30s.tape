@@ -18,7 +18,7 @@ Show
 
 Hide
 Type "bash demos/vhs/bin/animate-swarm.sh" Enter
-Sleep 14s
+Sleep 24s
 Show
 
 Type "cat demos/vhs/assets/coordinator-excerpt.txt" Enter
