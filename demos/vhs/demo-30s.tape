@@ -1,41 +1,23 @@
 Output demos/demo.gif
 Set Shell "bash"
-Set FontSize 18
+Set FontSize 16
 Set Width 1280
 Set Height 720
-Set Theme "Catppuccin Mocha"
-Set TypingSpeed 48ms
+Set Theme "Builtin Dark"
+Set TypingSpeed 55ms
 
 Hide
 Type "source demos/vhs/sanitize-recording-env.sh" Enter
-Sleep 400ms
+Type "bash demos/vhs/bin/bootstrap-demo-profile.sh" Enter
+Sleep 8s
 Show
 
-Type "# Heavy Coder - council + swarm_watch" Enter
-Sleep 500ms
-Type "cat demos/vhs/assets/install-transcript.txt" Enter
-Sleep 2s
+Type "# Skinned Hermes TUI (profile install + /help)" Enter
+Sleep 800ms
 
 Hide
 Type "source demos/vhs/sanitize-recording-env.sh" Enter
-Sleep 300ms
-Type "bash demos/vhs/bin/show-team-plan.sh" Enter
-Sleep 4s
-Show
-
-Hide
-Type "source demos/vhs/sanitize-recording-env.sh" Enter
-Sleep 300ms
-Type "bash demos/vhs/bin/animate-swarm.sh" Enter
-Sleep 24s
-Show
-
-Type "cat demos/vhs/assets/coordinator-excerpt.txt" Enter
-Sleep 3s
-
-Hide
-Type "source demos/vhs/sanitize-recording-env.sh" Enter
-Sleep 300ms
-Type "bash demos/vhs/bin/run-ship-gate-pytest.sh" Enter
-Sleep 4s
+Sleep 200ms
+Type "bash demos/vhs/bin/hermes-tui-skin-demo.sh" Enter
+Sleep 22s
 Show
