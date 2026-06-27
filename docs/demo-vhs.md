@@ -1,51 +1,34 @@
 # Demo recording with VHS
 
-Heavy Coder ships a **terminal-as-code** demo pipeline under `demos/vhs/`. It targets launch and README footage without manual screen recording.
+Profile README GIFs show the **skinned Hermes Ink TUI** (not plain bash): install into sanitized `HERMES_HOME`, then `hermes -p <profile> chat` with `/help` and `/skin`.
 
 ## Quick render
 
 ```bash
 brew install vhs ffmpeg
-./demos/vhs/render_all.sh
+# hermes CLI + expect (macOS) required
+bash scripts/render_launch_demos.sh
 ```
 
-Clips are written to `demos/vhs/out/*.mp4`. Import into your NLE using `demos/vhs/launch-manifest.json` as the cut list.
-
-## Architecture
+## Pipeline
 
 ```text
-.tape scripts (VHS)
-    → bash helpers (demos/vhs/bin/)
-    → scripts/demo_vhs_apply_fixture.py  (staged swarm-progress.json)
-    → scripts/team_coordinator.py        (real plan JSON)
-    → scripts/swarm_watch.py             (real dashboard formatter)
+demo-30s.tape
+  → sanitize-recording-env.sh (fake HOME + HERMES_HOME)
+  → bootstrap-demo-profile.sh (rsync clean tree, hermes profile install --force)
+  → hermes-tui-skin-demo.sh (expect drives TUI)
 ```
 
-Hermes **TUI** and live `delegate_task` batches are intentionally **not** driven by VHS: async timing and Ink rendering are poor fits for deterministic tapes. Use:
+Heavy Coder launch MP4 tapes under `demos/vhs/tapes/` still cover council/swarm beats for NLE; README GIF is TUI-first.
 
-- **VHS** for install, plan, dashboard, and pytest beats.
-- **OBS window capture** for one authentic TUI swarm beat (optional).
+## Why not only bash?
 
-## Coordinator scripting (optional live layer)
+`cat`, `validate_profile.py`, and pytest look like a generic terminal. Skins ship with the profile and render inside **Hermes TUI** (`display.skin` in `config.yaml`).
 
-For a **real** non-interactive run (no video), reuse the eval harness pattern:
+## Optional live layer
 
 ```bash
-hermes -p heavy-coder chat --cli -q "YOUR PROMPT" \
-  --yolo --accept-hooks --pass-session-id -Q --source launch-demo
+hermes -p heavy-coder chat --cli -q "YOUR PROMPT" --yolo --accept-hooks --pass-session-id -Q
 ```
 
-See `src/heavy_coder/evaluation/hermes_invoke.py`. Export sessions with `hermes sessions export` for post-mortem narration.
-
-## Observability during live capture
-
-If you record live swarms, use the second-pane workflow from [cli-observability.md](cli-observability.md):
-
-```bash
-python scripts/swarm_watch.py --repo . --interval 1
-```
-
-## Further reading
-
-- [demos/vhs/README.md](../demos/vhs/README.md)
-- [Charm VHS](https://github.com/charmbracelet/vhs)
+See [identity-safety.md](identity-safety.md) and [demos/vhs/README.md](../demos/vhs/README.md).
