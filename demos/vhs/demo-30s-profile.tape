@@ -6,7 +6,7 @@ Set Height 720
 Set Theme "Builtin Dark"
 Set TypingSpeed 52ms
 
-Type "# Heavy Coder - install, skin, council, swarm" Enter
+Type "# Hermes profile demo" Enter
 Sleep 600ms
-Type "bash demos/vhs/run-heavy-coder-demo.sh" Enter
-Sleep 42s
+Type "bash demos/vhs/run-full-demo.sh" Enter
+Sleep 40s

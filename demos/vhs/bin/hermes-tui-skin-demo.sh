@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=../sanitize-recording-env.sh
 source "$SCRIPT_DIR/../sanitize-recording-env.sh"
 
 PROFILE="${DEMO_PROFILE:-}"
@@ -11,21 +10,22 @@ fi
 PROFILE="${PROFILE:-$(basename "$REPO_ROOT")}"
 
 command -v expect >/dev/null || { echo "expect required" >&2; exit 1; }
+command -v hermes >/dev/null || { echo "hermes CLI required" >&2; exit 1; }
 
 export TERM=xterm-256color
 stty cols 120 rows 36 2>/dev/null || true
 
-export HOME HERMES_HOME PROFILE
+export HOME HERMES_HOME PROFILE HERMES_TUI_THEME HERMES_TUI_BACKGROUND COLORFGBG
 expect <<'EXPECT_EOF'
-set timeout 25
+set timeout 40
 set profile $env(PROFILE)
 log_user 1
-spawn env HOME=$env(HOME) HERMES_HOME=$env(HERMES_HOME) TERM=xterm-256color HERMES_TUI_FAST_ECHO=0 hermes -p $profile chat
-sleep 4
+spawn -noecho env HOME=$env(HOME) HERMES_HOME=$env(HERMES_HOME) TERM=xterm-256color HERMES_TUI_FAST_ECHO=0 HERMES_TUI_THEME=dark HERMES_TUI_BACKGROUND=#0a0e14 COLORFGBG=0;15 hermes -p $profile chat
+sleep 7
 send "/help\r"
-sleep 3
+sleep 4
 send "/skin\r"
-sleep 2
+sleep 3
 send "\x03"
 expect eof
 EXPECT_EOF
