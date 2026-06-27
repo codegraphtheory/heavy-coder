@@ -12,7 +12,7 @@ Type "cat demos/vhs/assets/coordinator-excerpt.txt" Enter
 Sleep 2.5s
 
 Hide
-Type "bash -lc 'source demos/vhs/env.sh && python3 -m pytest tests/test_swarm_progress.py -q'" Enter
+Type "bash demos/vhs/bin/run-ship-gate-pytest.sh" Enter
 Sleep 5s
 Show
 

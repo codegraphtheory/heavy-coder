@@ -4,43 +4,48 @@ Reproducible terminal demos for README **`demos/demo.gif`** and optional launch 
 
 ## Quick start (repo root)
 
+Use **bash** (avoids zsh quirks with pasted `#` comments):
+
 ```bash
 brew install vhs ffmpeg
-./demos/vhs/render.sh          # README GIF (default)
-./demos/vhs/render.sh --doctor # preflight only
-./demos/vhs/render.sh --all    # demos/vhs/out/*.mp4
+bash scripts/render_launch_demos.sh --doctor
+bash scripts/render_launch_demos.sh
+bash scripts/render_launch_demos.sh --all
 ```
 
-`render.sh` runs `doctor.sh`, fixes execute bits on `demos/vhs/bin/*.sh`, then records.
+Or:
+
+```bash
+./demos/vhs/render.sh --doctor
+./demos/vhs/render.sh
+./demos/vhs/render.sh --all
+```
+
+Run **one command per line**. Do not paste trailing shell comments on the same line.
 
 ## Common failure: theme does not exist
 
-VHS cannot load `Set Theme demos/vhs/theme.json` reliably. All tapes use **`Set Theme "Catppuccin Mocha"`** instead.
+Use **`Set Theme "Catppuccin Mocha"`** in `.tape` files (not `theme.json` paths).
 
 ## Outputs
 
 | Command | Output |
 |---------|--------|
-| `./demos/vhs/render.sh` | `demos/demo.gif` (~30s) |
-| `./demos/vhs/render.sh --all` | `demos/vhs/out/01-install.mp4` ... `04-ship-gate.mp4` |
+| `render.sh` (default) | `demos/demo.gif` (~30s) |
+| `render.sh --all` | `demos/vhs/out/01-install.mp4` ... `04-ship-gate.mp4` |
 
-After re-rendering the GIF, sync to graphtheory.xyz:
+After re-rendering the GIF:
 
 ```bash
-../codegraphtheory.github.io/scripts/sync_demo_gifs.sh
+bash ../codegraphtheory.github.io/scripts/sync_demo_gifs.sh
 ```
 
-## What is real vs staged
+## Bin scripts (called from tapes)
 
-| Beat | Real? |
-|------|--------|
-| Council plan | Yes (`team_coordinator.py`, no API) |
-| Swarm progress | **Staged** (`scripts/demo_vhs_apply_fixture.py`) |
-| `swarm_watch` UI | Yes |
-| Ship-gate pytest | Yes (`tests/test_swarm_progress.py`) |
-
-## Bin scripts
-
-`demos/vhs/bin/show-team-plan.sh` and `animate-swarm.sh` source `demos/vhs/env.sh` themselves. Tapes invoke them with `bash demos/vhs/bin/...` from repo root.
+| Script | Purpose |
+|--------|---------|
+| `bin/show-team-plan.sh` | Council plan JSON |
+| `bin/animate-swarm.sh` | Staged swarm_watch replay |
+| `bin/run-ship-gate-pytest.sh` | `pytest tests/test_swarm_progress.py` |
 
 See also: [docs/demo-vhs.md](../../docs/demo-vhs.md).
