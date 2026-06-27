@@ -9,6 +9,7 @@ workspace/
 plans/
 local/
 .heavy-coder/
+eval/runs/
 cache/
 __pycache__/
 .pytest_cache/
@@ -19,3 +20,5 @@ dist/
 build/
 *.egg-info/
 .DS_Store
+demos/vhs/out/
+demos/vhs/staging/home/
