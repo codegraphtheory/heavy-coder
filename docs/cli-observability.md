@@ -126,6 +126,16 @@ Restart the session (`/new` or exit and relaunch) after display or compression c
 
 For per-leaf detail before the batch ends, use **TUI `/agents`** or inspect `.heavy-coder/evidence/*.json` as leaves finish.
 
+## Launch demo footage (VHS)
+
+Primary README asset: **`demos/demo.gif`** (30s, `demos/vhs/demo-30s.tape`). Render locally:
+
+```bash
+./demos/vhs/render_demo_gif.sh
+```
+
+All **codegraphtheory** public repos: `/path/to/codegraphtheory/scripts/render_org_demo_gifs.sh`. Details: [demo-vhs.md](demo-vhs.md).
+
 ## Further reading
 
 - [composer-hermes-swarms.md](composer-hermes-swarms.md)

@@ -1,5 +1,8 @@
 # Heavy Coder
 
+<p align="center">
+  <img src="demos/demo.gif" alt="30-second demo: council plan, swarm dashboard, and ship gate" width="100%">
+</p>
 
 <p><strong>Docs:</strong> <a href="https://graphtheory.xyz/heavy-coder/">https://graphtheory.xyz/heavy-coder/</a></p>
 
@@ -227,7 +230,7 @@ See `docs/coding-standards.md` and `AGENTS.md`.
 
 ## Evaluation plan
 
-Planned comparison: single Composer candidate (control) vs adaptive 3/5 candidates with blind critic and shared verifier (treatment). See `docs/evaluation-plan.md`.
+Pilot harness: **Hermes `default` vs Heavy Coder council** on shared fixtures. See `eval/README.md` and `docs/evaluation-plan.md`.
 
 ---
 

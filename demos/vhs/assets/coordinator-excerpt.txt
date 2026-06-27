@@ -1,0 +1,5 @@
+⛓ delegate_task · width 8 · background batch started
+subagents working · /agents to watch live · status bar ⛓ 8
+
+ASYNC DELEGATION BATCH COMPLETE (8/8)
+Next: heavy-synthesize-winner → heavy-ship-gate (pytest)

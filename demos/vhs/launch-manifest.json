@@ -1,0 +1,25 @@
+{
+  "segments": [
+    {
+      "file": "demos/vhs/out/01-install.mp4",
+      "title": "Install profile",
+      "suggested_use": "Opening hook after logo"
+    },
+    {
+      "file": "demos/vhs/out/02-council-plan.mp4",
+      "title": "Council plan",
+      "suggested_use": "Explain width-8 delegate_tasks JSON"
+    },
+    {
+      "file": "demos/vhs/out/03-swarm-dashboard.mp4",
+      "title": "Swarm dashboard",
+      "suggested_use": "Hero shot; pair with voiceover on /agents"
+    },
+    {
+      "file": "demos/vhs/out/04-ship-gate.mp4",
+      "title": "Synthesis and tests",
+      "suggested_use": "Close on pytest / ship gate"
+    }
+  ],
+  "notes": "Staged swarm uses scripts/demo_vhs_apply_fixture.py, not a live delegate_task batch. Swap in OBS capture of a real swarm for authenticity."
+}

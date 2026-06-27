@@ -1,0 +1,4 @@
+$ hermes profile install github.com/codegraphtheory/heavy-coder --name heavy-coder --alias --yes
+Profile heavy-coder installed.
+Merged display.skin: heavy-coder · delegation.max_async_children: 16
+Next: hermes -p heavy-coder chat
