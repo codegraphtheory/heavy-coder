@@ -29,7 +29,8 @@ case "${1:-}" in
     ;;
 esac
 
-chmod +x demos/vhs/doctor.sh demos/vhs/bin/*.sh demos/vhs/render_demo_gif.sh demos/vhs/render_all.sh 2>/dev/null || true
+chmod +x demos/vhs/doctor.sh demos/vhs/bin/*.sh demos/vhs/render_demo_gif.sh demos/vhs/render_all.sh demos/vhs/sanitize-recording-env.sh 2>/dev/null || true
+export VHS_RECORDING=1
 ./demos/vhs/doctor.sh
 
 case "$mode" in

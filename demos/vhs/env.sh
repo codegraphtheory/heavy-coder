@@ -6,7 +6,12 @@ export REPO_ROOT
 export DEMO_REPO="${DEMO_REPO:-$REPO_ROOT/demos/vhs/staging/repo}"
 mkdir -p "$DEMO_REPO/.heavy-coder"
 export PYTHONPATH="$REPO_ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
-cd "$REPO_ROOT"
+
+if [[ "${VHS_RECORDING:-}" == "1" ]]; then
+  : # sanitize-recording-env.sh already cd'd to public workspace path
+else
+  cd "$REPO_ROOT"
+fi
 
 # Non-interactive shells often pick /usr/bin/python3 (3.9); demos need 3.11+ (datetime.UTC).
 if [[ -z "${PY:-}" ]]; then

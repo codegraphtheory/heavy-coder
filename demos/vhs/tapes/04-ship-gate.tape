@@ -12,6 +12,8 @@ Type "cat demos/vhs/assets/coordinator-excerpt.txt" Enter
 Sleep 2.5s
 
 Hide
+Type "source demos/vhs/sanitize-recording-env.sh" Enter
+Sleep 300ms
 Type "bash demos/vhs/bin/run-ship-gate-pytest.sh" Enter
 Sleep 5s
 Show

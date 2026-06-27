@@ -11,6 +11,9 @@ fi
 
 python -m pip install -q -e '.[dev]'
 
+echo "== validate_identity_leak =="
+python scripts/validate_identity_leak.py .
+
 echo "== validate_distribution =="
 python scripts/validate_distribution.py .
 

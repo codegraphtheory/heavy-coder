@@ -10,6 +10,8 @@ Type "# Second pane: swarm_watch.py (staged hooks progress)" Enter
 Sleep 800ms
 
 Hide
+Type "source demos/vhs/sanitize-recording-env.sh" Enter
+Sleep 300ms
 Type "bash demos/vhs/bin/animate-swarm.sh" Enter
 Sleep 22s
 Show

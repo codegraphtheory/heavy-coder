@@ -10,6 +10,8 @@ Type "# Council plan JSON (team_coordinator.py)" Enter
 Sleep 600ms
 
 Hide
+Type "source demos/vhs/sanitize-recording-env.sh" Enter
+Sleep 300ms
 Type "bash demos/vhs/bin/show-team-plan.sh" Enter
 Sleep 4s
 Show

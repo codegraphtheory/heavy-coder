@@ -1,39 +1,50 @@
 # Evaluation Plan
 
-The goal is to test whether adaptive candidate teams outperform a single-candidate baseline under comparable outer coordination and verification.
+The goal is to test whether Heavy Coder **council** outperforms **single-mode Grok Build** on identical fixtures and verifier commands.
 
-## Control
+## Primary study: Grok Build A/B
 
-- One Composer implementation candidate.
-- Same outer coordinator and verifier conditions.
-- No parallel alternatives.
-- No comparative critic.
+Prereg: `eval/preregistration/pilot-grok-build-ab.yaml`
 
-## Treatment
+| Arm | Profile | Behavior |
+|-----|---------|----------|
+| **`grok_single`** (A / control) | `heavy-coder` | One Composer agent; prompt requests single mode |
+| **`grok_council`** (B / treatment) | `heavy-coder` | Default council hooks (width 8) |
 
-- Adaptive 3/5 Composer candidates (matching profile `candidate_widths`).
-- Blind comparative critic.
-- Reasoning-model synthesis when available.
-- Same final verifier and comparable runtime limits.
+Both arms pin **`xai-oauth`** + **`composer-2.5`** on the Hermes CLI (`--provider`, `-m`).
 
-## Initial benchmark target
+## Legacy cross-profile study
 
-Use a preregistered subset of 10 to 20 agentic coding problems. Prefer SWE-Bench Pro Public if availability and licensing permit it at implementation time.
+Prereg: `eval/preregistration/pilot-composer-hermes.yaml`
 
-## Repetition
+- **`hermes_baseline`**: Hermes `default` profile - lone Composer, no Heavy hooks.
+- **`heavy_council`**: Heavy Coder council.
 
-Run three attempts per task per condition when feasible.
+Optional in-profile control: **`heavy_single`**.
+
+## Harness (implemented)
+
+| Step | Tool |
+|------|------|
+| Preregister | `eval/preregistration/*.yaml` |
+| Validate | `run_eval.py validate` |
+| Prepare worktree | `run_eval.py prepare-run` |
+| Automated grid | `./scripts/run_pilot_eval.sh` (default Grok Build A/B) |
+| Human Hermes session | `operator.json` in each run dir |
+| Objective verify | `run_eval.py verify` |
+| Traces | `run_eval.py import-traces` |
+| Metrics | `run_eval.py record` |
+| Publish in repo | `run_eval.py finalize` → `eval/published/<id>/` |
+
+Full operator guide: `eval/README.md`.
 
 ## Primary endpoint
 
-Official benchmark resolution status where available.
+Manifest `verify_command` exit code 0.
 
 ## Analysis
 
-- Task-level paired analysis.
-- Success-rate uplift with uncertainty.
-- Cost or model-call usage.
-- Wall-clock duration.
-- Failure categories.
-
-Small subset results must not be presented as a full leaderboard score.
+- `summary.json` includes `ab_comparison` (control vs treatment pools)
+- Task-level paired success by arm
+- Cost and model-call totals
+- Never present a pilot subset as a full leaderboard score.

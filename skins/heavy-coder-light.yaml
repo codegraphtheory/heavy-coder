@@ -1,4 +1,4 @@
-# Heavy Coder light-terminal variant (Cursor / VS Code white or light-grey panels).
+# Heavy Coder light-terminal variant (Cursor / VS Code white or light panels).
 # Same branding as heavy-coder; darker foregrounds so muted/help/status text stays readable.
 name: heavy-coder-light
 description: "Heavy Coder - readable on light IDE terminals"

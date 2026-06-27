@@ -53,9 +53,9 @@ The **`t tt r re re` pattern** is Ink **fast-echo**: keystrokes are written stra
 
 After skin or Hermes changes, restart the session (`/new` or exit and relaunch).
 
-## Unreadable dark grey secondary text
+## Unreadable dim secondary text on light panels
 
-The cyberpunk **heavy-coder** skin targets **dark** terminal backgrounds. Secondary copy (status bar model name, `/help` hints, tool progress, timestamps) uses `banner_dim`, which Ink maps to `color.muted`. On a **light** IDE terminal panel, near-white body text (`#F0FDFF`) and grey-purple muted tones can look like unreadable dark grey mush, especially with Ink `dimColor`.
+The cyberpunk **heavy-coder** skin targets **dark** terminal backgrounds. Secondary copy (status bar model name, `/help` hints, tool progress, timestamps) uses `banner_dim`, which Ink maps to `color.muted`. On a **light** IDE terminal panel, near-white body text (`#F0FDFF`) and purple-muted tones can look like unreadable dim mush, especially with Ink `dimColor`.
 
 **Dark terminal (default look):** reinstall the updated skin (brighter `banner_dim` / status colors in 0.2.21+).
 

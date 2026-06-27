@@ -50,4 +50,10 @@ For this repository, commits should use:
 GraphTheory <codegraphtheory@pm.me>
 ```
 
-Before public push or PR, scan tracked content and git metadata for personal identity leakage.
+Before public push or PR, scan tracked content and git metadata for personal identity leakage. Run `python scripts/validate_identity_leak.py .` and never commit real OS usernames, home paths (`/Users/...`), or VHS demos recorded without `demos/vhs/sanitize-recording-env.sh` (public prompt: `graphtheory@cyber:~/users/graphtheory/projects/...`).
+
+## Identity and demos (hard rule)
+
+- Never commit personal usernames, real home directories, or machine paths in docs, scripts, agent rules, or demo media.
+- VHS / terminal demos: always `source demos/vhs/sanitize-recording-env.sh` before recording; re-run `scripts/validate_identity_leak.py` before push.
+- Demo GIFs/MP4s that ever showed a real path must be purged from git history (`scripts/purge_leaked_demo_history.sh`) and re-rendered.
