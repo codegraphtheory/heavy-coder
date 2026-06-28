@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../sanitize-recording-env.sh"
+if [[ "${DEMO_IN_DOCKER:-}" == 1 && -f /opt/demo/container-env.sh ]]; then
+  # shellcheck source=/opt/demo/container-env.sh
+  source /opt/demo/container-env.sh
+else
+  source "$SCRIPT_DIR/../sanitize-recording-env.sh"
+fi
 
 PROFILE="${DEMO_PROFILE:-}"
 if [[ -z "$PROFILE" ]] && [[ -f distribution.yaml ]]; then
@@ -11,7 +16,8 @@ PROFILE="${PROFILE:-$(basename "$REPO_ROOT")}"
 
 SKIN_DIR="$HERMES_HOME/profiles/$PROFILE/skins"
 SKIN_FILE="$SKIN_DIR/${PROFILE}.yaml"
-[[ -f "$SKIN_FILE" ]] || SKIN_FILE="$(find "$SKIN_DIR" -maxdepth 1 -name '*.yaml' | head -1)"
+[[ -f "$SKIN_FILE" ]] || SKIN_FILE="$(find "$SKIN_DIR" -maxdepth 1 -name '*.yaml' 2>/dev/null | head -1)"
+[[ -n "${SKIN_FILE:-}" && -f "$SKIN_FILE" ]] || SKIN_FILE="$REPO_ROOT/skins/${PROFILE}.yaml"
 
 CYAN='\033[38;2;86;212;232m'
 MAG='\033[38;2;198;120;221m'

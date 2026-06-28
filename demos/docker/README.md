@@ -1,4 +1,4 @@
-# Heavy Coder — 90s Docker terminal demo
+# Heavy Coder - 90s Docker terminal demo
 
 Uncut **asciinema** recording inside an isolated container (`graphtheory@heavy-coder-demo`, `~/workspace/heavy-coder`). No host `HOME`, no `/Users/...` in scripted output (redacted).
 
