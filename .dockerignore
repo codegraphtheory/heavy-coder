@@ -1,0 +1,14 @@
+# Docker demo build context (repo root)
+.git
+.venv
+**/__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+eval/runs
+.heavy-coder
+demos/vhs/staging
+demos/docker/out
+*.egg-info
+dist
+build

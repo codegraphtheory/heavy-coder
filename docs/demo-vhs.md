@@ -25,6 +25,16 @@ Heavy Coder launch MP4 tapes under `demos/vhs/tapes/` still cover council/swarm 
 
 `cat`, `validate_profile.py`, and pytest look like a generic terminal. Skins ship with the profile and render inside **Hermes TUI** (`display.skin` in `config.yaml`).
 
+## Docker 90s demo (private / pre-publish review)
+
+Isolated recording (no host paths): see **[demos/docker/README.md](demos/docker/README.md)**.
+
+```bash
+bash demos/docker/record.sh
+```
+
+Outputs: `demos/docker/out/heavy-coder-90s.cast` (uncut) and optional gif/mp4.
+
 ## Optional live layer
 
 ```bash

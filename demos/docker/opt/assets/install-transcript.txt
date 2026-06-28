@@ -1,0 +1,11 @@
+Installing Hermes profile: heavy-coder
+
+Distribution: heavy-coder v0.1.0
+  Terminal-first Hermes profile for Grok Composer council swarms.
+  Author:   CodeGraphTheory
+  Requires: Hermes >=0.12.0
+  Source:   ~/workspace/heavy-coder
+  Target:   ~/.hermes/profiles/heavy-coder
+
+✓ Installed 'heavy-coder' v0.1.0
+  Use with:      hermes -p heavy-coder chat
