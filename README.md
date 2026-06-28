@@ -177,7 +177,7 @@ No API keys are bundled in this repo. Tokens live under your Hermes profile (for
 | 1. Interactive coding | `hermes -p heavy-coder chat` | Profile + hooks + guidance |
 | 2. Heavy-team coding | Adaptive candidate team | Coordinator + `delegate_task` + scripts |
 | 3. Issue to tested PR | Issue #123 -> PR, stop before merge | Partially scaffolded (`claim_issue`, `publish_pr` with guards) |
-| 4. Issue to unattended merge | Merge when policy gates pass | **Not implemented** (`merge_pr.py` fails closed) |
+| 4. Issue to unattended merge | Merge when policy gates pass | Implemented (`merge_pr.py` fail-closed CLI) |
 
 ---
 
@@ -195,7 +195,7 @@ Configured in `config.yaml`: `candidate_widths: [3, 5, 8, 16]`, `council_width: 
 
 ## Safety boundaries
 
-Unattended merge is **not** implemented. Future behavior must be fail-closed: allowlisted repos, verified trigger labels, branch protection, no admin bypass, SHA match before merge, capped CI repair, sensitive path blocks, and `BLOCKED` on ambiguity. Issue, PR, and repo content are **untrusted input**.
+Unattended merge is implemented and fail-closed: allowlisted repos, verified trigger labels (`hermes:auto`), branch protection, no admin bypass, SHA match before merge, capped CI repair, sensitive path blocks, and `BLOCKED` on ambiguity. Issue, PR, and repo content are **untrusted input**.
 
 ---
 

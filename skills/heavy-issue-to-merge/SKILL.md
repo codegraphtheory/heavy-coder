@@ -38,7 +38,7 @@ Dangerous GitHub writes require explicit `--execute` (default is dry-run).
 | `validate_candidate.py` | JSON schema validation for candidate results |
 | `claim_issue.py` | Issue claim labels/comments (`--execute` uses `gh`) |
 | `publish_pr.py` | Open PR (`--execute` uses `gh pr create`) |
-| `merge_pr.py` | Fail-closed stub (merge not implemented) |
+| `merge_pr.py` | Unattended fail-closed merge CLI |
 | `policy_gate.py` | Deterministic merge-policy evaluation |
 | `github_state.py` | Label projection helpers |
 | `collect_evidence.py` | Local git evidence snapshot |
