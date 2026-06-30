@@ -42,3 +42,12 @@ Initial protected path examples:
 - lockfiles when dependency changes are not part of scope
 
 These examples are conservative and should become configurable per repository.
+
+## Operating Mode 4 (Unattended Merge)
+
+The unattended merge process is executed by `merge_pr.py`. It is a strict fail-closed system. The tool enforces the following gates before performing any merge operation:
+- **Explicit Allowlist**: The repository must be explicitly specified in the allowlist.
+- **Authorized Trigger**: The trigger label `hermes:auto` must be applied by an actor with `admin`, `write`, or `maintain` repository permissions.
+- **Branch Protection & CI Checks**: Merging is blocked unless all status checks pass and the PR state is not blocked.
+- **SHA Verification**: The current pull-request head commit SHA must match the expected commit SHA exactly to prevent race conditions or stealth push injections.
+- **Sensitive Paths**: Changes to protected paths (e.g. `.github/workflows/*`, `pyproject.toml`, etc.) block the unattended merge, requiring manual intervention.

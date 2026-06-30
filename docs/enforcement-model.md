@@ -13,7 +13,7 @@ Heavy Coder combines **coordinator instructions**, **deterministic scripts**, an
 | Candidate validation | `validate_candidate.py` against JSON schema |
 | Blind critique | `scripts/critique_candidates.py` |
 | Issue claim / PR open | `claim_issue.py`, `publish_pr.py` with `--execute` and `gh` |
-| Merge | **Not implemented** (`merge_pr.py` fails closed) |
+| Merge | Implemented (`merge_pr.py` fail-closed) |
 
 The Hermes coordinator must still call `delegate_task`; scripts do not spawn agents themselves.
 
