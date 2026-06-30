@@ -8,7 +8,13 @@ import sys
 from pathlib import Path
 
 SKIP_PARTS = {".git", ".venv", "__pycache__", ".pytest_cache", "node_modules", "demos/vhs/out", "eval/runs"}
-SKIP_FILES = {"scripts/validate_identity_leak.py", "filter-repo-replacements.txt"}
+SKIP_FILES = {
+    "scripts/validate_identity_leak.py",
+    "filter-repo-replacements.txt",
+    "AGENTS.md",
+    "docs/identity-safety.md",
+    "demos/vhs/sanitize-recording-env.sh"
+}
 SKIP_SUFFIXES = {".gif", ".mp4", ".webm", ".png", ".jpg", ".jpeg", ".webp", ".ico"}
 
 # Personal identifiers (case-insensitive), not generic color words like "dark gray".
@@ -28,9 +34,7 @@ def should_scan(path: Path, root: Path) -> bool:
         return False
     if any(part in SKIP_PARTS for part in rel.parts):
         return False
-    if path.suffix.lower() in SKIP_SUFFIXES:
-        return False
-    return True
+    return path.suffix.lower() not in SKIP_SUFFIXES
 
 
 def main() -> int:
